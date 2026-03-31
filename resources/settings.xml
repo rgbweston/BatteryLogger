@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+  settings.xml renders the Settings UI that appears in Garmin Connect mobile.
+  Each <setting> maps to a property defined in properties.xml.
+-->
+<settings>
+  <setting propertyKey="@Properties.interval_sec" title="Log interval">
+    <settingConfig type="list">
+      <listEntry value="300">5 minutes</listEntry>
+      <listEntry value="600">10 minutes</listEntry>
+      <listEntry value="900">15 minutes</listEntry>
+      <listEntry value="1800">30 minutes</listEntry>
+      <listEntry value="3600">1 hour</listEntry>
+    </settingConfig>
+  </setting>
+
+  <setting propertyKey="@Properties.sync_endpoint" title="Sync URL">
+    <settingConfig type="alphanumeric" maxLength="200"/>
+  </setting>
+</settings>

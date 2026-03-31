@@ -1,0 +1,61 @@
+{
+  "settings" : [ {
+    "key" : "interval_sec",
+    "valueType" : "number",
+    "defaultValue" : 300,
+    "configTitle" : "$literal0$",
+    "configPrompt" : null,
+    "configType" : "list",
+    "configError" : null,
+    "configHelpUrl" : null,
+    "configReadonly" : false,
+    "configRequired" : false,
+    "configOptions" : [ {
+      "display" : "$literal1$",
+      "value" : 300
+    }, {
+      "display" : "$literal2$",
+      "value" : 600
+    }, {
+      "display" : "$literal3$",
+      "value" : 900
+    }, {
+      "display" : "$literal4$",
+      "value" : 1800
+    }, {
+      "display" : "$literal5$",
+      "value" : 3600
+    } ],
+    "configMin" : null,
+    "configMax" : null,
+    "configMaxLength" : null
+  }, {
+    "key" : "sync_endpoint",
+    "valueType" : "string",
+    "defaultValue" : "http://YOUR_LAN_IP:8765/api/battery-readings",
+    "configTitle" : "$literal6$",
+    "configPrompt" : null,
+    "configType" : "alphaNumeric",
+    "configError" : null,
+    "configHelpUrl" : null,
+    "configReadonly" : false,
+    "configRequired" : false,
+    "configOptions" : null,
+    "configMin" : null,
+    "configMax" : null,
+    "configMaxLength" : 200
+  } ],
+  "supportsLiveValidation" : false,
+  "languages" : {
+    "valyrian" : {
+      "$literal1$" : "5 minutes",
+      "$literal0$" : "Log interval",
+      "$literal3$" : "15 minutes",
+      "$literal2$" : "10 minutes",
+      "$literal5$" : "1 hour",
+      "$literal4$" : "30 minutes",
+      "$literal6$" : "Sync URL",
+      "AppName" : "Battery Logger"
+    }
+  }
+}

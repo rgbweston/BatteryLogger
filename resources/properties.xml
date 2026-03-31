@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+  properties.xml defines settings that appear in the Garmin Connect mobile app
+  under the app's Settings page.  Users can change these without sideloading.
+
+  Exposed settings:
+    interval_sec   — logging interval (300–3600 s). Default 300 (5 min).
+    sync_endpoint  — the POST URL for battery readings.
+-->
+<properties>
+  <property id="interval_sec" type="Number">300</property>
+  <property id="sync_endpoint" type="String">http://172.20.10.3:8765/api/battery-readings</property>
+</properties>

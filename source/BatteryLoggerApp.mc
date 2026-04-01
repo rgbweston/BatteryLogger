@@ -1,4 +1,5 @@
 import Toybox.Application;
+import Toybox.Application.Storage;
 import Toybox.Background;
 import Toybox.Lang;
 import Toybox.System;
@@ -21,7 +22,14 @@ class BatteryLoggerApp extends Application.AppBase {
             }
         } catch (ex instanceof Lang.Exception) {
         }
-        Background.registerForTemporalEvent(new Time.Duration(intervalSec));
+        // Schedule from the last event time to avoid resetting the timer on widget open.
+        var lastTime = Background.getLastTemporalEventTime();
+        if (lastTime != null) {
+            var nextTime = lastTime.add(new Time.Duration(intervalSec));
+            Background.registerForTemporalEvent(nextTime);
+        } else {
+            Background.registerForTemporalEvent(Time.now());
+        }
     }
 
     public function onStop(state as Dictionary?) as Void {
@@ -37,6 +45,10 @@ class BatteryLoggerApp extends Application.AppBase {
     }
 
     public function onBackgroundData(data as Application.PersistableType) as Void {
+        // Write result to storage so the view can pick it up on next redraw.
+        if (data instanceof String) {
+            Storage.setValue("last_sync_result", data);
+        }
         WatchUi.requestUpdate();
     }
 }

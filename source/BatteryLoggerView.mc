@@ -1,6 +1,6 @@
 import Toybox.Application;
 import Toybox.Application.Storage;
-import Toybox.Communications;
+import Toybox.Background;
 import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.System;
@@ -10,7 +10,9 @@ import Toybox.WatchUi;
 (:typecheck(disableBackgroundCheck))
 class BatteryLoggerView extends WatchUi.View {
 
-    private var _status as String = "Tap for menu";
+    private static const VERSION as String = "1.0.3";
+
+    private var _status as String = "Tap to sync";
 
     public function initialize() {
         View.initialize();
@@ -20,10 +22,12 @@ class BatteryLoggerView extends WatchUi.View {
     }
 
     public function onShow() as Void {
+        updateStatusFromStorage();
         WatchUi.requestUpdate();
     }
 
     public function onUpdate(dc as Graphics.Dc) as Void {
+        updateStatusFromStorage();
         var w  = dc.getWidth();
         var h  = dc.getHeight();
         var cx = w / 2;
@@ -46,7 +50,7 @@ class BatteryLoggerView extends WatchUi.View {
         dc.drawText(cx, h * 0.15, Graphics.FONT_NUMBER_MEDIUM, batStr, Graphics.TEXT_JUSTIFY_CENTER);
 
         dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(cx, h * 0.03, Graphics.FONT_XTINY, "Battery Logger", Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(cx, h * 0.03, Graphics.FONT_XTINY, "v" + VERSION, Graphics.TEXT_JUSTIFY_CENTER);
 
         var queue  = loadQueue();
         var qLabel = queue.size().toString() + " reading" + (queue.size() == 1 ? "" : "s") + " pending";
@@ -70,43 +74,31 @@ class BatteryLoggerView extends WatchUi.View {
         WatchUi.requestUpdate();
     }
 
-    public function triggerSync() as Void {
-        var queue = loadQueue();
-        if (queue.size() == 0) {
-            setStatus("Nothing to sync");
-            return;
-        }
-
-        var url = "https://346144f088c5fa.lhr.life/api/battery-readings";
-        try {
-            var prop = Application.Properties.getValue("sync_endpoint");
-            if (prop instanceof String && (prop as String).length() > 0) {
-                url = prop;
+    private function updateStatusFromStorage() as Void {
+        var result = Storage.getValue("last_sync_result");
+        if (result instanceof String) {
+            var msg = result as String;
+            if (msg.equals("synced")) {
+                _status = "Synced!";
+            } else if (msg.equals("queue_empty")) {
+                _status = "Nothing to sync";
+            } else if (msg.equals("no_url_configured")) {
+                _status = "No URL set";
+            } else {
+                _status = msg;
             }
-        } catch (ex instanceof Lang.Exception) {}
-
-        if (url.length() == 0) {
-            setStatus("No URL configured");
-            return;
+            Storage.setValue("last_sync_result", null);
         }
-
-        var options = {
-            :method       => Communications.HTTP_REQUEST_METHOD_POST,
-            :headers      => { "Content-Type" => "application/json" },
-            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
-        };
-
-        setStatus("Syncing...");
-        Communications.makeWebRequest(url, { "readings" => queue }, options, method(:onSyncDone));
     }
 
-    public function onSyncDone(code as Number, data as Dictionary or String or Null) as Void {
-        if (code == 200 || code == 201 || code == 204) {
-            Storage.setValue("pending_readings", [] as Array);
-            Storage.setValue("last_sync_ts", Time.now().value() + 631152000);
-            setStatus("Synced!");
-        } else {
-            setStatus("Failed: " + code.toString());
+    public function triggerSync() as Void {
+        Storage.setValue("sync_requested", true);
+        try {
+            Background.registerForTemporalEvent(Time.now());
+            setStatus("Sync queued...");
+        } catch (ex instanceof Lang.Exception) {
+            // 5-min cooldown still active — background will pick it up on next cycle
+            setStatus("Queued (~5 min)");
         }
     }
 
@@ -119,7 +111,7 @@ class BatteryLoggerView extends WatchUi.View {
     }
 
     private function formatRelativeTime(unixTs as Number) as String {
-        var nowUnix = Time.now().value() + 631152000;
+        var nowUnix = Time.now().value();
         var diff    = nowUnix - unixTs;
         if (diff < 60)   { return diff.toString() + "s ago"; }
         if (diff < 3600) { return (diff / 60).toString() + "m ago"; }

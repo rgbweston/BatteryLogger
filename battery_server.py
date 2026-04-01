@@ -10,8 +10,8 @@ Usage:
 The watch POSTs JSON like:
     {
       "readings": [
-        {"ts": 1711123456, "bat": 73.5, "charging": 0},
-        {"ts": 1711123756, "bat": 72.1, "charging": 0}
+        {"ts": 1711123456, "bat": 73.5, "charging": 0, "device_id": "006-B3258-00", "version": "1.0.3"},
+        {"ts": 1711123756, "bat": 72.1, "charging": 0, "device_id": "006-B3258-00", "version": "1.0.3"}
       ]
     }
 
@@ -58,8 +58,6 @@ def ingest_readings():
     if not isinstance(readings, list):
         return jsonify({"error": "'readings' must be an array"}), 400
 
-    # Optionally tag with the watch's reported device ID (if you add it later).
-    device_id = request.headers.get("X-Device-Id", "unknown")
     received_at = int(time.time())
 
     saved = 0
@@ -70,7 +68,8 @@ def ingest_readings():
                 continue  # skip malformed entries
 
             record = {
-                "device_id":   device_id,
+                "device_id":   r.get("device_id", "unknown"),
+                "version":     r.get("version", "unknown"),
                 "ts":          int(r["ts"]),
                 "bat":         float(r["bat"]),
                 "charging":    int(r.get("charging", 0)),

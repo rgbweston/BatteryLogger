@@ -32,7 +32,7 @@
   }, {
     "key" : "sync_endpoint",
     "valueType" : "string",
-    "defaultValue" : "http://YOUR_LAN_IP:8765/api/battery-readings",
+    "defaultValue" : "https://batterylogger.onrender.com/api/battery-readings",
     "configTitle" : "$literal6$",
     "configPrompt" : null,
     "configType" : "alphaNumeric",

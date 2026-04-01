@@ -114,7 +114,7 @@ def ingest_readings():
 def list_readings():
     check_auth()
 
-    limit = min(int(request.args.get("limit", 500)), 500)
+    limit = int(request.args.get("limit", 500))
 
     with get_db() as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:

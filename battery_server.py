@@ -114,16 +114,35 @@ def ingest_readings():
 def list_readings():
     check_auth()
 
-    limit = int(request.args.get("limit", 500))
+    limit     = int(request.args.get("limit", 500))
+    device_id = request.args.get("device_id")
+    from_ts   = request.args.get("from", type=int)
+    to_ts     = request.args.get("to", type=int)
+
+    filters = []
+    params  = []
+    if device_id:
+        filters.append("device_id = %s")
+        params.append(device_id)
+    if from_ts is not None:
+        filters.append("ts >= %s")
+        params.append(from_ts)
+    if to_ts is not None:
+        filters.append("ts <= %s")
+        params.append(to_ts)
+
+    where = ("WHERE " + " AND ".join(filters)) if filters else ""
+    params.append(limit)
 
     with get_db() as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-            cur.execute("""
+            cur.execute(f"""
                 SELECT device_id, version, ts, ts_iso, bat, charging, received_at
                 FROM readings
+                {where}
                 ORDER BY ts DESC
                 LIMIT %s
-            """, (limit,))
+            """, params)
             rows = [dict(r) for r in cur.fetchall()]
 
     return jsonify(rows), 200

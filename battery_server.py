@@ -6,8 +6,8 @@ from the BatteryLogger Connect IQ app.
 The watch POSTs JSON like:
     {
       "readings": [
-        {"ts": 1711123456, "bat": 73.5, "charging": 0, "device_id": "006-B3258-00", "version": "1.0.3"},
-        {"ts": 1711123756, "bat": 72.1, "charging": 0, "device_id": "006-B3258-00", "version": "1.0.3"}
+        {"ts": 1711123456, "bat": 73.5, "charging": 0, "device_id": "abc123", "part_number": "006-B3258-00", "firmware_version": "15.20", "version": "1.1.0"},
+        {"ts": 1711123756, "bat": 72.1, "charging": 0, "device_id": "abc123", "part_number": "006-B3258-00", "firmware_version": "15.20", "version": "1.1.0"}
       ]
     }
 
@@ -17,7 +17,6 @@ Requires a PostgreSQL database. Set DATABASE_URL in the environment
 
 import os
 import time
-from datetime import datetime, timezone
 from flask import Flask, request, jsonify, abort
 import psycopg2
 import psycopg2.extras
@@ -50,16 +49,35 @@ def init_db():
         with conn.cursor() as cur:
             cur.execute("""
                 CREATE TABLE IF NOT EXISTS readings (
-                    id          SERIAL PRIMARY KEY,
-                    device_id   TEXT    NOT NULL DEFAULT 'unknown',
-                    version     TEXT    NOT NULL DEFAULT 'unknown',
-                    ts          BIGINT  NOT NULL,
-                    ts_iso      TEXT    NOT NULL,
-                    bat         REAL    NOT NULL,
-                    charging    INTEGER NOT NULL DEFAULT 0,
-                    received_at BIGINT  NOT NULL
+                    id               SERIAL PRIMARY KEY,
+                    device_id        TEXT    NOT NULL DEFAULT 'unknown',
+                    version          TEXT    NOT NULL DEFAULT 'unknown',
+                    ts               BIGINT  NOT NULL,
+                    bat              REAL    NOT NULL,
+                    charging         INTEGER NOT NULL DEFAULT 0,
+                    received_at      BIGINT  NOT NULL,
+                    part_number      TEXT    NOT NULL DEFAULT 'unknown',
+                    firmware_version TEXT    NOT NULL DEFAULT 'unknown'
                 )
             """)
+            # Migrate existing databases
+            for col, definition in [
+                ("part_number",      "TEXT NOT NULL DEFAULT 'unknown'"),
+                ("firmware_version", "TEXT NOT NULL DEFAULT 'unknown'"),
+            ]:
+                cur.execute("""
+                    SELECT 1 FROM information_schema.columns
+                    WHERE table_name = 'readings' AND column_name = %s
+                """, (col,))
+                if cur.fetchone() is None:
+                    cur.execute(f"ALTER TABLE readings ADD COLUMN {col} {definition}")
+            # Drop ts_iso if it still exists
+            cur.execute("""
+                SELECT 1 FROM information_schema.columns
+                WHERE table_name = 'readings' AND column_name = 'ts_iso'
+            """)
+            if cur.fetchone() is not None:
+                cur.execute("ALTER TABLE readings DROP COLUMN ts_iso")
 
 
 # Initialise the table on startup.
@@ -92,16 +110,17 @@ def ingest_readings():
 
                 ts = int(r["ts"])
                 cur.execute("""
-                    INSERT INTO readings (device_id, version, ts, ts_iso, bat, charging, received_at)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                    INSERT INTO readings (device_id, version, ts, bat, charging, received_at, part_number, firmware_version)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 """, (
                     r.get("device_id", "unknown"),
                     r.get("version", "unknown"),
                     ts,
-                    datetime.fromtimestamp(ts, tz=timezone.utc).isoformat(),
                     float(r["bat"]),
                     int(r.get("charging", 0)),
                     received_at,
+                    r.get("part_number", "unknown"),
+                    r.get("firmware_version", "unknown"),
                 ))
                 saved += 1
 
@@ -137,7 +156,7 @@ def list_readings():
     with get_db() as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
             cur.execute(f"""
-                SELECT device_id, version, ts, ts_iso, bat, charging, received_at
+                SELECT device_id, version, ts, bat, charging, received_at, part_number, firmware_version
                 FROM readings
                 {where}
                 ORDER BY ts DESC

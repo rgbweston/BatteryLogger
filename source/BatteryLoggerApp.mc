@@ -23,10 +23,16 @@ class BatteryLoggerApp extends Application.AppBase {
         } catch (ex instanceof Lang.Exception) {
         }
         // Schedule from the last event time to avoid resetting the timer on widget open.
+        // If nextTime is already in the past (e.g. after a long restart), fall back to
+        // Time.now() — some firmware versions don't reliably fire past Moments.
         var lastTime = Background.getLastTemporalEventTime();
         if (lastTime != null) {
             var nextTime = lastTime.add(new Time.Duration(intervalSec));
-            Background.registerForTemporalEvent(nextTime);
+            if (nextTime.value() <= Time.now().value()) {
+                Background.registerForTemporalEvent(Time.now());
+            } else {
+                Background.registerForTemporalEvent(nextTime);
+            }
         } else {
             Background.registerForTemporalEvent(Time.now());
         }

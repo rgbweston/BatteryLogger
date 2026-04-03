@@ -10,7 +10,7 @@ import Toybox.WatchUi;
 (:typecheck(disableBackgroundCheck))
 class BatteryLoggerView extends WatchUi.View {
 
-    private static const VERSION as String = "1.0.3";
+    private static const VERSION as String = "1.1.0";
 
     private var _status as String = "Tap to sync";
 

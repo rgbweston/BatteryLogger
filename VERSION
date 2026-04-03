@@ -1,0 +1,11 @@
+1.1.0
+
+# Changelog
+
+## 1.1.0 (2026-04-03)
+- Added part_number and firmware_version fields to readings payload
+- Removed ts_iso field from server storage and API response
+- Fixed background temporal event not restarting after watch restart/long power-off
+
+## 1.0.3
+- Initial sideloaded release

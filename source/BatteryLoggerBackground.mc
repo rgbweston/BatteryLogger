@@ -12,7 +12,7 @@ class BatteryLoggerBackground extends System.ServiceDelegate {
     private static const QUEUE_KEY    = "pending_readings";
     private static const MAX_QUEUE    = 150;
     private static const DEFAULT_URL  = "https://batterylogger.onrender.com/api/battery-readings";
-    private static const VERSION      = "1.0.3";
+    private static const VERSION      = "1.1.0";
 
     public function initialize() {
         ServiceDelegate.initialize();
@@ -30,7 +30,6 @@ class BatteryLoggerBackground extends System.ServiceDelegate {
         } catch (ex instanceof Lang.Exception) {}
         Background.registerForTemporalEvent(new Time.Duration(intervalSec));
 
-        var manualSync = Storage.getValue("sync_requested");
         Storage.setValue("sync_requested", false);
 
         // Always capture a fresh reading, whether manual or scheduled
@@ -45,6 +44,8 @@ class BatteryLoggerBackground extends System.ServiceDelegate {
         var unixNow = Time.now().value();
 
         var deviceId = "unknown";
+        var partNumber = "unknown";
+        var firmwareVersion = "unknown";
         try {
             var settings = System.getDeviceSettings();
             if (settings.uniqueIdentifier != null) {
@@ -52,14 +53,23 @@ class BatteryLoggerBackground extends System.ServiceDelegate {
             } else if (settings.partNumber != null) {
                 deviceId = settings.partNumber;
             }
+            if (settings.partNumber != null) {
+                partNumber = settings.partNumber;
+            }
+            var fw = settings.firmwareVersion;
+            if (fw instanceof Array && fw.size() >= 2) {
+                firmwareVersion = fw[0].toString() + "." + fw[1].toString();
+            }
         } catch (ex instanceof Lang.Exception) {}
 
         return {
-            "ts"        => unixNow,
-            "bat"       => stats.battery,
-            "charging"  => charging ? 1 : 0,
-            "device_id" => deviceId,
-            "version"   => VERSION
+            "ts"               => unixNow,
+            "bat"              => stats.battery,
+            "charging"         => charging ? 1 : 0,
+            "device_id"        => deviceId,
+            "part_number"      => partNumber,
+            "firmware_version" => firmwareVersion,
+            "version"          => VERSION
         };
     }
 

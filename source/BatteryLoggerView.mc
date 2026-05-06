@@ -10,7 +10,7 @@ import Toybox.WatchUi;
 (:typecheck(disableBackgroundCheck))
 class BatteryLoggerView extends WatchUi.View {
 
-    private static const VERSION as String = "1.1.0";
+    private static const VERSION as String = "1.2.0";
 
     private var _status as String = "Tap to sync";
 
@@ -52,8 +52,9 @@ class BatteryLoggerView extends WatchUi.View {
         dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
         dc.drawText(cx, h * 0.03, Graphics.FONT_XTINY, "v" + VERSION, Graphics.TEXT_JUSTIFY_CENTER);
 
-        var queue  = loadQueue();
-        var qLabel = queue.size().toString() + " reading" + (queue.size() == 1 ? "" : "s") + " pending";
+        var qSize  = Storage.getValue("q_size");
+        var qCount = (qSize instanceof Number) ? qSize : 0;
+        var qLabel = qCount.toString() + " reading" + (qCount == 1 ? "" : "s") + " pending";
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
         dc.drawText(cx, h * 0.50, Graphics.FONT_XTINY, qLabel, Graphics.TEXT_JUSTIFY_CENTER);
 
@@ -100,14 +101,6 @@ class BatteryLoggerView extends WatchUi.View {
             // 5-min cooldown still active — background will pick it up on next cycle
             setStatus("Queued (~5 min)");
         }
-    }
-
-    private function loadQueue() as Array {
-        var stored = Storage.getValue("pending_readings");
-        if (stored instanceof Array) {
-            return stored;
-        }
-        return [] as Array;
     }
 
     private function formatRelativeTime(unixTs as Number) as String {

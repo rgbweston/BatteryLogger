@@ -1,6 +1,23 @@
-1.1.0
+1.2.0
 
 # Changelog
+
+## 1.2.0 (2026-04-07)
+- Rewrite queue storage to indexed keys (q_0…q_199) — each background cycle loads only
+  BATCH_SIZE readings regardless of total queue size, eliminating background heap crashes
+- Queue now safely handles 200 readings (~16h buffer) with no memory pressure
+- Automatic migration: old array-based queue (pending_readings) cleared on first run
+- Readings stored as 3 fields (ts, bat, charging); device metadata merged at sync time
+- Batched sync: 30 readings per POST cycle, drains large queues over successive cycles
+
+## 1.1.3 (2026-04-07)
+- Partial fix — superseded by 1.2.0
+
+## 1.1.2 (2026-04-07)
+- Partial fix — superseded by 1.2.0
+
+## 1.1.1 (2026-04-03)
+- Increase max queue size from 150 to 200 readings (~16h buffer)
 
 ## 1.1.0 (2026-04-03)
 - Added part_number and firmware_version fields to readings payload

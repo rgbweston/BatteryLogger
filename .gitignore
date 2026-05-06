@@ -3,3 +3,15 @@ developer_key.der
 bin/
 .venv/
 *.pdf
+.DS_Store
+.history/
+.claude/settings.local.json
+BatteryLogger.prg
+BatteryLogger.iq
+BatteryLogger.prg.debug.xml
+gen/
+internal-mir/
+mir/
+readings.jsonl
+smartwatch-logs.csv
+analysis_py/__pycache__/

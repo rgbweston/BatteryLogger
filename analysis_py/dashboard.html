@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>BatteryLogger — Device Dashboard</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 40px; color: #222; max-width: 1200px;
+  }
+  h1 { font-size: 20px; margin-bottom: 4px; }
+  h2 {
+    font-size: 15px; margin-top: 36px; margin-bottom: 10px;
+    color: #444; border-bottom: 1px solid #eee; padding-bottom: 6px;
+  }
+  .meta { font-size: 13px; color: #888; margin-bottom: 28px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; margin-bottom: 12px; }
+  th {
+    text-align: left; padding: 7px 12px; background: #f5f5f5;
+    border-bottom: 2px solid #ddd; font-weight: 600;
+  }
+  td { padding: 6px 12px; border-bottom: 1px solid #eee; vertical-align: middle; }
+  tr:hover td { background: #fafafa; }
+
+  /* ── Device cards ── */
+  .device-section {
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .device-header {
+    background: #f8f9fa;
+    padding: 12px 18px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .device-header-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .device-model {
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+  }
+  .device-meta {
+    font-size: 12px;
+    color: #666;
+    flex: 1;
+  }
+  .device-id {
+    font-family: monospace;
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 5px;
+    word-break: break-all;
+  }
+  .device-status {
+    font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 10px; white-space: nowrap;
+  }
+  .status-active   { background: #e8f5e9; color: #2e7d32; }
+  .status-inactive { background: #f5f5f5; color: #999; }
+
+  .device-body { padding: 20px; }
+  .section-block { margin-bottom: 24px; }
+  .block-title {
+    font-size: 13px; font-weight: 600; color: #444;
+    margin-bottom: 8px; padding-bottom: 4px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
+  .section-divider {
+    margin-top: 36px; margin-bottom: 8px;
+    font-size: 14px; font-weight: 600; color: #888;
+    border-top: 2px solid #eee; padding-top: 14px;
+  }
+</style>
+</head>
+<body>
+<h1>BatteryLogger — Device Dashboard</h1>
+<div class="meta">
+  24 devices &nbsp;·&nbsp;
+  <span style="color:#2e7d32"><strong>15</strong> active (&le;7d)</span>
+  &nbsp;·&nbsp;
+  <span style="color:#999"><strong>9</strong> inactive</span>
+  &nbsp;·&nbsp;
+  74128 readings &nbsp;·&nbsp;
+  Generated 06 May 2026 08:47 UTC
+</div>
+
+<h2>Battery life by model</h2>
+<p style="font-size:12px;color:#888;margin-top:-6px">Median across all devices of each model.</p>
+<table><thead><tr><th>Model</th><th style="text-align:right">Direct (clean cycles)</th><th style="text-align:right">Charge boundaries</th><th style="text-align:right">Normalised drain rate</th><th style="text-align:right">Devices</th></tr></thead><tbody><tr><td><span style="color:#2ca02c;font-size:16px">●</span> Venu 3S</td><td style="text-align:right">2.8 d</td><td style="text-align:right">3.0 d</td><td style="text-align:right">3.2 d</td><td style="text-align:right;color:#888">5</td></tr><tr><td><span style="color:#8c564b;font-size:16px">●</span> Venu 4</td><td style="text-align:right">5.6 d</td><td style="text-align:right">—</td><td style="text-align:right">5.5 d</td><td style="text-align:right;color:#888">1</td></tr><tr><td><span style="color:#d62728;font-size:16px">●</span> Venu 4 41mm</td><td style="text-align:right">6.8 d</td><td style="text-align:right">—</td><td style="text-align:right">6.9 d</td><td style="text-align:right;color:#888">1</td></tr><tr><td><span style="color:#9467bd;font-size:16px">●</span> Venu 4 45mm</td><td style="text-align:right">8.8 d</td><td style="text-align:right">10.6 d</td><td style="text-align:right">8.6 d</td><td style="text-align:right;color:#888">2</td></tr><tr><td><span style="color:#1f77b4;font-size:16px">●</span> Vivoactive 5</td><td style="text-align:right">4.9 d</td><td style="text-align:right">9.7 d</td><td style="text-align:right">5.0 d</td><td style="text-align:right;color:#888">10</td></tr><tr><td><span style="color:#ff7f0e;font-size:16px">●</span> Vivoactive 6</td><td style="text-align:right">3.5 d</td><td style="text-align:right">15.3 d</td><td style="text-align:right">5.7 d</td><td style="text-align:right;color:#888">4</td></tr><tr><td><span style="color:#aaaaaa;font-size:16px">●</span> —</td><td style="text-align:right">3.7 d</td><td style="text-align:right">—</td><td style="text-align:right">3.7 d</td><td style="text-align:right;color:#888">1</td></tr></tbody></table>
+
+<h2>Device status</h2>
+<table><thead><tr><th>Device ID</th><th>Model</th><th>Firmware</th><th style="text-align:right">Readings</th><th style="text-align:right">Last bat%</th><th>Last seen</th><th>Status</th></tr></thead><tbody><tr><td><a href="#dev-39492696" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">39492696cac7db14…</a></td><td><span style="color:#2ca02c">●</span> Venu 3S</td><td style="font-family:monospace;font-size:11px;color:#888">17.5</td><td style="text-align:right">7218</td><td style="text-align:right">38%</td><td style="font-size:12px;color:#666">37s ago</td><td style="background:#e8f5e9;color:#2e7d32;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-fb947d3c" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">fb947d3c61491c13…</a></td><td><span style="color:#9467bd">●</span> Venu 4 45mm</td><td style="font-family:monospace;font-size:11px;color:#888">16.37</td><td style="text-align:right">7081</td><td style="text-align:right">48%</td><td style="font-size:12px;color:#666">32s ago</td><td style="background:#e8f5e9;color:#2e7d32;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-5be3da43" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">5be3da43dd1704a3…</a></td><td><span style="color:#2ca02c">●</span> Venu 3S</td><td style="font-family:monospace;font-size:11px;color:#888">16.8, 17.5</td><td style="text-align:right">7069</td><td style="text-align:right">74%</td><td style="font-size:12px;color:#666">1h ago</td><td style="background:#fff8e1;color:#f57f17;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-e3b9d5c7" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">e3b9d5c770b35989…</a></td><td><span style="color:#2ca02c">●</span> Venu 3S</td><td style="font-family:monospace;font-size:11px;color:#888">17.5</td><td style="text-align:right">6831</td><td style="text-align:right">36%</td><td style="font-size:12px;color:#666">3m ago</td><td style="background:#e8f5e9;color:#2e7d32;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-4d4c82ea" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">4d4c82eaef432d2d…</a></td><td><span style="color:#1f77b4">●</span> Vivoactive 5</td><td style="font-family:monospace;font-size:11px;color:#888">17.5</td><td style="text-align:right">6205</td><td style="text-align:right">12%</td><td style="font-size:12px;color:#666">10h ago</td><td style="background:#fff3e0;color:#e65100;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-182fe10a" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">182fe10af4611e57…</a></td><td><span style="color:#ff7f0e">●</span> Vivoactive 6</td><td style="font-family:monospace;font-size:11px;color:#888">16.37</td><td style="text-align:right">5942</td><td style="text-align:right">31%</td><td style="font-size:12px;color:#666">6d ago</td><td style="background:#ffebee;color:#b71c1c;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-3f727e94" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">3f727e94476661da…</a></td><td><span style="color:#2ca02c">●</span> Venu 3S</td><td style="font-family:monospace;font-size:11px;color:#888">17.5</td><td style="text-align:right">5926</td><td style="text-align:right">8%</td><td style="font-size:12px;color:#666">36m ago</td><td style="background:#fff8e1;color:#f57f17;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-727287ec" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">727287ece99f866e…</a></td><td><span style="color:#1f77b4">●</span> Vivoactive 5</td><td style="font-family:monospace;font-size:11px;color:#888">17.5</td><td style="text-align:right">5801</td><td style="text-align:right">86%</td><td style="font-size:12px;color:#666">9h ago</td><td style="background:#fff3e0;color:#e65100;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-04376431" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">04376431f8bce5d2…</a></td><td><span style="color:#ff7f0e">●</span> Vivoactive 6</td><td style="font-family:monospace;font-size:11px;color:#888">16.37</td><td style="text-align:right">4681</td><td style="text-align:right">93%</td><td style="font-size:12px;color:#666">6h ago</td><td style="background:#fff3e0;color:#e65100;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-0457c34a" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">0457c34ac33a3bc3…</a></td><td><span style="color:#ff7f0e">●</span> Vivoactive 6</td><td style="font-family:monospace;font-size:11px;color:#888">16.37, 17.19</td><td style="text-align:right">4188</td><td style="text-align:right">10%</td><td style="font-size:12px;color:#666">20h ago</td><td style="background:#fff3e0;color:#e65100;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-1b3353f8" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">1b3353f8e64ab02e…</a></td><td><span style="color:#1f77b4">●</span> Vivoactive 5</td><td style="font-family:monospace;font-size:11px;color:#888">17.5</td><td style="text-align:right">2391</td><td style="text-align:right">70%</td><td style="font-size:12px;color:#666">3h ago</td><td style="background:#fff8e1;color:#f57f17;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-98a5accc" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">98a5acccfb6f99af…</a></td><td><span style="color:#2ca02c">●</span> Venu 3S</td><td style="font-family:monospace;font-size:11px;color:#888">17.5</td><td style="text-align:right">2007</td><td style="text-align:right">84%</td><td style="font-size:12px;color:#666">3m ago</td><td style="background:#e8f5e9;color:#2e7d32;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-ec631b64" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">ec631b640b7f7714…</a></td><td><span style="color:#9467bd">●</span> Venu 4 45mm</td><td style="font-family:monospace;font-size:11px;color:#888">16.37</td><td style="text-align:right">1662</td><td style="text-align:right">88%</td><td style="font-size:12px;color:#666">44m ago</td><td style="background:#fff8e1;color:#f57f17;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-5169e801" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">5169e8019ef11ac0…</a></td><td><span style="color:#aaaaaa">●</span> —</td><td style="font-family:monospace;font-size:11px;color:#888">17.5</td><td style="text-align:right">1437</td><td style="text-align:right">51%</td><td style="font-size:12px;color:#666">6m ago</td><td style="background:#e8f5e9;color:#2e7d32;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-16f5c57c" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">16f5c57cdb48c53a…</a></td><td><span style="color:#1f77b4">●</span> Vivoactive 5</td><td style="font-family:monospace;font-size:11px;color:#888">17.5</td><td style="text-align:right">114</td><td style="text-align:right">92%</td><td style="font-size:12px;color:#666">4h ago</td><td style="background:#fff8e1;color:#f57f17;text-align:center;font-size:16px">●</td></tr><tr><td colspan="7" style="background:#f5f5f5;font-size:11px;color:#999;padding:4px 12px;border-top:2px solid #ddd">Inactive</td></tr><tr><td><a href="#dev-82af553a" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">82af553af94a99f2…</a></td><td><span style="color:#1f77b4">●</span> Vivoactive 5</td><td style="font-family:monospace;font-size:11px;color:#888">17.5</td><td style="text-align:right">3247</td><td style="text-align:right">63%</td><td style="font-size:12px;color:#666">21d ago</td><td style="background:#ffebee;color:#b71c1c;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-b63b6eb3" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">b63b6eb396d08012…</a></td><td><span style="color:#d62728">●</span> Venu 4 41mm</td><td style="font-family:monospace;font-size:11px;color:#888">16.37</td><td style="text-align:right">1435</td><td style="text-align:right">22%</td><td style="font-size:12px;color:#666">12d ago</td><td style="background:#ffebee;color:#b71c1c;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-504ee0cf" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">504ee0cf39ff7ffc…</a></td><td><span style="color:#1f77b4">●</span> Vivoactive 5</td><td style="font-family:monospace;font-size:11px;color:#888">—</td><td style="text-align:right">488</td><td style="text-align:right">83%</td><td style="font-size:12px;color:#666">32d ago</td><td style="background:#ffebee;color:#b71c1c;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-652ec02b" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">652ec02bd230849e…</a></td><td><span style="color:#1f77b4">●</span> Vivoactive 5</td><td style="font-family:monospace;font-size:11px;color:#888">17.5</td><td style="text-align:right">260</td><td style="text-align:right">71%</td><td style="font-size:12px;color:#666">15d ago</td><td style="background:#ffebee;color:#b71c1c;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-997a99dd" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">997a99dd41117774…</a></td><td><span style="color:#8c564b">●</span> Venu 4</td><td style="font-family:monospace;font-size:11px;color:#888">—</td><td style="text-align:right">126</td><td style="text-align:right">86%</td><td style="font-size:12px;color:#666">33d ago</td><td style="background:#ffebee;color:#b71c1c;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-956fb3a3" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">956fb3a352f00dbd…</a></td><td><span style="color:#1f77b4">●</span> Vivoactive 5</td><td style="font-family:monospace;font-size:11px;color:#888">17.5</td><td style="text-align:right">11</td><td style="text-align:right">98%</td><td style="font-size:12px;color:#666">17d ago</td><td style="background:#ffebee;color:#b71c1c;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-4caf030f" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">4caf030f5082edf0…</a></td><td><span style="color:#1f77b4">●</span> Vivoactive 5</td><td style="font-family:monospace;font-size:11px;color:#888">17.5</td><td style="text-align:right">3</td><td style="text-align:right">25%</td><td style="font-size:12px;color:#666">28d ago</td><td style="background:#ffebee;color:#b71c1c;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-f0ad6bcc" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">f0ad6bcc8c3e5e3d…</a></td><td><span style="color:#ff7f0e">●</span> Vivoactive 6</td><td style="font-family:monospace;font-size:11px;color:#888">16.37</td><td style="text-align:right">3</td><td style="text-align:right">85%</td><td style="font-size:12px;color:#666">24d ago</td><td style="background:#ffebee;color:#b71c1c;text-align:center;font-size:16px">●</td></tr><tr><td><a href="#dev-d82839a8" style="font-family:monospace;font-size:12px;color:#333;text-decoration:none">d82839a836da26f4…</a></td><td><span style="color:#1f77b4">●</span> Vivoactive 5</td><td style="font-family:monospace;font-size:11px;color:#888">17.1</td><td style="text-align:right">2</td><td style="text-align:right">77%</td><td style="font-size:12px;color:#666">29d ago</td><td style="background:#ffebee;color:#b71c1c;text-align:center;font-size:16px">●</td></tr></tbody></table>
+
+<h2>Per-device analysis</h2>
+<p style="font-size:12px;color:#888;margin-top:-6px">
+  Active-first, then by number of readings descending.
+  Discharge cycles and charging behaviour use API data only.
+</p>
+
+<div class="device-section" id="dev-39492696">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#2ca02c;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Venu 3S</span>
+      <span class="device-meta">FW: 17.5 &nbsp;·&nbsp; 7218 readings &nbsp;·&nbsp; 10 cycles &nbsp;·&nbsp; 02 Apr 2026 – 06 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">39492696cac7db14c5dd1102ebb468c79304c3fb</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>2.8</strong> days</td><td style="color:#888;font-size:12px">n=10 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>3.0</strong> days</td><td style="color:#888;font-size:12px">n=9 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>3.0</strong> days</td><td style="color:#888;font-size:12px">n=10 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">10 cycles &nbsp;·&nbsp; 10 clean, 0 flagged &nbsp;·&nbsp; 618.2 total discharge hours &nbsp;·&nbsp; 61.8 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">02 Apr 14:09</td><td style="font-size:11px;color:#666">04 Apr 08:09</td><td style="text-align:right">42.0</td><td style="text-align:right">100% → 46%</td><td style="text-align:right">54%</td><td style="text-align:right">30.9</td></tr>
+<tr><td style="font-size:11px;color:#666">09 Apr 11:35</td><td style="font-size:11px;color:#666">12 Apr 08:10</td><td style="text-align:right">68.6</td><td style="text-align:right">100% → 0%</td><td style="text-align:right">100%</td><td style="text-align:right">35.0</td></tr>
+<tr><td style="font-size:11px;color:#666">13 Apr 14:10</td><td style="font-size:11px;color:#666">18 Apr 15:10</td><td style="text-align:right">121.0</td><td style="text-align:right">100% → 0%</td><td style="text-align:right">100%</td><td style="text-align:right">19.8</td></tr>
+<tr><td style="font-size:11px;color:#666">18 Apr 18:13</td><td style="font-size:11px;color:#666">21 Apr 18:23</td><td style="text-align:right">72.2</td><td style="text-align:right">100% → 6%</td><td style="text-align:right">94%</td><td style="text-align:right">31.3</td></tr>
+<tr><td style="font-size:11px;color:#666">21 Apr 20:13</td><td style="font-size:11px;color:#666">24 Apr 05:44</td><td style="text-align:right">57.5</td><td style="text-align:right">100% → 5%</td><td style="text-align:right">95%</td><td style="text-align:right">39.6</td></tr>
+<tr><td style="font-size:11px;color:#666">24 Apr 08:19</td><td style="font-size:11px;color:#666">26 Apr 21:07</td><td style="text-align:right">60.8</td><td style="text-align:right">100% → 10%</td><td style="text-align:right">90%</td><td style="text-align:right">35.5</td></tr>
+<tr><td style="font-size:11px;color:#666">26 Apr 22:22</td><td style="font-size:11px;color:#666">29 Apr 08:37</td><td style="text-align:right">58.3</td><td style="text-align:right">95% → 4%</td><td style="text-align:right">91%</td><td style="text-align:right">37.5</td></tr>
+<tr><td style="font-size:11px;color:#666">29 Apr 11:37</td><td style="font-size:11px;color:#666">01 May 13:42</td><td style="text-align:right">50.1</td><td style="text-align:right">100% → 11%</td><td style="text-align:right">89%</td><td style="text-align:right">42.6</td></tr>
+<tr><td style="font-size:11px;color:#666">01 May 15:42</td><td style="font-size:11px;color:#666">03 May 17:16</td><td style="text-align:right">49.6</td><td style="text-align:right">100% → 27%</td><td style="text-align:right">73%</td><td style="text-align:right">35.4</td></tr>
+<tr><td style="font-size:11px;color:#666">04 May 18:41</td><td style="font-size:11px;color:#666">06 May 08:46</td><td style="text-align:right">38.1</td><td style="text-align:right">100% → 38%</td><td style="text-align:right">62%</td><td style="text-align:right">39.1</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">14:56</td><td style="text-align:right">100.0%</td><td style="color:#888;font-size:12px">n=10  ·  mean 99.5%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">13:46</td><td style="text-align:right">10.0%</td><td style="color:#888;font-size:12px">n=9  ·  mean 11.2%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:75px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">981</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:89px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1152</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:71px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">927</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:79px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1032</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1291</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:74px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">962</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:67px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">873</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-fb947d3c">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#9467bd;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Venu 4 45mm</span>
+      <span class="device-meta">FW: 16.37 &nbsp;·&nbsp; 7081 readings &nbsp;·&nbsp; 4 cycles &nbsp;·&nbsp; 11 Apr 2026 – 06 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">fb947d3c61491c139176d0cc2ea98cee6d214393</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>7.7</strong> days</td><td style="color:#888;font-size:12px">n=4 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>12.1</strong> days</td><td style="color:#888;font-size:12px">n=2 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>10.8</strong> days</td><td style="color:#888;font-size:12px">n=4 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">4 cycles &nbsp;·&nbsp; 4 clean, 0 flagged &nbsp;·&nbsp; 599.0 total discharge hours &nbsp;·&nbsp; 149.8 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">11 Apr 05:09</td><td style="font-size:11px;color:#666">11 Apr 19:27</td><td style="text-align:right">14.3</td><td style="text-align:right">56% → 43%</td><td style="text-align:right">13%</td><td style="text-align:right">21.8</td></tr>
+<tr><td style="font-size:11px;color:#666">11 Apr 20:42</td><td style="font-size:11px;color:#666">17 Apr 14:38</td><td style="text-align:right">137.9</td><td style="text-align:right">100% → 9%</td><td style="text-align:right">91%</td><td style="text-align:right">15.8</td></tr>
+<tr><td style="font-size:11px;color:#666">17 Apr 17:03</td><td style="font-size:11px;color:#666">02 May 22:01</td><td style="text-align:right">365.0</td><td style="text-align:right">100% → 11%</td><td style="text-align:right">89%</td><td style="text-align:right">5.9</td></tr>
+<tr><td style="font-size:11px;color:#666">02 May 22:56</td><td style="font-size:11px;color:#666">06 May 08:46</td><td style="text-align:right">81.8</td><td style="text-align:right">86% → 48%</td><td style="text-align:right">38%</td><td style="text-align:right">11.1</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">20:41</td><td style="text-align:right">100.0%</td><td style="color:#888;font-size:12px">n=3  ·  mean 95.3%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">19:32</td><td style="text-align:right">14.0%</td><td style="color:#888;font-size:12px">n=3  ·  mean 23.3%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:99px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1149</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1152</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:82px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">946</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:66px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">761</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:73px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">844</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:93px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1077</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1152</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-5be3da43">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#2ca02c;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Venu 3S</span>
+      <span class="device-meta">FW: 16.8, 17.5 &nbsp;·&nbsp; 7069 readings &nbsp;·&nbsp; 6 cycles &nbsp;·&nbsp; 09 Apr 2026 – 06 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">5be3da43dd1704a3bffd3caf9eb5dc8b2c814482</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>10.0</strong> days</td><td style="color:#888;font-size:12px">n=6 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>11.9</strong> days</td><td style="color:#888;font-size:12px">n=4 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>9.9</strong> days</td><td style="color:#888;font-size:12px">n=6 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">6 cycles &nbsp;·&nbsp; 6 clean, 0 flagged &nbsp;·&nbsp; 633.6 total discharge hours &nbsp;·&nbsp; 105.6 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">09 Apr 17:27</td><td style="font-size:11px;color:#666">13 Apr 16:51</td><td style="text-align:right">95.4</td><td style="text-align:right">85% → 39%</td><td style="text-align:right">46%</td><td style="text-align:right">11.6</td></tr>
+<tr><td style="font-size:11px;color:#666">13 Apr 17:36</td><td style="font-size:11px;color:#666">17 Apr 16:09</td><td style="text-align:right">94.6</td><td style="text-align:right">92% → 36%</td><td style="text-align:right">56%</td><td style="text-align:right">14.2</td></tr>
+<tr><td style="font-size:11px;color:#666">17 Apr 16:39</td><td style="font-size:11px;color:#666">21 Apr 14:40</td><td style="text-align:right">94.0</td><td style="text-align:right">72% → 30%</td><td style="text-align:right">42%</td><td style="text-align:right">10.7</td></tr>
+<tr><td style="font-size:11px;color:#666">21 Apr 15:45</td><td style="font-size:11px;color:#666">26 Apr 15:50</td><td style="text-align:right">120.1</td><td style="text-align:right">96% → 54%</td><td style="text-align:right">42%</td><td style="text-align:right">8.4</td></tr>
+<tr><td style="font-size:11px;color:#666">26 Apr 16:30</td><td style="font-size:11px;color:#666">03 May 17:01</td><td style="text-align:right">168.5</td><td style="text-align:right">94% → 38%</td><td style="text-align:right">56%</td><td style="text-align:right">8.0</td></tr>
+<tr><td style="font-size:11px;color:#666">03 May 18:01</td><td style="font-size:11px;color:#666">06 May 07:01</td><td style="text-align:right">61.0</td><td style="text-align:right">98% → 74%</td><td style="text-align:right">24%</td><td style="text-align:right">9.4</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">16:38</td><td style="text-align:right">94.0%</td><td style="color:#888;font-size:12px">n=5  ·  mean 90.4%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">16:14</td><td style="text-align:right">41.0%</td><td style="color:#888;font-size:12px">n=5  ·  mean 43.4%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:99px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1151</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:90px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1041</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:54px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">631</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:68px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">792</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1152</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:99px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1151</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:99px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1151</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-e3b9d5c7">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#2ca02c;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Venu 3S</span>
+      <span class="device-meta">FW: 17.5 &nbsp;·&nbsp; 6831 readings &nbsp;·&nbsp; 9 cycles &nbsp;·&nbsp; 13 Mar 2026 – 06 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">e3b9d5c770b359892b7911839eb8e870b22fe559</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>4.2</strong> days</td><td style="color:#888;font-size:12px">n=9 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>4.6</strong> days</td><td style="color:#888;font-size:12px">n=7 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>4.9</strong> days</td><td style="color:#888;font-size:12px">n=9 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">9 cycles &nbsp;·&nbsp; 9 clean, 0 flagged &nbsp;·&nbsp; 525.8 total discharge hours &nbsp;·&nbsp; 58.4 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">08 Apr 13:33</td><td style="font-size:11px;color:#666">08 Apr 14:43</td><td style="text-align:right">1.2</td><td style="text-align:right">34% → 32%</td><td style="text-align:right">2%</td><td style="text-align:right">41.1</td></tr>
+<tr><td style="font-size:11px;color:#666">09 Apr 02:03</td><td style="font-size:11px;color:#666">11 Apr 18:30</td><td style="text-align:right">64.5</td><td style="text-align:right">100% → 32%</td><td style="text-align:right">68%</td><td style="text-align:right">25.3</td></tr>
+<tr><td style="font-size:11px;color:#666">12 Apr 06:16</td><td style="font-size:11px;color:#666">14 Apr 15:16</td><td style="text-align:right">57.0</td><td style="text-align:right">100% → 42%</td><td style="text-align:right">58%</td><td style="text-align:right">24.4</td></tr>
+<tr><td style="font-size:11px;color:#666">14 Apr 15:46</td><td style="font-size:11px;color:#666">16 Apr 05:06</td><td style="text-align:right">37.3</td><td style="text-align:right">84% → 47%</td><td style="text-align:right">37%</td><td style="text-align:right">23.8</td></tr>
+<tr><td style="font-size:11px;color:#666">16 Apr 13:32</td><td style="font-size:11px;color:#666">21 Apr 06:18</td><td style="text-align:right">112.8</td><td style="text-align:right">100% → 44%</td><td style="text-align:right">56%</td><td style="text-align:right">11.9</td></tr>
+<tr><td style="font-size:11px;color:#666">21 Apr 10:01</td><td style="font-size:11px;color:#666">22 Apr 15:26</td><td style="text-align:right">29.4</td><td style="text-align:right">100% → 71%</td><td style="text-align:right">29%</td><td style="text-align:right">23.7</td></tr>
+<tr><td style="font-size:11px;color:#666">25 Apr 17:06</td><td style="font-size:11px;color:#666">29 Apr 06:02</td><td style="text-align:right">84.9</td><td style="text-align:right">100% → 26%</td><td style="text-align:right">74%</td><td style="text-align:right">20.9</td></tr>
+<tr><td style="font-size:11px;color:#666">30 Apr 13:08</td><td style="font-size:11px;color:#666">03 May 19:04</td><td style="text-align:right">77.9</td><td style="text-align:right">86% → 17%</td><td style="text-align:right">69%</td><td style="text-align:right">21.3</td></tr>
+<tr><td style="font-size:11px;color:#666">03 May 19:59</td><td style="font-size:11px;color:#666">06 May 08:44</td><td style="text-align:right">60.8</td><td style="text-align:right">91% → 36%</td><td style="text-align:right">55%</td><td style="text-align:right">21.7</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">13:19</td><td style="text-align:right">100.0%</td><td style="color:#888;font-size:12px">n=8  ·  mean 95.1%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">15:04</td><td style="text-align:right">42.0%</td><td style="color:#888;font-size:12px">n=8  ·  mean 41.8%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:97px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1121</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:85px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">987</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:86px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1003</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:70px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">813</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:75px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">867</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:76px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">885</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1155</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-4d4c82ea">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#1f77b4;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 5</span>
+      <span class="device-meta">FW: 17.5 &nbsp;·&nbsp; 6205 readings &nbsp;·&nbsp; 8 cycles &nbsp;·&nbsp; 09 Mar 2026 – 05 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">4d4c82eaef432d2ddbc7448a662134e285b70b85</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>3.6</strong> days</td><td style="color:#888;font-size:12px">n=8 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>4.3</strong> days</td><td style="color:#888;font-size:12px">n=7 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>3.9</strong> days</td><td style="color:#888;font-size:12px">n=8 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">8 cycles &nbsp;·&nbsp; 8 clean, 0 flagged &nbsp;·&nbsp; 618.9 total discharge hours &nbsp;·&nbsp; 77.4 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">07 Apr 13:29</td><td style="font-size:11px;color:#666">08 Apr 14:53</td><td style="text-align:right">25.4</td><td style="text-align:right">85% → 10%</td><td style="text-align:right">75%</td><td style="text-align:right">70.9</td></tr>
+<tr><td style="font-size:11px;color:#666">08 Apr 17:08</td><td style="font-size:11px;color:#666">14 Apr 07:57</td><td style="text-align:right">134.8</td><td style="text-align:right">100% → 2%</td><td style="text-align:right">98%</td><td style="text-align:right">17.4</td></tr>
+<tr><td style="font-size:11px;color:#666">14 Apr 15:20</td><td style="font-size:11px;color:#666">18 Apr 08:39</td><td style="text-align:right">89.3</td><td style="text-align:right">100% → 2%</td><td style="text-align:right">98%</td><td style="text-align:right">26.3</td></tr>
+<tr><td style="font-size:11px;color:#666">19 Apr 11:54</td><td style="font-size:11px;color:#666">24 Apr 07:59</td><td style="text-align:right">116.1</td><td style="text-align:right">100% → 2%</td><td style="text-align:right">98%</td><td style="text-align:right">20.3</td></tr>
+<tr><td style="font-size:11px;color:#666">24 Apr 14:44</td><td style="font-size:11px;color:#666">26 Apr 10:53</td><td style="text-align:right">44.2</td><td style="text-align:right">100% → 45%</td><td style="text-align:right">55%</td><td style="text-align:right">29.9</td></tr>
+<tr><td style="font-size:11px;color:#666">26 Apr 12:07</td><td style="font-size:11px;color:#666">02 May 09:11</td><td style="text-align:right">141.1</td><td style="text-align:right">100% → 2%</td><td style="text-align:right">98%</td><td style="text-align:right">16.7</td></tr>
+<tr><td style="font-size:11px;color:#666">02 May 16:35</td><td style="font-size:11px;color:#666">05 May 04:12</td><td style="text-align:right">59.6</td><td style="text-align:right">100% → 2%</td><td style="text-align:right">98%</td><td style="text-align:right">39.5</td></tr>
+<tr><td style="font-size:11px;color:#666">05 May 13:55</td><td style="font-size:11px;color:#666">05 May 22:20</td><td style="text-align:right">8.4</td><td style="text-align:right">45% → 12%</td><td style="text-align:right">33%</td><td style="text-align:right">94.1</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">14:19</td><td style="text-align:right">100.0%</td><td style="color:#888;font-size:12px">n=8  ·  mean 91.2%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">12:50</td><td style="text-align:right">4.0%</td><td style="color:#888;font-size:12px">n=7  ·  mean 10.9%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:93px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">926</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:89px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">884</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">991</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:81px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">805</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:92px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">918</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:70px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">703</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:98px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">978</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-182fe10a">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#ff7f0e;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 6</span>
+      <span class="device-meta">FW: 16.37 &nbsp;·&nbsp; 5942 readings &nbsp;·&nbsp; 3 cycles &nbsp;·&nbsp; 11 Mar 2026 – 29 Apr 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">182fe10af4611e572f80124619c02bde653c1b64</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>17.9</strong> days</td><td style="color:#888;font-size:12px">n=3 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>20.3</strong> days</td><td style="color:#888;font-size:12px">n=3 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>12.8</strong> days</td><td style="color:#888;font-size:12px">n=3 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">3 cycles &nbsp;·&nbsp; 3 clean, 0 flagged &nbsp;·&nbsp; 570.0 total discharge hours &nbsp;·&nbsp; 190.0 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">02 Apr 10:37</td><td style="font-size:11px;color:#666">17 Apr 00:28</td><td style="text-align:right">349.8</td><td style="text-align:right">53% → 0%</td><td style="text-align:right">53%</td><td style="text-align:right">3.6</td></tr>
+<tr><td style="font-size:11px;color:#666">17 Apr 08:28</td><td style="font-size:11px;color:#666">23 Apr 07:09</td><td style="text-align:right">142.7</td><td style="text-align:right">33% → 0%</td><td style="text-align:right">33%</td><td style="text-align:right">5.6</td></tr>
+<tr><td style="font-size:11px;color:#666">23 Apr 11:47</td><td style="font-size:11px;color:#666">26 Apr 17:17</td><td style="text-align:right">77.5</td><td style="text-align:right">100% → 0%</td><td style="text-align:right">100%</td><td style="text-align:right">31.0</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">09:58</td><td style="text-align:right">33.0%</td><td style="color:#888;font-size:12px">n=5  ·  mean 47.2%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">09:00</td><td style="text-align:right">3.0%</td><td style="color:#888;font-size:12px">n=4  ·  mean 8.8%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:63px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">724</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:89px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1021</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1142</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:85px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">982</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:77px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">886</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:56px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">644</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:47px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">543</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-3f727e94">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#2ca02c;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Venu 3S</span>
+      <span class="device-meta">FW: 17.5 &nbsp;·&nbsp; 5926 readings &nbsp;·&nbsp; 6 cycles &nbsp;·&nbsp; 11 Mar 2026 – 06 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">3f727e94476661dac969cbb771b1a119eaab225b</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>2.1</strong> days</td><td style="color:#888;font-size:12px">n=6 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>2.2</strong> days</td><td style="color:#888;font-size:12px">n=4 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>3.2</strong> days</td><td style="color:#888;font-size:12px">n=6 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">6 cycles &nbsp;·&nbsp; 6 clean, 0 flagged &nbsp;·&nbsp; 392.0 total discharge hours &nbsp;·&nbsp; 65.3 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">02 Apr 11:36</td><td style="font-size:11px;color:#666">09 Apr 01:22</td><td style="text-align:right">157.8</td><td style="text-align:right">100% → 9%</td><td style="text-align:right">91%</td><td style="text-align:right">13.8</td></tr>
+<tr><td style="font-size:11px;color:#666">23 Apr 10:14</td><td style="font-size:11px;color:#666">25 Apr 08:19</td><td style="text-align:right">46.1</td><td style="text-align:right">100% → 10%</td><td style="text-align:right">90%</td><td style="text-align:right">46.9</td></tr>
+<tr><td style="font-size:11px;color:#666">25 Apr 09:54</td><td style="font-size:11px;color:#666">27 Apr 07:09</td><td style="text-align:right">45.3</td><td style="text-align:right">100% → 4%</td><td style="text-align:right">96%</td><td style="text-align:right">50.9</td></tr>
+<tr><td style="font-size:11px;color:#666">28 Apr 06:21</td><td style="font-size:11px;color:#666">01 May 06:31</td><td style="text-align:right">72.2</td><td style="text-align:right">100% → 4%</td><td style="text-align:right">96%</td><td style="text-align:right">31.9</td></tr>
+<tr><td style="font-size:11px;color:#666">01 May 07:31</td><td style="font-size:11px;color:#666">02 May 07:28</td><td style="text-align:right">23.9</td><td style="text-align:right">80% → 32%</td><td style="text-align:right">48%</td><td style="text-align:right">48.1</td></tr>
+<tr><td style="font-size:11px;color:#666">04 May 09:28</td><td style="font-size:11px;color:#666">06 May 08:10</td><td style="text-align:right">46.7</td><td style="text-align:right">100% → 8%</td><td style="text-align:right">92%</td><td style="text-align:right">47.3</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">09:41</td><td style="text-align:right">100.0%</td><td style="color:#888;font-size:12px">n=6  ·  mean 96.7%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">07:14</td><td style="text-align:right">15.0%</td><td style="color:#888;font-size:12px">n=5  ·  mean 32.4%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:49px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">574</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:61px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">711</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:73px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">848</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:66px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">773</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1158</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:85px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">994</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:74px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">868</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-727287ec">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#1f77b4;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 5</span>
+      <span class="device-meta">FW: 17.5 &nbsp;·&nbsp; 5801 readings &nbsp;·&nbsp; 4 cycles &nbsp;·&nbsp; 09 Apr 2026 – 05 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">727287ece99f866e56f84b53c3887b040aee29f3</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>8.1</strong> days</td><td style="color:#888;font-size:12px">n=4 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>31.9</strong> days</td><td style="color:#888;font-size:12px">n=2 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>12.6</strong> days</td><td style="color:#888;font-size:12px">n=4 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">4 cycles &nbsp;·&nbsp; 4 clean, 0 flagged &nbsp;·&nbsp; 606.0 total discharge hours &nbsp;·&nbsp; 151.5 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">09 Apr 08:44</td><td style="font-size:11px;color:#666">11 Apr 21:13</td><td style="text-align:right">60.5</td><td style="text-align:right">66% → 2%</td><td style="text-align:right">64%</td><td style="text-align:right">25.4</td></tr>
+<tr><td style="font-size:11px;color:#666">11 Apr 22:01</td><td style="font-size:11px;color:#666">22 Apr 00:01</td><td style="text-align:right">242.0</td><td style="text-align:right">32% → 7%</td><td style="text-align:right">25%</td><td style="text-align:right">2.5</td></tr>
+<tr><td style="font-size:11px;color:#666">22 Apr 07:52</td><td style="font-size:11px;color:#666">04 May 11:15</td><td style="text-align:right">291.4</td><td style="text-align:right">100% → 2%</td><td style="text-align:right">98%</td><td style="text-align:right">8.1</td></tr>
+<tr><td style="font-size:11px;color:#666">05 May 10:48</td><td style="font-size:11px;color:#666">05 May 22:53</td><td style="text-align:right">12.1</td><td style="text-align:right">100% → 86%</td><td style="text-align:right">14%</td><td style="text-align:right">27.8</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">10:48</td><td style="text-align:right">100.0%</td><td style="color:#888;font-size:12px">n=3  ·  mean 77.3%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">08:15</td><td style="text-align:right">3.0%</td><td style="color:#888;font-size:12px">n=3  ·  mean 5.7%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:65px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">666</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:80px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">825</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:71px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">731</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:83px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">855</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">1019</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:84px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">861</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:82px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">844</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-04376431">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#ff7f0e;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 6</span>
+      <span class="device-meta">FW: 16.37 &nbsp;·&nbsp; 4681 readings &nbsp;·&nbsp; 4 cycles &nbsp;·&nbsp; 02 Apr 2026 – 06 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>3.5</strong> days</td><td style="color:#888;font-size:12px">n=4 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>15.3</strong> days</td><td style="color:#888;font-size:12px">n=2 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>5.7</strong> days</td><td style="color:#888;font-size:12px">n=4 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">4 cycles &nbsp;·&nbsp; 4 clean, 0 flagged &nbsp;·&nbsp; 400.0 total discharge hours &nbsp;·&nbsp; 100.0 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">02 Apr 13:31</td><td style="font-size:11px;color:#666">05 Apr 19:57</td><td style="text-align:right">78.4</td><td style="text-align:right">98% → 4%</td><td style="text-align:right">94%</td><td style="text-align:right">28.8</td></tr>
+<tr><td style="font-size:11px;color:#666">06 Apr 12:41</td><td style="font-size:11px;color:#666">09 Apr 19:59</td><td style="text-align:right">79.3</td><td style="text-align:right">100% → 8%</td><td style="text-align:right">92%</td><td style="text-align:right">27.8</td></tr>
+<tr><td style="font-size:11px;color:#666">10 Apr 13:17</td><td style="font-size:11px;color:#666">20 Apr 10:45</td><td style="text-align:right">237.5</td><td style="text-align:right">100% → 0%</td><td style="text-align:right">100%</td><td style="text-align:right">10.1</td></tr>
+<tr><td style="font-size:11px;color:#666">05 May 21:16</td><td style="font-size:11px;color:#666">06 May 02:06</td><td style="text-align:right">4.8</td><td style="text-align:right">100% → 93%</td><td style="text-align:right">7%</td><td style="text-align:right">34.8</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">13:16</td><td style="text-align:right">100.0%</td><td style="color:#888;font-size:12px">n=3  ·  mean 100.0%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">20:02</td><td style="text-align:right">8.0%</td><td style="color:#888;font-size:12px">n=3  ·  mean 7.7%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:79px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">623</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:95px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">745</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:76px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">602</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:79px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">624</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:89px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">705</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">784</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:76px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">598</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-0457c34a">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#ff7f0e;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 6</span>
+      <span class="device-meta">FW: 16.37, 17.19 &nbsp;·&nbsp; 4188 readings &nbsp;·&nbsp; 7 cycles &nbsp;·&nbsp; 14 Apr 2026 – 05 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">0457c34ac33a3bc3ee0196003561d39b6b9a4080</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>3.4</strong> days</td><td style="color:#888;font-size:12px">n=7 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>4.1</strong> days</td><td style="color:#888;font-size:12px">n=5 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>3.5</strong> days</td><td style="color:#888;font-size:12px">n=7 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">7 cycles &nbsp;·&nbsp; 7 clean, 0 flagged &nbsp;·&nbsp; 439.1 total discharge hours &nbsp;·&nbsp; 62.7 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">14 Apr 15:04</td><td style="font-size:11px;color:#666">16 Apr 10:21</td><td style="text-align:right">43.3</td><td style="text-align:right">47% → 3%</td><td style="text-align:right">44%</td><td style="text-align:right">24.4</td></tr>
+<tr><td style="font-size:11px;color:#666">16 Apr 11:49</td><td style="font-size:11px;color:#666">20 Apr 06:41</td><td style="text-align:right">90.9</td><td style="text-align:right">99% → 3%</td><td style="text-align:right">96%</td><td style="text-align:right">25.4</td></tr>
+<tr><td style="font-size:11px;color:#666">20 Apr 07:21</td><td style="font-size:11px;color:#666">22 Apr 05:39</td><td style="text-align:right">46.3</td><td style="text-align:right">56% → 0%</td><td style="text-align:right">56%</td><td style="text-align:right">29.0</td></tr>
+<tr><td style="font-size:11px;color:#666">22 Apr 12:45</td><td style="font-size:11px;color:#666">25 Apr 11:23</td><td style="text-align:right">70.6</td><td style="text-align:right">96% → 0%</td><td style="text-align:right">96%</td><td style="text-align:right">32.6</td></tr>
+<tr><td style="font-size:11px;color:#666">27 Apr 13:42</td><td style="font-size:11px;color:#666">30 Apr 22:15</td><td style="text-align:right">80.6</td><td style="text-align:right">94% → 19%</td><td style="text-align:right">75%</td><td style="text-align:right">22.3</td></tr>
+<tr><td style="font-size:11px;color:#666">30 Apr 22:55</td><td style="font-size:11px;color:#666">02 May 16:00</td><td style="text-align:right">41.1</td><td style="text-align:right">73% → 4%</td><td style="text-align:right">69%</td><td style="text-align:right">40.3</td></tr>
+<tr><td style="font-size:11px;color:#666">02 May 18:10</td><td style="font-size:11px;color:#666">05 May 12:26</td><td style="text-align:right">66.3</td><td style="text-align:right">100% → 10%</td><td style="text-align:right">90%</td><td style="text-align:right">32.6</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">13:13</td><td style="text-align:right">95.0%</td><td style="color:#888;font-size:12px">n=6  ·  mean 86.3%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">12:02</td><td style="text-align:right">5.0%</td><td style="color:#888;font-size:12px">n=6  ·  mean 19.0%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:80px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">613</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:74px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">568</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:99px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">757</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:91px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">691</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">758</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:56px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">425</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:49px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">376</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-1b3353f8">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#1f77b4;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 5</span>
+      <span class="device-meta">FW: 17.5 &nbsp;·&nbsp; 2391 readings &nbsp;·&nbsp; 5 cycles &nbsp;·&nbsp; 24 Apr 2026 – 06 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">1b3353f8e64ab02eb1177208446f6c863854a320</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>5.1</strong> days</td><td style="color:#888;font-size:12px">n=5 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>5.3</strong> days</td><td style="color:#888;font-size:12px">n=3 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>4.8</strong> days</td><td style="color:#888;font-size:12px">n=5 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">5 cycles &nbsp;·&nbsp; 5 clean, 0 flagged &nbsp;·&nbsp; 275.4 total discharge hours &nbsp;·&nbsp; 55.1 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">24 Apr 08:48</td><td style="font-size:11px;color:#666">27 Apr 07:39</td><td style="text-align:right">70.8</td><td style="text-align:right">91% → 18%</td><td style="text-align:right">73%</td><td style="text-align:right">24.7</td></tr>
+<tr><td style="font-size:11px;color:#666">27 Apr 13:09</td><td style="font-size:11px;color:#666">30 Apr 14:54</td><td style="text-align:right">73.8</td><td style="text-align:right">76% → 16%</td><td style="text-align:right">60%</td><td style="text-align:right">19.5</td></tr>
+<tr><td style="font-size:11px;color:#666">30 Apr 16:41</td><td style="font-size:11px;color:#666">04 May 15:10</td><td style="text-align:right">94.5</td><td style="text-align:right">100% → 17%</td><td style="text-align:right">83%</td><td style="text-align:right">21.1</td></tr>
+<tr><td style="font-size:11px;color:#666">04 May 15:30</td><td style="font-size:11px;color:#666">05 May 18:45</td><td style="text-align:right">27.3</td><td style="text-align:right">31% → 10%</td><td style="text-align:right">21%</td><td style="text-align:right">18.5</td></tr>
+<tr><td style="font-size:11px;color:#666">05 May 19:10</td><td style="font-size:11px;color:#666">06 May 04:10</td><td style="text-align:right">9.0</td><td style="text-align:right">25% → 23%</td><td style="text-align:right">2%</td><td style="text-align:right">5.3</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">16:05</td><td style="text-align:right">33.5%</td><td style="color:#888;font-size:12px">n=6  ·  mean 47.7%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">14:58</td><td style="text-align:right">19.0%</td><td style="color:#888;font-size:12px">n=7  ·  mean 22.9%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">575</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:73px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">421</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:44px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">257</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:28px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">165</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:54px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">314</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:41px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">241</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:72px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">418</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-98a5accc">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#2ca02c;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Venu 3S</span>
+      <span class="device-meta">FW: 17.5 &nbsp;·&nbsp; 2007 readings &nbsp;·&nbsp; 16 cycles &nbsp;·&nbsp; 17 Apr 2026 – 06 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">98a5acccfb6f99af1b98ab4459b6fce647598e51</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>2.7</strong> days</td><td style="color:#888;font-size:12px">n=16 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>2.9</strong> days</td><td style="color:#888;font-size:12px">n=9 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>3.2</strong> days</td><td style="color:#888;font-size:12px">n=16 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">16 cycles &nbsp;·&nbsp; 16 clean, 0 flagged &nbsp;·&nbsp; 414.6 total discharge hours &nbsp;·&nbsp; 25.9 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">17 Apr 10:28</td><td style="font-size:11px;color:#666">17 Apr 16:23</td><td style="text-align:right">5.9</td><td style="text-align:right">7% → 0%</td><td style="text-align:right">7%</td><td style="text-align:right">28.4</td></tr>
+<tr><td style="font-size:11px;color:#666">17 Apr 22:38</td><td style="font-size:11px;color:#666">18 Apr 21:39</td><td style="text-align:right">23.0</td><td style="text-align:right">100% → 67%</td><td style="text-align:right">33%</td><td style="text-align:right">34.4</td></tr>
+<tr><td style="font-size:11px;color:#666">18 Apr 23:39</td><td style="font-size:11px;color:#666">19 Apr 15:39</td><td style="text-align:right">16.0</td><td style="text-align:right">84% → 61%</td><td style="text-align:right">23%</td><td style="text-align:right">34.5</td></tr>
+<tr><td style="font-size:11px;color:#666">19 Apr 23:39</td><td style="font-size:11px;color:#666">22 Apr 16:39</td><td style="text-align:right">65.0</td><td style="text-align:right">100% → 2%</td><td style="text-align:right">98%</td><td style="text-align:right">36.2</td></tr>
+<tr><td style="font-size:11px;color:#666">22 Apr 21:00</td><td style="font-size:11px;color:#666">25 Apr 17:01</td><td style="text-align:right">68.0</td><td style="text-align:right">100% → 2%</td><td style="text-align:right">98%</td><td style="text-align:right">34.6</td></tr>
+<tr><td style="font-size:11px;color:#666">26 Apr 00:01</td><td style="font-size:11px;color:#666">28 Apr 20:51</td><td style="text-align:right">68.8</td><td style="text-align:right">99% → 92%</td><td style="text-align:right">7%</td><td style="text-align:right">2.4</td></tr>
+<tr><td style="font-size:11px;color:#666">28 Apr 23:51</td><td style="font-size:11px;color:#666">30 Apr 15:18</td><td style="text-align:right">39.5</td><td style="text-align:right">99% → 34%</td><td style="text-align:right">65%</td><td style="text-align:right">39.5</td></tr>
+<tr><td style="font-size:11px;color:#666">30 Apr 15:43</td><td style="font-size:11px;color:#666">30 Apr 17:38</td><td style="text-align:right">1.9</td><td style="text-align:right">68% → 65%</td><td style="text-align:right">3%</td><td style="text-align:right">37.6</td></tr>
+<tr><td style="font-size:11px;color:#666">30 Apr 17:48</td><td style="font-size:11px;color:#666">01 May 21:58</td><td style="text-align:right">28.2</td><td style="text-align:right">65% → 19%</td><td style="text-align:right">46%</td><td style="text-align:right">39.2</td></tr>
+<tr><td style="font-size:11px;color:#666">01 May 22:28</td><td style="font-size:11px;color:#666">02 May 14:19</td><td style="text-align:right">15.8</td><td style="text-align:right">60% → 32%</td><td style="text-align:right">28%</td><td style="text-align:right">42.4</td></tr>
+<tr><td style="font-size:11px;color:#666">02 May 14:44</td><td style="font-size:11px;color:#666">03 May 22:59</td><td style="text-align:right">32.3</td><td style="text-align:right">66% → 9%</td><td style="text-align:right">57%</td><td style="text-align:right">42.4</td></tr>
+<tr><td style="font-size:11px;color:#666">03 May 23:19</td><td style="font-size:11px;color:#666">04 May 15:19</td><td style="text-align:right">16.0</td><td style="text-align:right">28% → 0%</td><td style="text-align:right">28%</td><td style="text-align:right">42.0</td></tr>
+<tr><td style="font-size:11px;color:#666">04 May 20:59</td><td style="font-size:11px;color:#666">04 May 23:49</td><td style="text-align:right">2.8</td><td style="text-align:right">100% → 96%</td><td style="text-align:right">4%</td><td style="text-align:right">33.9</td></tr>
+<tr><td style="font-size:11px;color:#666">05 May 00:14</td><td style="font-size:11px;color:#666">05 May 18:39</td><td style="text-align:right">18.4</td><td style="text-align:right">100% → 71%</td><td style="text-align:right">29%</td><td style="text-align:right">37.8</td></tr>
+<tr><td style="font-size:11px;color:#666">05 May 19:24</td><td style="font-size:11px;color:#666">05 May 22:49</td><td style="text-align:right">3.4</td><td style="text-align:right">100% → 95%</td><td style="text-align:right">5%</td><td style="text-align:right">35.1</td></tr>
+<tr><td style="font-size:11px;color:#666">05 May 23:09</td><td style="font-size:11px;color:#666">06 May 08:44</td><td style="text-align:right">9.6</td><td style="text-align:right">100% → 84%</td><td style="text-align:right">16%</td><td style="text-align:right">40.1</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">21:00</td><td style="text-align:right">99.0%</td><td style="color:#888;font-size:12px">n=15  ·  mean 84.6%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">19:00</td><td style="text-align:right">65.0%</td><td style="color:#888;font-size:12px">n=15  ·  mean 52.4%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:77px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">308</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:84px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">334</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:37px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">149</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:37px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">149</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">395</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:85px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">336</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:85px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">336</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-ec631b64">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#9467bd;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Venu 4 45mm</span>
+      <span class="device-meta">FW: 16.37 &nbsp;·&nbsp; 1662 readings &nbsp;·&nbsp; 4 cycles &nbsp;·&nbsp; 21 Apr 2026 – 06 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">ec631b640b7f771485f28a42aa14a9142ceb6a93</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>10.0</strong> days</td><td style="color:#888;font-size:12px">n=4 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>9.2</strong> days</td><td style="color:#888;font-size:12px">n=2 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>6.4</strong> days</td><td style="color:#888;font-size:12px">n=4 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">4 cycles &nbsp;·&nbsp; 4 clean, 0 flagged &nbsp;·&nbsp; 347.2 total discharge hours &nbsp;·&nbsp; 86.8 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">21 Apr 13:16</td><td style="font-size:11px;color:#666">26 Apr 10:27</td><td style="text-align:right">117.2</td><td style="text-align:right">52% → 18%</td><td style="text-align:right">34%</td><td style="text-align:right">7.0</td></tr>
+<tr><td style="font-size:11px;color:#666">26 Apr 13:02</td><td style="font-size:11px;color:#666">01 May 22:02</td><td style="text-align:right">129.0</td><td style="text-align:right">100% → 5%</td><td style="text-align:right">95%</td><td style="text-align:right">17.7</td></tr>
+<tr><td style="font-size:11px;color:#666">02 May 01:02</td><td style="font-size:11px;color:#666">03 May 18:02</td><td style="text-align:right">41.0</td><td style="text-align:right">99% → 13%</td><td style="text-align:right">86%</td><td style="text-align:right">50.3</td></tr>
+<tr><td style="font-size:11px;color:#666">03 May 20:02</td><td style="font-size:11px;color:#666">06 May 08:02</td><td style="text-align:right">60.0</td><td style="text-align:right">100% → 88%</td><td style="text-align:right">12%</td><td style="text-align:right">4.8</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">13:01</td><td style="text-align:right">100.0%</td><td style="color:#888;font-size:12px">n=3  ·  mean 99.7%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">19:02</td><td style="text-align:right">22.0%</td><td style="color:#888;font-size:12px">n=3  ·  mean 38.3%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:14px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">48</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:55px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">177</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">321</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:97px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">312</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:97px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">312</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:97px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">312</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:56px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">180</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-5169e801">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#aaaaaa;font-size:20px;line-height:1">●</span>
+      <span class="device-model">—</span>
+      <span class="device-meta">FW: 17.5 &nbsp;·&nbsp; 1437 readings &nbsp;·&nbsp; 2 cycles &nbsp;·&nbsp; 30 Apr 2026 – 06 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">5169e8019ef11ac0316f6bddf0afc5370977ced4</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>3.7</strong> days</td><td style="color:#888;font-size:12px">n=2 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>3.7</strong> days</td><td style="color:#888;font-size:12px">n=2 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">2 cycles &nbsp;·&nbsp; 2 clean, 0 flagged &nbsp;·&nbsp; 119.5 total discharge hours &nbsp;·&nbsp; 59.8 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">30 Apr 15:29</td><td style="font-size:11px;color:#666">03 May 17:49</td><td style="text-align:right">74.3</td><td style="text-align:right">86% → 1%</td><td style="text-align:right">85%</td><td style="text-align:right">27.4</td></tr>
+<tr><td style="font-size:11px;color:#666">04 May 11:30</td><td style="font-size:11px;color:#666">06 May 08:40</td><td style="text-align:right">45.2</td><td style="text-align:right">100% → 51%</td><td style="text-align:right">49%</td><td style="text-align:right">26.0</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">11:30</td><td style="text-align:right">100.0%</td><td style="color:#888;font-size:12px">n=1  ·  mean 100.0%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">10:05</td><td style="text-align:right">0.0%</td><td style="color:#888;font-size:12px">n=1  ·  mean 0.0%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:52px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">151</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">288</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:36px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">105</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:35px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">103</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">288</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">288</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:74px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">214</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-16f5c57c">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#1f77b4;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 5</span>
+      <span class="device-meta">FW: 17.5 &nbsp;·&nbsp; 114 readings &nbsp;·&nbsp; 0 cycles &nbsp;·&nbsp; 05 May 2026 – 06 May 2026</span>
+      <span class="device-status status-active">Active</span>
+    </div>
+    <div class="device-id">16f5c57cdb48c53a37307ca5ccc50f2a65b46bf2</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>From charge cycle boundaries</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>Normalised drain rate</td><td colspan="2" style="color:#bbb">—</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="color:#aaa;font-size:12px">No discharge episodes detected (requires API data with charging field).</p>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <p style="color:#aaa;font-size:12px">No charging transitions detected.</p>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">69</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:65px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">45</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div><div class="section-divider">Inactive devices (9)</div>
+<div class="device-section" id="dev-82af553a">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#1f77b4;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 5</span>
+      <span class="device-meta">FW: 17.5 &nbsp;·&nbsp; 3247 readings &nbsp;·&nbsp; 5 cycles &nbsp;·&nbsp; 10 Mar 2026 – 14 Apr 2026</span>
+      <span class="device-status status-inactive">Inactive</span>
+    </div>
+    <div class="device-id">82af553af94a99f25b403e73cb6e2c6edbd04919</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>4.7</strong> days</td><td style="color:#888;font-size:12px">n=5 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td style="text-align:right"><strong>14.0</strong> days</td><td style="color:#888;font-size:12px">n=4 cycles</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>5.2</strong> days</td><td style="color:#888;font-size:12px">n=5 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">5 cycles &nbsp;·&nbsp; 5 clean, 0 flagged &nbsp;·&nbsp; 266.0 total discharge hours &nbsp;·&nbsp; 53.2 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">01 Apr 15:07</td><td style="font-size:11px;color:#666">02 Apr 21:35</td><td style="text-align:right">30.5</td><td style="text-align:right">100% → 71%</td><td style="text-align:right">29%</td><td style="text-align:right">22.8</td></tr>
+<tr><td style="font-size:11px;color:#666">03 Apr 14:48</td><td style="font-size:11px;color:#666">05 Apr 11:09</td><td style="text-align:right">44.3</td><td style="text-align:right">55% → 16%</td><td style="text-align:right">39%</td><td style="text-align:right">21.1</td></tr>
+<tr><td style="font-size:11px;color:#666">06 Apr 11:19</td><td style="font-size:11px;color:#666">08 Apr 18:37</td><td style="text-align:right">55.3</td><td style="text-align:right">13% → 2%</td><td style="text-align:right">11%</td><td style="text-align:right">4.8</td></tr>
+<tr><td style="font-size:11px;color:#666">08 Apr 21:37</td><td style="font-size:11px;color:#666">13 Apr 10:34</td><td style="text-align:right">108.9</td><td style="text-align:right">100% → 3%</td><td style="text-align:right">97%</td><td style="text-align:right">21.4</td></tr>
+<tr><td style="font-size:11px;color:#666">13 Apr 11:57</td><td style="font-size:11px;color:#666">14 Apr 14:57</td><td style="text-align:right">27.0</td><td style="text-align:right">100% → 63%</td><td style="text-align:right">37%</td><td style="text-align:right">32.9</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">14:48</td><td style="text-align:right">100.0%</td><td style="color:#888;font-size:12px">n=5  ·  mean 73.6%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">14:43</td><td style="text-align:right">55.0%</td><td style="color:#888;font-size:12px">n=5  ·  mean 52.0%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:75px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">436</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:83px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">485</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:71px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">414</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">578</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:72px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">418</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:91px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">527</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:67px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">389</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-b63b6eb3">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#d62728;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Venu 4 41mm</span>
+      <span class="device-meta">FW: 16.37 &nbsp;·&nbsp; 1435 readings &nbsp;·&nbsp; 2 cycles &nbsp;·&nbsp; 14 Apr 2026 – 23 Apr 2026</span>
+      <span class="device-status status-inactive">Inactive</span>
+    </div>
+    <div class="device-id">b63b6eb396d0801216f2f9de1c114675ee84592b</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>6.8</strong> days</td><td style="color:#888;font-size:12px">n=2 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>6.9</strong> days</td><td style="color:#888;font-size:12px">n=2 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">2 cycles &nbsp;·&nbsp; 2 clean, 0 flagged &nbsp;·&nbsp; 224.5 total discharge hours &nbsp;·&nbsp; 112.2 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">14 Apr 12:15</td><td style="font-size:11px;color:#666">20 Apr 09:21</td><td style="text-align:right">141.1</td><td style="text-align:right">74% → 0%</td><td style="text-align:right">74%</td><td style="text-align:right">12.6</td></tr>
+<tr><td style="font-size:11px;color:#666">20 Apr 09:51</td><td style="font-size:11px;color:#666">23 Apr 21:16</td><td style="text-align:right">83.4</td><td style="text-align:right">84% → 22%</td><td style="text-align:right">62%</td><td style="text-align:right">17.8</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">09:50</td><td style="text-align:right">84.0%</td><td style="color:#888;font-size:12px">n=1  ·  mean 84.0%</td></tr>
+<tr><td>Plug in (start charging)</td><td style="text-align:right">09:26</td><td style="text-align:right">55.0%</td><td style="color:#888;font-size:12px">n=1  ·  mean 55.0%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:20px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">119</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:58px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">337</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">576</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:56px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">323</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:13px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">80</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-504ee0cf">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#1f77b4;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 5</span>
+      <span class="device-meta">FW: — &nbsp;·&nbsp; 488 readings &nbsp;·&nbsp; 0 cycles &nbsp;·&nbsp; 02 Apr 2026 – 04 Apr 2026</span>
+      <span class="device-status status-inactive">Inactive</span>
+    </div>
+    <div class="device-id">504ee0cf39ff7ffc6a6302463ad7a4fbd5c639af</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>From charge cycle boundaries</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>Normalised drain rate</td><td colspan="2" style="color:#bbb">—</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="color:#aaa;font-size:12px">No discharge episodes detected (requires API data with charging field).</p>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">11:16</td><td style="text-align:right">51.0%</td><td style="color:#888;font-size:12px">n=1  ·  mean 51.0%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:63px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">154</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">244</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:36px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">90</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-652ec02b">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#1f77b4;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 5</span>
+      <span class="device-meta">FW: 17.5 &nbsp;·&nbsp; 260 readings &nbsp;·&nbsp; 1 cycles &nbsp;·&nbsp; 20 Apr 2026 – 21 Apr 2026</span>
+      <span class="device-status status-inactive">Inactive</span>
+    </div>
+    <div class="device-id">652ec02bd230849ee9aaf282b192c3dfc6a9565f</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>7.5</strong> days</td><td style="color:#888;font-size:12px">n=1 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>7.5</strong> days</td><td style="color:#888;font-size:12px">n=1 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">1 cycles &nbsp;·&nbsp; 1 clean, 0 flagged &nbsp;·&nbsp; 21.5 total discharge hours &nbsp;·&nbsp; 21.5 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">20 Apr 02:57</td><td style="font-size:11px;color:#666">21 Apr 00:28</td><td style="text-align:right">21.5</td><td style="text-align:right">83% → 71%</td><td style="text-align:right">12%</td><td style="text-align:right">13.4</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <p style="color:#aaa;font-size:12px">No charging transitions detected.</p>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">253</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:2px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">7</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-997a99dd">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#8c564b;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Venu 4</span>
+      <span class="device-meta">FW: — &nbsp;·&nbsp; 126 readings &nbsp;·&nbsp; 1 cycles &nbsp;·&nbsp; 11 Mar 2026 – 02 Apr 2026</span>
+      <span class="device-status status-inactive">Inactive</span>
+    </div>
+    <div class="device-id">997a99dd411177745a9e99c8b61b410febdb26d3</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>5.6</strong> days</td><td style="color:#888;font-size:12px">n=1 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>5.5</strong> days</td><td style="color:#888;font-size:12px">n=1 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">1 cycles &nbsp;·&nbsp; 1 clean, 0 flagged &nbsp;·&nbsp; 9.3 total discharge hours &nbsp;·&nbsp; 9.3 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">02 Apr 14:03</td><td style="font-size:11px;color:#666">02 Apr 23:23</td><td style="text-align:right">9.3</td><td style="text-align:right">93% → 86%</td><td style="text-align:right">7%</td><td style="text-align:right">18.0</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <table><thead><tr><th>Event</th><th style="text-align:right">Median time</th><th style="text-align:right">Median bat%</th><th>Notes</th></tr></thead><tbody><tr><td>Unplug (stop charging)</td><td style="text-align:right">14:03</td><td style="text-align:right">93.0%</td><td style="color:#888;font-size:12px">n=1  ·  mean 93.0%</td></tr>
+</tbody></table>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:4px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">5</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:4px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">5</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">116</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-956fb3a3">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#1f77b4;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 5</span>
+      <span class="device-meta">FW: 17.5 &nbsp;·&nbsp; 11 readings &nbsp;·&nbsp; 1 cycles &nbsp;·&nbsp; 19 Apr 2026 – 19 Apr 2026</span>
+      <span class="device-status status-inactive">Inactive</span>
+    </div>
+    <div class="device-id">956fb3a352f00dbdcd2a5858e6c010082df2be3a</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td style="text-align:right"><strong>3.3</strong> days</td><td style="color:#888;font-size:12px">n=1 cycles</td></tr>
+<tr><td>From charge cycle boundaries</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>Normalised drain rate</td><td style="text-align:right"><strong>3.3</strong> days</td><td style="color:#888;font-size:12px">n=1 cycles</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">1 cycles &nbsp;·&nbsp; 1 clean, 0 flagged &nbsp;·&nbsp; 0.8 total discharge hours &nbsp;·&nbsp; 0.8 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">19 Apr 07:13</td><td style="font-size:11px;color:#666">19 Apr 08:01</td><td style="text-align:right">0.8</td><td style="text-align:right">99% → 98%</td><td style="text-align:right">1%</td><td style="text-align:right">30.1</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <p style="color:#aaa;font-size:12px">No charging transitions detected.</p>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">11</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-4caf030f">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#1f77b4;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 5</span>
+      <span class="device-meta">FW: 17.5 &nbsp;·&nbsp; 3 readings &nbsp;·&nbsp; 0 cycles &nbsp;·&nbsp; 07 Apr 2026 – 07 Apr 2026</span>
+      <span class="device-status status-inactive">Inactive</span>
+    </div>
+    <div class="device-id">4caf030f5082edf015bca6b23df68756437d94a4</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>From charge cycle boundaries</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>Normalised drain rate</td><td colspan="2" style="color:#bbb">—</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">1 cycles &nbsp;·&nbsp; 0 clean, 1 flagged &nbsp;·&nbsp; 0.0 total discharge hours &nbsp;·&nbsp; 0.0 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">07 Apr 14:58</td><td style="font-size:11px;color:#666">07 Apr 15:08</td><td style="text-align:right">0.2</td><td style="text-align:right">27% → 25%</td><td style="text-align:right">2%</td><td style="text-align:right">288.0&thinsp;<span style="color:#e65100;font-size:10px">⚑</span></td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <p style="color:#aaa;font-size:12px">No charging transitions detected.</p>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">3</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-f0ad6bcc">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#ff7f0e;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 6</span>
+      <span class="device-meta">FW: 16.37 &nbsp;·&nbsp; 3 readings &nbsp;·&nbsp; 0 cycles &nbsp;·&nbsp; 11 Apr 2026 – 11 Apr 2026</span>
+      <span class="device-status status-inactive">Inactive</span>
+    </div>
+    <div class="device-id">f0ad6bcc8c3e5e3d9ab052769e825c9b31a89103</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>From charge cycle boundaries</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>Normalised drain rate</td><td colspan="2" style="color:#bbb">—</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="font-size:12px;color:#666;margin-bottom:6px">1 cycles &nbsp;·&nbsp; 0 clean, 1 flagged &nbsp;·&nbsp; 0.0 total discharge hours &nbsp;·&nbsp; 0.0 h avg (clean)</p>
+<div style="max-height:220px;overflow-y:auto">
+<table style="font-size:12px">
+  <thead>
+    <tr>
+      <th>Start</th><th>End</th>
+      <th style="text-align:right">Hours</th>
+      <th style="text-align:right">Range</th>
+      <th style="text-align:right">Drop</th>
+      <th style="text-align:right">%/day</th>
+    </tr>
+  </thead>
+  <tbody><tr><td style="font-size:11px;color:#666">11 Apr 15:33</td><td style="font-size:11px;color:#666">11 Apr 15:40</td><td style="text-align:right">0.1</td><td style="text-align:right">86% → 85%</td><td style="text-align:right">1%</td><td style="text-align:right">217.6&thinsp;<span style="color:#e65100;font-size:10px">⚑</span></td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <p style="color:#aaa;font-size:12px">No charging transitions detected.</p>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">3</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="device-section" id="dev-d82839a8">
+  <div class="device-header">
+    <div class="device-header-main">
+      <span style="color:#1f77b4;font-size:20px;line-height:1">●</span>
+      <span class="device-model">Vivoactive 5</span>
+      <span class="device-meta">FW: 17.1 &nbsp;·&nbsp; 2 readings &nbsp;·&nbsp; 0 cycles &nbsp;·&nbsp; 07 Apr 2026 – 07 Apr 2026</span>
+      <span class="device-status status-inactive">Inactive</span>
+    </div>
+    <div class="device-id">d82839a836da26f49888a74a66c40a8e040edc44</div>
+  </div>
+  <div class="device-body">
+
+    <div class="section-block">
+      <div class="block-title">Battery Life Estimates</div>
+      <table><thead><tr><th>Method</th><th style="text-align:right;width:90px">Estimate</th><th>Notes</th></tr></thead><tbody><tr><td>Direct from clean discharge cycles</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>From charge cycle boundaries</td><td colspan="2" style="color:#bbb">—</td></tr>
+<tr><td>Normalised drain rate</td><td colspan="2" style="color:#bbb">—</td></tr>
+</tbody></table>
+    </div>
+
+    <div class="section-block">
+      <div class="block-title">Discharge Cycles</div>
+      <p style="color:#aaa;font-size:12px">No discharge episodes detected (requires API data with charging field).</p>
+    </div>
+
+    <div class="two-col">
+      <div class="section-block">
+        <div class="block-title">Charging Behaviour</div>
+        <p style="color:#aaa;font-size:12px">No charging transitions detected.</p>
+      </div>
+      <div class="section-block">
+        <div class="block-title">Days of Week (logging activity)</div>
+        <table style="border:none;margin:0;width:auto"><tr><td style="width:36px;font-size:12px;color:#555">Mon</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Tue</td><td><div style="display:inline-block;width:100px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">2</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Wed</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Thu</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Fri</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sat</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr><tr><td style="width:36px;font-size:12px;color:#555">Sun</td><td><div style="display:inline-block;width:0px;height:12px;background:#1f77b4;vertical-align:middle;border-radius:2px"></div></td><td style="font-size:12px;color:#666;padding-left:8px">0</td></tr></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

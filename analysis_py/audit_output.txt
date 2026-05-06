@@ -1,0 +1,2669 @@
+Loading CSV …
+Fetching API (all records, limit=500000) …
+
+================================================================================
+  SECTION 1: RAW STRUCTURE
+================================================================================
+
+------------------------------------------------------------
+  1a — CSV
+------------------------------------------------------------
+  File:        /Users/k2691736/Library/Mobile Documents/com~apple~CloudDocs/Developer/BatteryLogger/smartwatch-logs.csv
+  Shape:       344 rows × 24 columns
+  Memory:      115.3 KB
+
+  Columns and dtypes:
+    config_name                    object       nulls=0
+    id                             int64        nulls=0
+    participant_code               object       nulls=0
+    mst_group                      int64        nulls=0
+    battery_percentage             int64        nulls=0
+    device_model                   object       nulls=0
+    timestamp                      datetime64[ns] nulls=0
+    source                         object       nulls=0
+    heart_rate                     bool         nulls=0
+    respiration_rate               bool         nulls=0
+    stress                         bool         nulls=0
+    steps                          bool         nulls=0
+    bbi                            bool         nulls=0
+    enhanced_bbi                   bool         nulls=0
+    gyroscope                      bool         nulls=0
+    spo2                           object       nulls=0
+    skin_temperature               bool         nulls=0
+    wrist_status                   bool         nulls=0
+    accelerometer                  bool         nulls=0
+    zero_crossing                  bool         nulls=0
+    actigraphy_1                   bool         nulls=0
+    actigraphy_2                   bool         nulls=0
+    actigraphy_3                   bool         nulls=0
+    always_on_display              bool         nulls=0
+
+  ── First 5 rows ──
+  config_name   id participant_code  mst_group  battery_percentage device_model               timestamp       source  heart_rate  respiration_rate  stress  steps   bbi  enhanced_bbi  gyroscope        spo2  skin_temperature  wrist_status  accelerometer  zero_crossing  actigraphy_1  actigraphy_2  actigraphy_3  always_on_display
+0  SDK All On  355      keen-hawk-4          5                  25      Venu 3S 2026-04-11 07:12:21.325  participant        True              True    True   True  True          True       True  Sleep Only              True          True           True           True          True          True          True              False
+1  SDK All On  354      keen-hawk-4          5                  40      Venu 3S 2026-04-10 21:41:49.686  participant        True              True    True   True  True          True       True  Sleep Only              True          True           True           True          True          True          True              False
+2  SDK All On  353      keen-hawk-4          5                  58      Venu 3S 2026-04-10 09:39:35.070  participant        True              True    True   True  True          True       True  Sleep Only              True          True           True           True          True          True          True              False
+3  SDK All On  352      keen-hawk-4          5                 100      Venu 3S 2026-04-08 15:37:04.383  participant        True              True    True   True  True          True       True     All day              True          True           True           True          True          True          True              False
+4  SDK All On  351   gentle-owl-208          4                  76       Venu 4 2026-04-03 15:22:49.771  participant        True              True    True   True  True          True       True     All day              True          True           True           True          True          True          True              False
+
+  ── Last 5 rows ──
+    config_name  id participant_code  mst_group  battery_percentage  device_model           timestamp   source  heart_rate  respiration_rate  stress  steps   bbi  enhanced_bbi  gyroscope       spo2  skin_temperature  wrist_status  accelerometer  zero_crossing  actigraphy_1  actigraphy_2  actigraphy_3  always_on_display
+339     Initial  48     fierce-owl-1          7                   6  Vivoactive 5 2026-03-10 17:07:00  backlog        True              True    True   True  True          True       True  On Demand             False          True           True           True          True          True          True              False
+340     Initial  18    fierce-newt-7          2                 100  Vivoactive 5 2026-03-10 16:36:00  backlog        True              True    True   True  True          True       True  On Demand             False          True           True           True          True          True          True              False
+341     Initial  47     fierce-owl-1          7                  41  Vivoactive 5 2026-03-10 15:52:00  backlog        True              True    True   True  True          True       True  On Demand             False          True           True           True          True          True          True              False
+342     Initial  22    gentle-owl-33          7                  54  Vivoactive 6 2026-03-10 12:41:00  backlog        True              True    True   True  True          True       True    All day             False          True           True           True          True          True          True              False
+343     Initial  46     fierce-owl-1          7                 100  Vivoactive 5 2026-03-09 16:16:00  backlog        True              True    True   True  True          True       True  On Demand             False          True           True           True          True          True          True              False
+
+------------------------------------------------------------
+  1b — API
+------------------------------------------------------------
+  URL:         https://batterylogger.onrender.com/api/battery-readings
+  Records:     67133
+
+  Fields and inferred types (including enriched):
+    bat                            float64      nulls=0
+    charging                       int64        nulls=0
+    device_id                      object       nulls=0
+    firmware_version               object       nulls=0
+    part_number                    object       nulls=0
+    received_at                    int64        nulls=0
+    ts                             int64        nulls=0
+    version                        object       nulls=0
+    timestamp                      datetime64[ns] nulls=0
+    participant_code               object       nulls=42312
+    watch_model                    object       nulls=198
+    mst                            object       nulls=12666
+    era                            object       nulls=0
+
+  ── First 5 records ──
+    bat  charging                                 device_id firmware_version   part_number  received_at          ts version           timestamp participant_code   watch_model   mst                 era
+0  66.0         0  4d4c82eaef432d2ddbc7448a662134e285b70b85             17.5  006-B4426-00   1777621464  1777621556   1.2.0 2026-05-01 07:45:56     fierce-owl-1  Vivoactive 5     7  Post SDK All On #3
+1  34.0         0  fb947d3c61491c139176d0cc2ea98cee6d214393            16.37  006-B4643-00   1777621487  1777621487   1.2.0 2026-05-01 07:44:47             None   Venu 4 45mm     3  Post SDK All On #3
+2  68.0         0  5169e8019ef11ac0316f6bddf0afc5370977ced4             17.5  006-B4260-00   1777621447  1777621445   1.2.0 2026-05-01 07:44:05             None          None  None  Post SDK All On #3
+3  47.0         0  98a5acccfb6f99af1b98ab4459b6fce647598e51             17.5  006-B4261-00   1777621438  1777621437   1.2.0 2026-05-01 07:43:57             None       Venu 3S     3  Post SDK All On #3
+4  94.0         0  1b3353f8e64ab02eb1177208446f6c863854a320             17.5  006-B4426-00   1777621400  1777621399   1.2.0 2026-05-01 07:43:19             None  Vivoactive 5  None  Post SDK All On #3
+
+  ── Last 5 records ──
+        bat  charging                                 device_id firmware_version   part_number  received_at          ts  version           timestamp participant_code  watch_model   mst       era
+67128  96.0         0  b63b6eb396d0801216f2f9de1c114675ee84592b            16.37  006-B4644-00   1777478836  1745946078    1.2.0 2025-04-29 17:01:18             None  Venu 4 41mm     7  Pre SpO2
+67129  96.0         0  b63b6eb396d0801216f2f9de1c114675ee84592b            16.37  006-B4644-00   1777478235  1745945778    1.2.0 2025-04-29 16:56:18             None  Venu 4 41mm     7  Pre SpO2
+67130  96.0         0  b63b6eb396d0801216f2f9de1c114675ee84592b            16.37  006-B4644-00   1777477935  1745945478    1.2.0 2025-04-29 16:51:18             None  Venu 4 41mm     7  Pre SpO2
+67131  97.0         0  b63b6eb396d0801216f2f9de1c114675ee84592b            16.37  006-B4644-00   1777477635  1745945178    1.2.0 2025-04-29 16:46:18             None  Venu 4 41mm     7  Pre SpO2
+67132  85.0         0                                   unknown          unknown       unknown   1775075874  1743000000  unknown 2025-03-26 14:40:00             None         None  None  Pre SpO2
+
+================================================================================
+  SECTION 2: PARTICIPANT / DEVICE INVENTORY
+================================================================================
+
+------------------------------------------------------------
+  2a — CSV: participant_codes
+------------------------------------------------------------
+  Unique participant_codes: 17
+  participant_code               readings
+  ------------------------------ --------
+  clever-gecko-71                       2
+  cool-seal-27                         12
+  fierce-newt-7                       125
+  fierce-owl-1                         21
+  gentle-owl-208                       40
+  gentle-owl-33                        11
+  jolly-seal-25                         1
+  keen-hawk-4                          25
+  merry-moose-23                        4
+  merry-panda-18                       38
+  noble-numbat-5                        5
+  plucky-bison-10                       1
+  quick-otter-3                        52
+  snappy-seal-7                         1
+  trusty-koala-846                      1
+  warm-fox-8                            2
+  wise-fox-66                           3
+
+------------------------------------------------------------
+  2b — CSV: device_models
+------------------------------------------------------------
+  Vivoactive 5               149
+  Vivoactive 6                66
+  Venu 3S                     65
+  Venu 4                      64
+
+------------------------------------------------------------
+  2c — CSV: mst_group values
+------------------------------------------------------------
+  MST 2: 133
+  MST 3: 20
+  MST 4: 93
+  MST 5: 27
+  MST 6: 38
+  MST 7: 33
+
+------------------------------------------------------------
+  2d — CSV: config_names (sorted by first appearance)
+------------------------------------------------------------
+  config_name                    first seen             readings
+  ------------------------------ ---------------------- --------
+  Initial                        2026-03-09 16:16            101
+  SpO2 All Day                   2026-03-17 12:20             57
+  SDK All Off                    2026-03-18 17:56             20
+  SDK All On                     2026-03-19 12:19            166
+
+------------------------------------------------------------
+  2e — CSV: cross-tab participant_code × config_name
+------------------------------------------------------------
+config_name       Initial  SDK All Off  SDK All On  SpO2 All Day
+participant_code                                                
+clever-gecko-71         0            0           0             2
+cool-seal-27            4            3           2             3
+fierce-newt-7          31            8          66            20
+fierce-owl-1            8            1           9             3
+gentle-owl-208         11            2          25             2
+gentle-owl-33           6            0           1             4
+jolly-seal-25           1            0           0             0
+keen-hawk-4            11            0           7             7
+merry-moose-23          2            0           1             1
+merry-panda-18          7            2          25             4
+noble-numbat-5          3            0           0             2
+plucky-bison-10         1            0           0             0
+quick-otter-3          11            4          29             8
+snappy-seal-7           1            0           0             0
+trusty-koala-846        0            0           0             1
+warm-fox-8              2            0           0             0
+wise-fox-66             2            0           1             0
+
+------------------------------------------------------------
+  2f — CSV: participant_code × device_model (flag multi-model)
+------------------------------------------------------------
+device_model      Venu 3S  Venu 4  Vivoactive 5  Vivoactive 6
+participant_code                                             
+clever-gecko-71         0       0             2             0
+cool-seal-27            0      12             0             0
+fierce-newt-7           0       0           125             0
+fierce-owl-1            0       0            21             0
+gentle-owl-208          0      40             0             0
+gentle-owl-33           0       0             0            11
+jolly-seal-25           0       1             0             0
+keen-hawk-4            25       0             0             0
+merry-moose-23          0       4             0             0
+merry-panda-18         38       0             0             0
+noble-numbat-5          0       5             0             0
+plucky-bison-10         1       0             0             0
+quick-otter-3           0       0             0            52
+snappy-seal-7           1       0             0             0
+trusty-koala-846        0       0             1             0
+warm-fox-8              0       2             0             0
+wise-fox-66             0       0             0             3
+
+  ✓  No participant appears under more than one device model.
+
+------------------------------------------------------------
+  2g — API: device_ids with reading counts
+------------------------------------------------------------
+  Unique device_ids: 28
+  device_id                                     readings  participant_code
+  --------------------------------------------- --------  --------------------
+  0457c34ac33a3bc3ee0196003561d39b6b9a4080          6134  None
+  182fe10af4611e572f80124619c02bde653c1b64          5931  quick-otter-3
+  39492696cac7db14c5dd1102ebb468c79304c3fb          5768  None
+  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482          5678  —
+  fb947d3c61491c139176d0cc2ea98cee6d214393          5630  None
+  e3b9d5c770b359892b7911839eb8e870b22fe559          5515  keen-hawk-4
+  4d4c82eaef432d2ddbc7448a662134e285b70b85          5087  fierce-owl-1
+  727287ece99f866e56f84b53c3887b040aee29f3          4825  None
+  3f727e94476661dac969cbb771b1a119eaab225b          4452  merry-panda-18
+  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4          4425  None
+  82af553af94a99f25b403e73cb6e2c6edbd04919          3722  fierce-newt-7
+  4013ffdec83138e6888a0828450df3308d9fb485          3296  —
+  b63b6eb396d0801216f2f9de1c114675ee84592b          1793  None
+  1b3353f8e64ab02eb1177208446f6c863854a320          1611  —
+  ec631b640b7f771485f28a42aa14a9142ceb6a93          1542  —
+  98a5acccfb6f99af1b98ab4459b6fce647598e51           583  None
+  504ee0cf39ff7ffc6a6302463ad7a4fbd5c639af           488  None
+  652ec02bd230849ee9aaf282b192c3dfc6a9565f           261  —
+  5169e8019ef11ac0316f6bddf0afc5370977ced4           196  —
+  997a99dd411177745a9e99c8b61b410febdb26d3           114  cool-seal-27
+  b45b27037186c0874c1f26a0ff05a15445888b5b            60  —
+  956fb3a352f00dbdcd2a5858e6c010082df2be3a            11  —
+  f0ad6bcc8c3e5e3d9ab052769e825c9b31a89103             3  —
+  4caf030f5082edf015bca6b23df68756437d94a4             3  —
+  d82839a836da26f49888a74a66c40a8e040edc44             2  —
+  0497c237acc4fb92938318ca840b54906dbec8e0             1  —
+  1b43be7a4124ef9599325ec25bd0a7d92e012384             1  —
+  unknown                                              1  —
+
+------------------------------------------------------------
+  2h — API: part_numbers with counts
+------------------------------------------------------------
+  006-B4261-00         24149  → Venu 3S
+  006-B4426-00         14623  → Vivoactive 5
+  006-B4625-00         11484  → Vivoactive 6
+  unknown               7716  → (unknown)
+  006-B4643-00          7172  → Venu 4 45mm
+  006-B4644-00          1793  → Venu 4 41mm
+  006-B4260-00           196  → (unknown)
+
+------------------------------------------------------------
+  2i — API: watch_models post-enrichment
+------------------------------------------------------------
+  Venu 3S                   25293
+  Vivoactive 6              16493
+  Vivoactive 5              16070
+  Venu 4 45mm                7172
+  Venu 4 41mm                1907
+
+------------------------------------------------------------
+  2j — API: participant_codes post-enrichment
+------------------------------------------------------------
+  participant_code               readings
+  ------------------------------ --------
+  None                              42312
+  quick-otter-3                      5931
+  keen-hawk-4                        5515
+  fierce-owl-1                       5087
+  merry-panda-18                     4452
+  fierce-newt-7                      3722
+  cool-seal-27                        114
+
+------------------------------------------------------------
+  2k — API: device_ids with >1 part_number (potential swap)
+------------------------------------------------------------
+  ⚠  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4  →  ['006-B4625-00', 'unknown']
+  ⚠  0457c34ac33a3bc3ee0196003561d39b6b9a4080  →  ['006-B4625-00', 'unknown']
+  ⚠  182fe10af4611e572f80124619c02bde653c1b64  →  ['006-B4625-00', 'unknown']
+  ⚠  39492696cac7db14c5dd1102ebb468c79304c3fb  →  ['006-B4261-00', 'unknown']
+  ⚠  3f727e94476661dac969cbb771b1a119eaab225b  →  ['006-B4261-00', 'unknown']
+  ⚠  82af553af94a99f25b403e73cb6e2c6edbd04919  →  ['006-B4426-00', 'unknown']
+  ⚠  b45b27037186c0874c1f26a0ff05a15445888b5b  →  ['006-B4426-00', 'unknown']
+
+================================================================================
+  SECTION 2L: ACTIVE DEVICES STATUS TABLE
+================================================================================
+  device_id  code            name                MST  model         firmware  app      battery  last_seen  status  n_readings
+  ---------  --------------  ------------------  ---  ------------  --------  -------  -------  ---------  ------  ----------
+  4d4c82ea…  fierce-owl-1    Benard Bene         7    Vivoactive 5  17.5      1.2.0    66%      59m ago    ●       5087      
+  fb947d3c…  —               Xiaoyu Zheng        3    Venu 4 45mm   16.37     1.2.0    34%      1h ago     ●       5630      
+  5169e801…  —               —                   —    006-B4260-00  17.5      1.2.0    68%      1h ago     ●       196       
+  98a5accc…  —               Xinyu Wang          3    Venu 3S       17.5      1.2.0    47%      1h ago     ●       583       
+  1b3353f8…  —               —                   —    Vivoactive 5  17.5      1.2.0    94%      1h ago     ●       1611      
+  39492696…  —               John Daniels        6    Venu 3S       17.5      1.2.0    23%      1h ago     ●       5768      
+  3f727e94…  merry-panda-18  Eric Auyoung        3    Venu 3S       17.5      1.2.0    79%      1h ago     ●       4452      
+  5be3da43…  —               —                   —    Venu 3S       17.5      1.2.0    56%      1h ago     ●       5678      
+  0457c34a…  —               Rohan Barrowcliff   2    Vivoactive 6  17.19     1.2.0    63%      1h ago     ●       6134      
+  ec631b64…  —               —                   —    Venu 4 45mm   16.37     1.2.0    39%      2h ago     ●       1542      
+  e3b9d5c7…  keen-hawk-4     Sabrina Demirdjian  5    Venu 3S       17.5      1.2.0    77%      5h ago     ●       5515      
+  182fe10a…  quick-otter-3   Emma Raywood        4    Vivoactive 6  16.37     1.2.0    31%      1d ago     ○       5931      
+  727287ec…  —               Liza Pekosak        4    Vivoactive 5  17.5      1.2.0    7%       2d ago     ○       4825      
+  4013ffde…  —               —                   —    Venu 3S       17.5      1.2.0    35%      3d ago     ·       3296      
+  0497c237…  —               —                   —    Venu 3S       17.5      1.2.0    73%      3d ago     ·       1         
+  b63b6eb3…  —               Mary Abichi         7    Venu 4 41mm   16.37     1.2.0    22%      7d ago     ·       1793      
+  652ec02b…  —               —                   —    Vivoactive 5  17.5      1.2.0    71%      10d ago    ·       261       
+  956fb3a3…  —               —                   —    Vivoactive 5  17.5      1.2.0    98%      12d ago    ·       11        
+  04376431…  —               Yiwei Ji            2    Vivoactive 6  16.37     1.2.0    33%      12d ago    ·       4425      
+  82af553a…  fierce-newt-7   Rohan Barrowcliff   2    Vivoactive 5  17.5      1.2.0    45%      15d ago    ·       3722      
+  f0ad6bcc…  —               —                   —    Vivoactive 6  16.37     1.2.0    85%      20d ago    ·       3         
+  1b43be7a…  —               —                   —    Vivoactive 5  17.5      1.2.0    59%      21d ago    ·       1         
+  4caf030f…  —               —                   —    Vivoactive 5  17.5      1.2.0    25%      24d ago    ·       3         
+  d82839a8…  —               —                   —    Vivoactive 5  17.1      1.1.1    77%      24d ago    ·       2         
+  b45b2703…  —               —                   —    Vivoactive 5  16.7      1.1.0    100%     27d ago    ·       60        
+  504ee0cf…  —               Runcong Zhao        3    Vivoactive 5  unknown   1.0.3    83%      27d ago    ·       488       
+  997a99dd…  cool-seal-27    Xiaoyu Zheng        3    Venu 4 41mm   unknown   1.0.3    86%      28d ago    ·       114       
+  unknown…   —               —                   —    unknown       unknown   unknown  85%      401d ago   ·       1         
+
+  ● = seen <6h    ○ = seen <48h    · = seen >48h
+  Total active devices: 28
+
+================================================================================
+  SECTION 3: TEMPORAL COVERAGE
+================================================================================
+
+------------------------------------------------------------
+  3a — CSV: global range
+------------------------------------------------------------
+  Min timestamp: 2026-03-09 16:16
+  Max timestamp: 2026-04-11 07:12
+
+------------------------------------------------------------
+  3b — CSV: per-participant coverage
+------------------------------------------------------------
+  code                      first              last               span(d)     n  med_gap(h)  max_gap(h)
+  ------------------------- ------------------ ------------------ ------- ----- ----------- -----------
+  clever-gecko-71           2026-03-17 20:43   2026-03-17 22:24       0.1     2         1.7         1.7
+  cool-seal-27              2026-03-11 14:04   2026-03-24 18:14      13.2    12         2.8       134.9
+  fierce-newt-7             2026-03-10 16:36   2026-04-02 15:41      23.0   125         1.7        95.0
+  fierce-owl-1              2026-03-09 16:16   2026-03-30 16:42      21.0    21         7.2       132.1
+  gentle-owl-208            2026-03-11 14:32   2026-04-03 15:22      23.0    40        12.1        55.2
+  gentle-owl-33             2026-03-10 12:41   2026-03-30 12:54      20.0    11         4.2       284.0
+  jolly-seal-25             2026-03-12 13:09   2026-03-12 13:09       0.0     1         nan         nan
+  keen-hawk-4               2026-03-13 18:31   2026-04-11 07:12      28.5    25         9.1       317.7
+  merry-moose-23            2026-03-12 12:43   2026-03-20 08:53       7.8     4        47.3       118.8
+  merry-panda-18            2026-03-11 11:54   2026-04-02 09:05      21.9    38        13.9        49.5
+  noble-numbat-5            2026-03-16 11:37   2026-03-18 09:38       1.9     5        11.9        22.3
+  plucky-bison-10           2026-03-13 20:57   2026-03-13 20:57       0.0     1         nan         nan
+  quick-otter-3             2026-03-11 11:54   2026-04-02 10:12      21.9    52         2.6        90.6
+  snappy-seal-7             2026-03-13 05:48   2026-03-13 05:48       0.0     1         nan         nan
+  trusty-koala-846          2026-03-17 14:36   2026-03-17 14:36       0.0     1         nan         nan
+  warm-fox-8                2026-03-11 17:15   2026-03-12 13:07       0.8     2        19.9        19.9
+  wise-fox-66               2026-03-11 21:54   2026-03-19 23:26       8.1     3        96.8       168.5
+
+------------------------------------------------------------
+  3c — CSV: inter-reading gap distribution (all participants combined)
+------------------------------------------------------------
+  min=0.00h  p5=0.37h  p25=1.46h  med=4.23h  p75=15.13h  p95=48.85h  max=317.71h  mean=14.04h  std=32.45h
+
+------------------------------------------------------------
+  3d — CSV: duplicate timestamps per participant
+------------------------------------------------------------
+  ✓  No duplicate timestamps found.
+
+------------------------------------------------------------
+  3e — CSV: timestamps outside plausible study window
+------------------------------------------------------------
+  ✓  All timestamps are within [2024-01-01 → 2026-05-01].
+
+------------------------------------------------------------
+  3f — API: global range
+------------------------------------------------------------
+  Min timestamp: 2025-03-26 14:40
+  Max timestamp: 2026-05-01 07:45
+
+------------------------------------------------------------
+  3g — API: per-device coverage and completeness
+------------------------------------------------------------
+  device_id                                     first              last               span(d)  actual  expect@5m  complete% part_code
+  --------------------------------------------- ------------------ ------------------ ------- ------- ---------- ---------- --------------------
+  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4      2026-04-02 13:31   2026-04-19 01:45      16.5    4425       4755      93.1%  None
+  0457c34ac33a3bc3ee0196003561d39b6b9a4080      2026-04-02 08:27   2026-05-01 07:40      29.0    6134       8343      73.5%  None
+  0497c237acc4fb92938318ca840b54906dbec8e0      2026-04-28 11:40   2026-04-28 11:40       0.0       1          1     100.0%  —
+  182fe10af4611e572f80124619c02bde653c1b64      2026-04-02 10:32   2026-04-29 21:59      27.5    5931       7914      74.9%  quick-otter-3
+  1b3353f8e64ab02eb1177208446f6c863854a320      2026-04-24 08:48   2026-05-01 07:43       7.0    1611       2004      80.4%  —
+  1b43be7a4124ef9599325ec25bd0a7d92e012384      2026-04-10 00:11   2026-04-10 00:11       0.0       1          1     100.0%  —
+  39492696cac7db14c5dd1102ebb468c79304c3fb      2026-04-02 14:04   2026-05-01 07:42      28.7    5768       8276      69.7%  None
+  3f727e94476661dac969cbb771b1a119eaab225b      2026-04-02 11:31   2026-05-01 07:41      28.8    4452       8307      53.6%  merry-panda-18
+  4013ffdec83138e6888a0828450df3308d9fb485      2026-04-11 07:16   2026-04-28 13:11      17.2    3296       4967      66.4%  —
+  4caf030f5082edf015bca6b23df68756437d94a4      2026-04-07 14:58   2026-04-07 15:08       0.0       3          3     100.0%  —
+  4d4c82eaef432d2ddbc7448a662134e285b70b85      2026-04-07 13:24   2026-05-01 07:45      23.8    5087       6845      74.3%  fierce-owl-1
+  504ee0cf39ff7ffc6a6302463ad7a4fbd5c639af      2026-04-02 11:11   2026-04-04 07:28       1.8     488        532      91.7%  None
+  5169e8019ef11ac0316f6bddf0afc5370977ced4      2026-04-30 15:29   2026-05-01 07:44       0.7     196        196     100.0%  —
+  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482      2026-04-09 17:27   2026-05-01 07:41      21.6    5678       6219      91.3%  —
+  652ec02bd230849ee9aaf282b192c3dfc6a9565f      2026-04-20 02:57   2026-04-21 00:28       0.9     261        259     100.8%  —
+  727287ece99f866e56f84b53c3887b040aee29f3      2026-04-09 08:44   2026-04-29 20:24      20.5    4825       5901      81.8%  None
+  82af553af94a99f25b403e73cb6e2c6edbd04919      2026-04-01 14:57   2026-04-16 11:17      14.8    3722       4276      87.0%  fierce-newt-7
+  956fb3a352f00dbdcd2a5858e6c010082df2be3a      2026-04-19 07:13   2026-04-19 08:01       0.0      11         10     110.0%  —
+  98a5acccfb6f99af1b98ab4459b6fce647598e51      2026-04-17 10:28   2026-05-01 07:43      13.9     583       4000      14.6%  None
+  997a99dd411177745a9e99c8b61b410febdb26d3      2026-04-02 13:58   2026-04-02 23:23       0.4     114        114     100.0%  cool-seal-27
+  b45b27037186c0874c1f26a0ff05a15445888b5b      2026-04-03 21:33   2026-04-04 15:43       0.8      60        218      27.5%  —
+  b63b6eb396d0801216f2f9de1c114675ee84592b      2025-04-29 16:46   2026-04-23 21:16     359.2    1793     103447       1.7%  None
+  d82839a836da26f49888a74a66c40a8e040edc44      2026-04-07 01:43   2026-04-07 01:48       0.0       2          2     100.0%  —
+  e3b9d5c770b359892b7911839eb8e870b22fe559      2026-04-08 13:33   2026-05-01 04:03      22.6    5515       6510      84.7%  keen-hawk-4
+  ec631b640b7f771485f28a42aa14a9142ceb6a93      2026-04-21 13:16   2026-05-01 07:02       9.7    1542       2806      55.0%  —
+  f0ad6bcc8c3e5e3d9ab052769e825c9b31a89103      2026-04-11 15:33   2026-04-11 15:40       0.0       3          2     150.0%  —
+  fb947d3c61491c139176d0cc2ea98cee6d214393      2026-04-11 05:09   2026-05-01 07:44      20.1    5630       5792      97.2%  None
+  unknown                                       2025-03-26 14:40   2025-03-26 14:40       0.0       1          1     100.0%  —
+
+------------------------------------------------------------
+  3h — API: inter-reading gap distribution per device
+------------------------------------------------------------
+  04376431f8bc…  (04376431…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=17.22h  mean=0.09h  std=0.28h
+    gaps >1h: 4  >6h: 2  >24h: 0
+  0457c34ac33a…  (0457c34a…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=50.09h  mean=0.11h  std=1.02h
+    gaps >1h: 10  >6h: 7  >24h: 3
+  quick-otter-3  (182fe10a…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=76.14h  mean=0.11h  std=1.26h
+    gaps >1h: 9  >6h: 4  >24h: 2
+  1b3353f8e64a…  (1b3353f8…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=15.42h  mean=0.10h  std=0.45h
+    gaps >1h: 5  >6h: 2  >24h: 0
+  39492696cac7…  (39492696…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=121.69h  mean=0.12h  std=1.75h
+    gaps >1h: 7  >6h: 4  >24h: 3
+  merry-panda-18  (3f727e94…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=144.93h  mean=0.16h  std=2.54h
+    gaps >1h: 7  >6h: 6  >24h: 4
+  4013ffdec831…  (4013ffde…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=61.09h  mean=0.13h  std=1.24h
+    gaps >1h: 11  >6h: 4  >24h: 2
+  4caf030f5082…  (4caf030f…)
+    min=0.08h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=0.08h  mean=0.08h  std=0.00h
+    gaps >1h: 0  >6h: 0  >24h: 0
+  fierce-owl-1  (4d4c82ea…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=24.78h  mean=0.11h  std=0.63h
+    gaps >1h: 17  >6h: 9  >24h: 1
+  504ee0cf39ff…  (504ee0cf…)
+    min=0.08h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=3.74h  mean=0.09h  std=0.17h
+    gaps >1h: 1  >6h: 0  >24h: 0
+  5169e8019ef1…  (5169e801…)
+    min=0.08h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=0.08h  mean=0.08h  std=0.00h
+    gaps >1h: 0  >6h: 0  >24h: 0
+  5be3da43dd17…  (5be3da43…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=37.39h  mean=0.09h  std=0.52h
+    gaps >1h: 2  >6h: 2  >24h: 1
+  652ec02bd230…  (652ec02b…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=0.10h  mean=0.08h  std=0.01h
+    gaps >1h: 0  >6h: 0  >24h: 0
+  727287ece99f…  (727287ec…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=41.26h  mean=0.10h  std=0.79h
+    gaps >1h: 4  >6h: 4  >24h: 2
+  fierce-newt-7  (82af553a…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=24.07h  mean=0.10h  std=0.50h
+    gaps >1h: 5  >6h: 3  >24h: 1
+  956fb3a352f0…  (956fb3a3…)
+    min=0.05h  p5=0.06h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=0.08h  mean=0.08h  std=0.01h
+    gaps >1h: 0  >6h: 0  >24h: 0
+  98a5acccfb6f…  (98a5accc…)
+    min=0.08h  p5=0.08h  p25=0.08h  med=0.08h  p75=1.00h  p95=1.00h  max=15.79h  mean=0.57h  std=0.81h
+    gaps >1h: 79  >6h: 1  >24h: 0
+  cool-seal-27  (997a99dd…)
+    min=0.08h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=0.08h  mean=0.08h  std=0.00h
+    gaps >1h: 0  >6h: 0  >24h: 0
+  b45b27037186…  (b45b2703…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=1.83h  max=6.23h  mean=0.31h  std=0.91h
+    gaps >1h: 4  >6h: 1  >24h: 0
+  b63b6eb396d0…  (b63b6eb3…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=8355.56h  mean=4.81h  std=197.39h
+    gaps >1h: 4  >6h: 4  >24h: 2
+  d82839a836da…  (d82839a8…)
+    min=0.08h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=0.08h  mean=0.08h  std=nanh
+    gaps >1h: 0  >6h: 0  >24h: 0
+  keen-hawk-4  (e3b9d5c7…)
+    min=0.08h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=56.42h  mean=0.10h  std=0.81h
+    gaps >1h: 3  >6h: 2  >24h: 1
+  ec631b640b7f…  (ec631b64…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=1.00h  max=1.00h  mean=0.15h  std=0.24h
+    gaps >1h: 31  >6h: 0  >24h: 0
+  f0ad6bcc8c3e…  (f0ad6bcc…)
+    min=0.03h  p5=0.03h  p25=0.04h  med=0.06h  p75=0.07h  p95=0.08h  max=0.08h  mean=0.06h  std=0.04h
+    gaps >1h: 0  >6h: 0  >24h: 0
+  fb947d3c6149…  (fb947d3c…)
+    min=0.00h  p5=0.08h  p25=0.08h  med=0.08h  p75=0.08h  p95=0.08h  max=10.67h  mean=0.09h  std=0.14h
+    gaps >1h: 3  >6h: 1  >24h: 0
+
+  Totals across all devices:  gaps >1h=206  >6h=56  >24h=22
+
+------------------------------------------------------------
+  3i — API: readings per device per day (summary)
+------------------------------------------------------------
+                mean_per_day  min_per_day  max_per_day  days_with_data
+04376431f8bc…          245.8           22          299              18
+0457c34ac33a…          219.1           30          302              28
+0497c237acc4…            1.0            1            1               1
+quick-otter-3          237.2           47          292              25
+1b3353f8e64a…          201.4           42          288               8
+1b43be7a4124…            1.0            1            1               1
+39492696cac7…          230.7            9          289              25
+merry-panda-18         202.4            1          294              22
+4013ffdec831…          206.0           30          289              16
+4caf030f5082…            3.0            3            3               1
+fierce-owl-1           203.5           33          290              25
+504ee0cf39ff…          162.7           90          244               3
+5169e8019ef1…           98.0           93          103               2
+5be3da43dd17…          258.1           79          309              22
+652ec02bd230…          130.5            7          254               2
+727287ece99f…          253.9          102          289              19
+fierce-newt-7          232.6          109          291              16
+956fb3a352f0…           11.0           11           11               1
+98a5acccfb6f…           38.9           22          125              15
+cool-seal-27           114.0          114          114               1
+b45b27037186…           30.0            9           51               2
+b63b6eb396d0…          163.0           67          291              11
+d82839a836da…            2.0            2            2               1
+keen-hawk-4            239.8           49          288              23
+ec631b640b7f…          140.2            8          289              11
+f0ad6bcc8c3e…            3.0            3            3               1
+fb947d3c6149…          268.1           93          289              21
+unknown…                 1.0            1            1               1
+
+------------------------------------------------------------
+  3j — API: duplicate timestamps per device
+------------------------------------------------------------
+  ⚠  558 duplicate (device_id, timestamp) rows:
+                                      device_id           timestamp    bat
+2240   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 11:00:21   36.0
+2241   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 11:00:21   36.0
+2248   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:55:22   36.0
+2249   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:55:22   36.0
+2258   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:49:20   36.0
+2259   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:49:20   36.0
+2266   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:44:20   37.0
+2267   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:44:20   37.0
+2274   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:39:19   37.0
+2275   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:39:19   37.0
+2282   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:34:20   37.0
+2283   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:34:20   37.0
+2290   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:29:19   37.0
+2291   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:29:19   37.0
+2298   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:24:20   37.0
+2299   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:24:20   37.0
+2306   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:19:19   37.0
+2307   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:19:19   37.0
+2314   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:14:19   37.0
+2315   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:14:19   37.0
+2322   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:09:19   38.0
+2323   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:09:19   38.0
+2330   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:04:19   38.0
+2331   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 10:04:19   38.0
+2339   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:59:18   38.0
+2340   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:59:18   38.0
+2347   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:54:18   38.0
+2348   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:54:18   38.0
+2355   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:49:19   38.0
+2356   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:49:19   38.0
+2363   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:44:18   38.0
+2364   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:44:18   38.0
+2370   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:39:18   38.0
+2371   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:39:18   38.0
+2377   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:34:18   38.0
+2378   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:34:18   38.0
+2384   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:29:18   38.0
+2385   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:29:18   38.0
+2391   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:24:17   38.0
+2392   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:24:17   38.0
+2398   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:19:17   39.0
+2399   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:19:17   39.0
+2405   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:14:18   39.0
+2406   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:14:18   39.0
+2412   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:09:18   39.0
+2413   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:09:18   39.0
+2419   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:04:18   39.0
+2420   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 09:04:18   39.0
+2427   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 08:59:17   39.0
+2428   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 08:59:17   39.0
+2434   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 08:54:18   39.0
+2435   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 08:54:18   39.0
+2441   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 08:49:17   39.0
+2442   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 08:49:17   39.0
+2448   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 08:44:17   39.0
+2449   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 08:44:17   39.0
+2455   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 08:39:16   39.0
+2456   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-30 08:39:16   39.0
+2656   4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-29 20:21:04   63.0
+2657   4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-29 20:21:04   63.0
+4856   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-29 00:36:03   76.0
+4857   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-29 00:36:03   76.0
+5364   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 20:11:03   77.0
+5365   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 20:11:03   77.0
+5374   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 20:06:03   77.0
+5375   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 20:06:03   77.0
+5385   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 20:01:03   77.0
+5386   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 20:01:03   77.0
+5395   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:56:03   77.0
+5396   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:56:03   77.0
+5406   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:51:04   77.0
+5407   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:51:04   77.0
+5416   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:46:03   77.0
+5417   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:46:03   77.0
+5426   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:41:03   78.0
+5427   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:41:03   78.0
+5436   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:36:03   78.0
+5437   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:36:03   78.0
+5446   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:31:03   78.0
+5447   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:31:03   78.0
+5456   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:26:03   78.0
+5457   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:26:03   78.0
+5466   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:21:03   78.0
+5467   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:21:03   78.0
+5476   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:16:04   78.0
+5477   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:16:04   78.0
+5486   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:11:03   78.0
+5487   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:11:03   78.0
+5496   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:06:03   78.0
+5497   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:06:03   78.0
+5507   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:01:04   78.0
+5508   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 19:01:04   78.0
+5517   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 18:56:04   78.0
+5518   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 18:56:04   78.0
+5528   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 18:51:04   78.0
+5529   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 18:51:04   78.0
+5538   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 18:46:03   78.0
+5539   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 18:46:03   78.0
+5548   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 18:41:04   78.0
+5549   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 18:41:04   78.0
+5558   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 18:36:04   78.0
+5559   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 18:36:04   78.0
+5568   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 18:31:04   78.0
+5569   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-28 18:31:04   78.0
+8013   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 22:01:02   84.0
+8014   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 22:01:02   84.0
+8041   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 21:46:01   84.0
+8042   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 21:46:01   84.0
+8051   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 21:41:02   84.0
+8052   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 21:41:02   84.0
+8053   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 21:41:02   84.0
+8062   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 21:36:01   84.0
+8063   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 21:36:01   84.0
+8064   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 21:36:01   84.0
+8606   182fe10af4611e572f80124619c02bde653c1b64 2026-04-27 16:28:54   96.0
+8607   182fe10af4611e572f80124619c02bde653c1b64 2026-04-27 16:28:54   96.0
+8668   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 15:56:01   86.0
+8669   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 15:56:01   86.0
+8806   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 14:41:01   87.0
+8807   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-27 14:41:01   87.0
+10365  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-26 22:10:57   93.0
+10366  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-26 22:10:57   93.0
+11959  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-26 05:54:42   59.0
+11960  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-26 05:54:42   59.0
+12287  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-26 02:54:42   64.0
+12288  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-26 02:54:42   64.0
+12424  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-26 01:39:42   66.0
+12425  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-26 01:39:42   66.0
+12452  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-26 01:24:42   66.0
+12453  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-26 01:24:42   66.0
+12508  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-26 00:54:41   67.0
+12509  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-26 00:54:41   67.0
+12536  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-26 00:39:42   67.0
+12537  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-26 00:39:42   67.0
+13626  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-25 14:32:36    8.0
+13627  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-25 14:32:36    8.0
+13875  182fe10af4611e572f80124619c02bde653c1b64 2026-04-25 12:12:21   37.0
+13876  182fe10af4611e572f80124619c02bde653c1b64 2026-04-25 12:12:21   37.0
+14166  182fe10af4611e572f80124619c02bde653c1b64 2026-04-25 09:27:21   41.0
+14168  182fe10af4611e572f80124619c02bde653c1b64 2026-04-25 09:27:21   41.0
+14769  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-25 04:25:49   66.0
+14770  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-25 04:25:49   66.0
+15843  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-24 19:25:48   70.0
+15844  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-24 19:25:48   70.0
+15853  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-24 19:20:48   70.0
+15854  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-24 19:20:48   70.0
+16350  1b3353f8e64ab02eb1177208446f6c863854a320 2026-04-24 15:13:06   86.0
+16351  1b3353f8e64ab02eb1177208446f6c863854a320 2026-04-24 15:13:06   86.0
+16380  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-24 14:59:06   99.0
+16381  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-24 14:59:06   99.0
+16391  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-24 14:54:06   99.0
+16392  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-24 14:54:06   99.0
+16402  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-24 14:49:06   99.0
+16403  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-24 14:49:06   99.0
+16897  182fe10af4611e572f80124619c02bde653c1b64 2026-04-24 10:57:18   74.0
+16898  182fe10af4611e572f80124619c02bde653c1b64 2026-04-24 10:57:18   74.0
+16931  182fe10af4611e572f80124619c02bde653c1b64 2026-04-24 10:42:18   74.0
+16932  182fe10af4611e572f80124619c02bde653c1b64 2026-04-24 10:42:18   74.0
+17024  182fe10af4611e572f80124619c02bde653c1b64 2026-04-24 09:57:19   75.0
+17025  182fe10af4611e572f80124619c02bde653c1b64 2026-04-24 09:57:19   75.0
+17136  182fe10af4611e572f80124619c02bde653c1b64 2026-04-24 09:02:19   76.0
+17137  182fe10af4611e572f80124619c02bde653c1b64 2026-04-24 09:02:19   76.0
+18514  182fe10af4611e572f80124619c02bde653c1b64 2026-04-23 19:22:16   91.0
+18515  182fe10af4611e572f80124619c02bde653c1b64 2026-04-23 19:22:16   91.0
+18570  182fe10af4611e572f80124619c02bde653c1b64 2026-04-23 18:52:17   91.0
+18571  182fe10af4611e572f80124619c02bde653c1b64 2026-04-23 18:52:17   91.0
+18843  182fe10af4611e572f80124619c02bde653c1b64 2026-04-23 16:22:15   95.0
+18844  182fe10af4611e572f80124619c02bde653c1b64 2026-04-23 16:22:15   95.0
+21204  182fe10af4611e572f80124619c02bde653c1b64 2026-04-22 21:04:37    6.0
+21205  182fe10af4611e572f80124619c02bde653c1b64 2026-04-22 21:04:37    6.0
+22100  b63b6eb396d0801216f2f9de1c114675ee84592b 2026-04-22 14:47:29   52.0
+22101  b63b6eb396d0801216f2f9de1c114675ee84592b 2026-04-22 14:47:29   52.0
+22823  b63b6eb396d0801216f2f9de1c114675ee84592b 2026-04-22 08:57:25   60.0
+22824  b63b6eb396d0801216f2f9de1c114675ee84592b 2026-04-22 08:57:25   60.0
+22833  b63b6eb396d0801216f2f9de1c114675ee84592b 2026-04-22 08:52:25   60.0
+22834  b63b6eb396d0801216f2f9de1c114675ee84592b 2026-04-22 08:52:25   60.0
+22876  182fe10af4611e572f80124619c02bde653c1b64 2026-04-22 08:29:34   27.0
+22877  182fe10af4611e572f80124619c02bde653c1b64 2026-04-22 08:29:34   27.0
+23531  ec631b640b7f771485f28a42aa14a9142ceb6a93 2026-04-22 02:51:24   45.0
+23532  ec631b640b7f771485f28a42aa14a9142ceb6a93 2026-04-22 02:51:24   45.0
+25052  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-21 14:24:25   18.0
+25053  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-21 14:24:25   18.0
+25608  b63b6eb396d0801216f2f9de1c114675ee84592b 2026-04-21 09:21:38   82.0
+25609  b63b6eb396d0801216f2f9de1c114675ee84592b 2026-04-21 09:21:38   82.0
+26231  182fe10af4611e572f80124619c02bde653c1b64 2026-04-21 02:39:31   69.0
+26232  182fe10af4611e572f80124619c02bde653c1b64 2026-04-21 02:39:31   69.0
+27361  182fe10af4611e572f80124619c02bde653c1b64 2026-04-20 16:04:29   81.0
+27362  182fe10af4611e572f80124619c02bde653c1b64 2026-04-20 16:04:29   81.0
+27555  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-20 14:33:53  100.0
+27556  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-20 14:33:53  100.0
+27557  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-20 14:33:50   49.0
+27558  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-20 14:33:50   49.0
+27708  652ec02bd230849ee9aaf282b192c3dfc6a9565f 2026-04-20 13:25:01   77.0
+27709  652ec02bd230849ee9aaf282b192c3dfc6a9565f 2026-04-20 13:25:01   77.0
+29024  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-20 04:05:01   46.0
+29025  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-20 04:05:01   46.0
+29112  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-20 03:29:46   64.0
+29113  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-20 03:29:46   64.0
+29253  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-20 02:29:46   67.0
+29254  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-20 02:29:46   67.0
+31148  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-19 09:51:58   57.0
+31149  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-19 09:51:58   57.0
+35917  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-17 09:26:18   83.0
+35918  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-17 09:26:18   83.0
+35929  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-17 09:21:18   83.0
+35930  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-17 09:21:18   83.0
+36118  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-17 07:55:40   58.0
+36119  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-17 07:55:40   58.0
+36403  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-17 05:34:07   39.0
+36404  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-17 05:34:07   39.0
+36632  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-17 03:40:28   93.0
+36633  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-17 03:40:28   93.0
+36824  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-17 02:04:50   42.0
+36825  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-17 02:04:50   42.0
+36945  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-17 01:04:50   43.0
+36946  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-17 01:04:50   43.0
+37677  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-16 19:19:50   47.0
+37678  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-16 19:19:50   47.0
+37743  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-16 18:47:26   25.0
+37744  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-16 18:47:26   25.0
+38138  182fe10af4611e572f80124619c02bde653c1b64 2026-04-16 15:43:45   10.0
+38139  182fe10af4611e572f80124619c02bde653c1b64 2026-04-16 15:43:45   10.0
+38619  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-16 11:40:34   81.0
+38620  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-16 11:40:34   81.0
+38766  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-16 10:27:04   46.0
+38767  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-16 10:27:04   46.0
+39162  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-16 07:27:04   47.0
+39163  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-16 07:27:04   47.0
+39165  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-16 07:26:48    5.0
+39166  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-16 07:26:48    5.0
+39208  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-16 07:07:03   47.0
+39209  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-16 07:07:03   47.0
+39211  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-16 07:06:48    5.0
+39212  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-16 07:06:48    5.0
+39221  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-16 07:02:04   47.0
+39222  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-16 07:02:04   47.0
+39224  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-16 07:01:49    5.0
+39225  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-16 07:01:49    5.0
+39234  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-16 06:57:03   47.0
+39235  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-16 06:57:03   47.0
+39237  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-16 06:56:48    5.0
+39238  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-16 06:56:48    5.0
+39239  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-16 06:56:48    5.0
+39248  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-16 06:52:04   47.0
+39249  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-16 06:52:04   47.0
+39250  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-16 06:52:04   47.0
+39252  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-16 06:51:48    5.0
+39253  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-16 06:51:48    5.0
+39254  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-16 06:51:48    5.0
+39255  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-16 06:51:48    5.0
+39849  182fe10af4611e572f80124619c02bde653c1b64 2026-04-16 02:28:41   32.0
+39850  182fe10af4611e572f80124619c02bde653c1b64 2026-04-16 02:28:41   32.0
+40416  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-15 22:12:02   49.0
+40417  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-15 22:12:02   49.0
+40467  182fe10af4611e572f80124619c02bde653c1b64 2026-04-15 21:48:41   38.0
+40468  182fe10af4611e572f80124619c02bde653c1b64 2026-04-15 21:48:41   38.0
+40660  182fe10af4611e572f80124619c02bde653c1b64 2026-04-15 20:13:41   39.0
+40661  182fe10af4611e572f80124619c02bde653c1b64 2026-04-15 20:13:41   39.0
+40941  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-15 18:06:48   19.0
+40942  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-15 18:06:48   19.0
+41094  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-15 16:57:02   51.0
+41095  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-15 16:57:02   51.0
+41128  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-15 16:42:02   51.0
+41129  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-15 16:42:02   51.0
+41797  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-15 11:31:45   29.0
+41798  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-15 11:31:45   29.0
+43458  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-14 22:56:55   58.0
+43459  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-14 22:56:55   58.0
+43514  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-14 22:31:55   59.0
+43515  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-14 22:31:55   59.0
+44137  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-14 17:24:49   16.0
+44138  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-14 17:24:49   16.0
+44347  b63b6eb396d0801216f2f9de1c114675ee84592b 2026-04-14 15:40:21   69.0
+44348  b63b6eb396d0801216f2f9de1c114675ee84592b 2026-04-14 15:40:21   69.0
+44900  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-14 10:47:14   87.0
+44901  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-14 10:47:14   87.0
+46325  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-13 21:39:39   46.0
+46326  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-13 21:39:39   46.0
+46678  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-13 18:11:32   92.0
+46679  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-13 18:11:32   92.0
+48605  182fe10af4611e572f80124619c02bde653c1b64 2026-04-12 23:18:54   40.0
+48606  182fe10af4611e572f80124619c02bde653c1b64 2026-04-12 23:18:54   40.0
+49063  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-12 19:26:35   88.0
+49064  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-12 19:26:35   88.0
+49122  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 18:58:12   40.0
+49123  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 18:58:12   40.0
+49183  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 18:28:12   40.0
+49184  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 18:28:12   40.0
+49204  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 18:18:12   41.0
+49205  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 18:18:12   41.0
+49215  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 18:13:11   41.0
+49216  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 18:13:11   41.0
+49217  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 18:13:11   41.0
+49237  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 18:03:12   41.0
+49238  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 18:03:12   41.0
+49248  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 17:58:11   41.0
+49249  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 17:58:11   41.0
+49250  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 17:58:11   41.0
+49260  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 17:53:11   41.0
+49261  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 17:53:11   41.0
+49262  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 17:53:11   41.0
+49263  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-12 17:53:11   41.0
+49426  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-12 16:31:32   48.0
+49427  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-12 16:31:32   48.0
+49899  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-12 12:36:24   15.0
+49900  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-12 12:36:24   15.0
+49910  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-12 12:31:24   15.0
+49911  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-12 12:31:24   15.0
+49921  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-12 12:26:24   15.0
+49922  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-12 12:26:24   15.0
+49932  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-12 12:21:23   15.0
+49933  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-12 12:21:23   15.0
+49934  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-12 12:21:23   15.0
+49988  182fe10af4611e572f80124619c02bde653c1b64 2026-04-12 11:53:50   53.0
+49989  182fe10af4611e572f80124619c02bde653c1b64 2026-04-12 11:53:50   53.0
+49990  182fe10af4611e572f80124619c02bde653c1b64 2026-04-12 11:53:50   53.0
+50476  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-04-12 07:42:31   95.0
+50477  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-04-12 07:42:31   95.0
+51398  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-11 22:01:21   32.0
+51399  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-11 22:01:21   32.0
+51891  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-11 17:08:03   56.0
+51892  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-04-11 17:08:03   56.0
+52010  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-11 16:08:40    3.0
+52011  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-11 16:08:40    3.0
+52093  182fe10af4611e572f80124619c02bde653c1b64 2026-04-11 15:28:47   75.0
+52094  182fe10af4611e572f80124619c02bde653c1b64 2026-04-11 15:28:47   75.0
+52395  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-11 12:58:40    6.0
+52396  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-11 12:58:40    6.0
+52792  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-11 09:28:38    8.0
+52793  727287ece99f866e56f84b53c3887b040aee29f3 2026-04-11 09:28:38    8.0
+52972  182fe10af4611e572f80124619c02bde653c1b64 2026-04-11 07:48:45   83.0
+52973  182fe10af4611e572f80124619c02bde653c1b64 2026-04-11 07:48:45   83.0
+54372  182fe10af4611e572f80124619c02bde653c1b64 2026-04-10 15:38:42   99.0
+54373  182fe10af4611e572f80124619c02bde653c1b64 2026-04-10 15:38:42   99.0
+54753  182fe10af4611e572f80124619c02bde653c1b64 2026-04-10 10:40:20    5.0
+54754  182fe10af4611e572f80124619c02bde653c1b64 2026-04-10 10:40:20    5.0
+54874  182fe10af4611e572f80124619c02bde653c1b64 2026-04-10 09:25:20    7.0
+54875  182fe10af4611e572f80124619c02bde653c1b64 2026-04-10 09:25:20    7.0
+55053  182fe10af4611e572f80124619c02bde653c1b64 2026-04-10 07:35:20    9.0
+55054  182fe10af4611e572f80124619c02bde653c1b64 2026-04-10 07:35:20    9.0
+56436  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-09 17:31:31   95.0
+56437  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-09 17:31:31   95.0
+56463  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-09 17:15:31   93.0
+56464  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-09 17:15:31   93.0
+56480  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-09 17:05:31   93.0
+56481  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-09 17:05:31   93.0
+56872  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-09 13:01:29   97.0
+56873  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-09 13:01:29   97.0
+58202  182fe10af4611e572f80124619c02bde653c1b64 2026-04-08 20:25:16   57.0
+58203  182fe10af4611e572f80124619c02bde653c1b64 2026-04-08 20:25:16   57.0
+58626  182fe10af4611e572f80124619c02bde653c1b64 2026-04-08 15:10:14   63.0
+58627  182fe10af4611e572f80124619c02bde653c1b64 2026-04-08 15:10:14   63.0
+59223  182fe10af4611e572f80124619c02bde653c1b64 2026-04-08 07:09:54   72.0
+59224  182fe10af4611e572f80124619c02bde653c1b64 2026-04-08 07:09:54   72.0
+59949  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-07 21:07:05   24.0
+59950  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-07 21:07:05   24.0
+60029  182fe10af4611e572f80124619c02bde653c1b64 2026-04-07 19:59:48   84.0
+60030  182fe10af4611e572f80124619c02bde653c1b64 2026-04-07 19:59:48   84.0
+60392  182fe10af4611e572f80124619c02bde653c1b64 2026-04-07 14:59:48   90.0
+60393  182fe10af4611e572f80124619c02bde653c1b64 2026-04-07 14:59:48   90.0
+60954  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-07 01:06:58   42.0
+60955  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-07 01:06:58   42.0
+61211  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-06 16:56:31   41.0
+61212  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-06 16:56:31   41.0
+61235  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-06 16:16:31   42.0
+61236  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-06 16:16:31   42.0
+61277  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-06 15:11:35   97.0
+61278  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-06 15:11:35   97.0
+61354  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-06 13:06:23   54.0
+61355  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-06 13:06:23   54.0
+61463  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-06 09:16:33   44.0
+61464  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-06 09:16:33   44.0
+61950  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-05 13:01:00   53.0
+61951  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-05 13:01:00   53.0
+61955  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-05 12:51:00   53.0
+61956  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-05 12:51:00   53.0
+62081  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-05 08:49:13   19.0
+62082  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-05 08:49:13   19.0
+62197  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-05 05:37:08   17.0
+62198  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-05 05:37:08   17.0
+62394  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-05 00:10:57   67.0
+62395  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-05 00:10:57   67.0
+62398  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-05 00:05:57   67.0
+62399  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-05 00:05:57   67.0
+62444  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:50:57   70.0
+62445  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:50:57   70.0
+62448  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:45:58   70.0
+62449  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:45:58   70.0
+62452  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:40:57   70.0
+62453  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:40:57   70.0
+62456  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:35:57   70.0
+62457  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:35:57   70.0
+62460  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:30:57   70.0
+62461  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:30:57   70.0
+62464  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:25:57   70.0
+62465  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:25:57   70.0
+62468  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:20:58   70.0
+62469  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:20:58   70.0
+62472  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:15:57   70.0
+62473  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 22:15:57   70.0
+62491  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 21:45:57   70.0
+62492  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 21:45:57   70.0
+62582  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 19:15:56   71.0
+62583  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 19:15:56   71.0
+62598  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 18:50:56   71.0
+62599  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 18:50:56   71.0
+62641  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 17:40:55   72.0
+62642  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 17:40:55   72.0
+62648  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 17:30:54   72.0
+62649  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 17:30:54   72.0
+62878  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-04 11:52:07   42.0
+62879  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-04 11:52:07   42.0
+62883  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-04 11:47:07   42.0
+62884  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-04 11:47:07   42.0
+62888  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-04 11:42:07   42.0
+62889  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-04 11:42:07   42.0
+62893  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-04 11:37:07   42.0
+62894  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-04 11:37:07   42.0
+62902  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-04 11:27:07   42.0
+62903  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-04 11:27:07   42.0
+63044  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 08:40:44   77.0
+63045  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-04 08:40:44   77.0
+63189  b45b27037186c0874c1f26a0ff05a15445888b5b 2026-04-04 06:25:52  100.0
+63190  b45b27037186c0874c1f26a0ff05a15445888b5b 2026-04-04 06:25:52  100.0
+64103  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:33:58   53.0
+64104  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:33:58   53.0
+64111  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:28:58   53.0
+64112  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:28:58   53.0
+64119  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:23:58   53.0
+64120  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:23:58   53.0
+64127  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:18:58   53.0
+64128  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:18:58   53.0
+64135  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:13:57   53.0
+64136  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:13:57   53.0
+64143  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:08:57   53.0
+64144  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:08:57   53.0
+64151  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:03:57   53.0
+64152  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 19:03:57   53.0
+64159  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:58:57   54.0
+64160  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:58:57   54.0
+64167  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:53:57   54.0
+64168  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:53:57   54.0
+64175  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:48:57   54.0
+64176  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:48:57   54.0
+64183  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:43:57   54.0
+64184  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:43:57   54.0
+64191  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:38:57   54.0
+64192  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:38:57   54.0
+64199  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:33:57   54.0
+64200  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:33:57   54.0
+64207  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:28:57   54.0
+64208  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:28:57   54.0
+64215  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:23:58   54.0
+64216  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:23:58   54.0
+64223  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:18:57   54.0
+64224  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:18:57   54.0
+64231  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:13:57   54.0
+64232  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:13:57   54.0
+64239  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:08:57   54.0
+64240  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:08:57   54.0
+64247  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:03:57   54.0
+64248  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 18:03:57   54.0
+64255  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:58:57   54.0
+64256  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:58:57   54.0
+64263  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:53:56   54.0
+64264  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:53:56   54.0
+64271  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:48:56   54.0
+64272  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:48:56   54.0
+64279  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:43:56   54.0
+64280  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:43:56   54.0
+64287  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:38:56   54.0
+64288  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:38:56   54.0
+64295  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:33:56   54.0
+64296  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:33:56   54.0
+64303  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:28:56   54.0
+64304  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:28:56   54.0
+64311  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:23:56   54.0
+64312  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:23:56   54.0
+64319  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:18:56   54.0
+64320  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:18:56   54.0
+64327  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:13:56   54.0
+64328  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:13:56   54.0
+64335  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:08:56   54.0
+64336  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:08:56   54.0
+64343  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:03:56   54.0
+64344  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 17:03:56   54.0
+64351  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:58:55   54.0
+64352  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:58:55   54.0
+64359  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:53:55   54.0
+64360  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:53:55   54.0
+64367  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:48:55   54.0
+64368  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:48:55   54.0
+64373  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-03 16:46:26   46.0
+64374  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-03 16:46:26   46.0
+64376  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:43:55   54.0
+64377  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:43:55   54.0
+64384  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:38:55   54.0
+64385  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:38:55   54.0
+64392  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:33:56   54.0
+64393  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:33:56   54.0
+64400  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:28:55   54.0
+64401  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:28:55   54.0
+64408  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:23:55   54.0
+64409  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:23:55   54.0
+64416  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:18:55   54.0
+64417  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:18:55   54.0
+64424  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:13:55   54.0
+64425  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:13:55   54.0
+64432  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:08:55   54.0
+64433  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:08:55   54.0
+64440  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:03:55   54.0
+64441  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 16:03:55   54.0
+64448  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 15:58:55   54.0
+64449  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 15:58:55   54.0
+64456  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 15:53:55   54.0
+64457  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 15:53:55   54.0
+64461  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-03 15:52:01   67.0
+64462  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-03 15:52:01   67.0
+64465  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 15:48:55   55.0
+64466  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 15:48:55   55.0
+64473  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 15:43:55   55.0
+64474  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 15:43:55   55.0
+64509  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-03 15:21:17   88.0
+64510  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-03 15:21:17   88.0
+64511  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-03 15:20:09   88.0
+64512  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-03 15:20:09   88.0
+64528  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 15:08:55   55.0
+64529  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-03 15:08:55   55.0
+64609  182fe10af4611e572f80124619c02bde653c1b64 2026-04-03 14:02:56   14.0
+64610  182fe10af4611e572f80124619c02bde653c1b64 2026-04-03 14:02:56   14.0
+64688  182fe10af4611e572f80124619c02bde653c1b64 2026-04-03 12:27:56   16.0
+64689  182fe10af4611e572f80124619c02bde653c1b64 2026-04-03 12:27:56   16.0
+64828  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-03 09:42:00   74.0
+64829  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4 2026-04-03 09:42:00   74.0
+65152  182fe10af4611e572f80124619c02bde653c1b64 2026-04-03 04:17:56   29.0
+65153  182fe10af4611e572f80124619c02bde653c1b64 2026-04-03 04:17:56   29.0
+65428  182fe10af4611e572f80124619c02bde653c1b64 2026-04-02 23:42:56   35.0
+65429  182fe10af4611e572f80124619c02bde653c1b64 2026-04-02 23:42:56   35.0
+65439  182fe10af4611e572f80124619c02bde653c1b64 2026-04-02 23:32:56   35.0
+65440  182fe10af4611e572f80124619c02bde653c1b64 2026-04-02 23:32:56   35.0
+65451  182fe10af4611e572f80124619c02bde653c1b64 2026-04-02 23:22:56   35.0
+65452  182fe10af4611e572f80124619c02bde653c1b64 2026-04-02 23:22:56   35.0
+65476  182fe10af4611e572f80124619c02bde653c1b64 2026-04-02 23:02:56   36.0
+65477  182fe10af4611e572f80124619c02bde653c1b64 2026-04-02 23:02:56   36.0
+65531  182fe10af4611e572f80124619c02bde653c1b64 2026-04-02 22:17:56   37.0
+65532  182fe10af4611e572f80124619c02bde653c1b64 2026-04-02 22:17:56   37.0
+65984  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-02 17:27:36   88.0
+65985  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-02 17:27:36   88.0
+66002  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-02 17:17:27   76.0
+66003  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-02 17:17:27   76.0
+66017  182fe10af4611e572f80124619c02bde653c1b64 2026-04-02 17:07:55   43.0
+66018  182fe10af4611e572f80124619c02bde653c1b64 2026-04-02 17:07:55   43.0
+66573  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-02 07:52:25   85.0
+66574  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-02 07:52:25   85.0
+66580  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-02 07:22:25   85.0
+66581  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-02 07:22:25   85.0
+66691  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-01 22:12:22   94.0
+66692  82af553af94a99f25b403e73cb6e2c6edbd04919 2026-04-01 22:12:22   94.0
+
+------------------------------------------------------------
+  3k — API: implausible timestamps
+------------------------------------------------------------
+  ⚠  844 readings in the future:
+                                    device_id           timestamp   bat
+0    4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 07:45:56  66.0
+1    fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 07:44:47  34.0
+2    5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 07:44:05  68.0
+3    98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 07:43:57  47.0
+4    1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 07:43:19  94.0
+5    39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 07:42:50  23.0
+6    3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 07:41:44  79.0
+7    5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 07:41:12  56.0
+8    4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 07:40:56  67.0
+9    0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 07:40:26  63.0
+10   fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 07:39:47  34.0
+11   5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 07:39:05  68.0
+12   98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 07:38:57  47.0
+13   1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 07:38:20  95.0
+14   39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 07:37:50  23.0
+15   3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 07:36:44  80.0
+16   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 07:36:11  56.0
+17   4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 07:35:56  67.0
+18   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 07:35:26  63.0
+19   fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 07:34:46  34.0
+20   5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 07:34:04  68.0
+21   98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 07:33:58  48.0
+22   1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 07:33:20  95.0
+23   39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 07:32:50  24.0
+24   3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 07:31:44  80.0
+25   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 07:31:12  56.0
+26   4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 07:30:56  67.0
+27   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 07:30:26  64.0
+28   fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 07:29:46  34.0
+29   5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 07:29:05  68.0
+30   98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 07:28:57  48.0
+31   1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 07:28:20  95.0
+32   39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 07:27:50  24.0
+33   3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 07:26:45  77.0
+34   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 07:26:11  56.0
+35   4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 07:25:56  68.0
+36   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 07:25:26  64.0
+37   fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 07:24:46  34.0
+38   5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 07:24:04  68.0
+39   98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 07:23:58  48.0
+40   1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 07:23:19  95.0
+41   39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 07:22:50  24.0
+42   3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 07:21:44  70.0
+43   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 07:21:11  56.0
+44   4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 07:20:56  68.0
+45   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 07:20:26  64.0
+46   fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 07:19:46  34.0
+47   5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 07:19:05  69.0
+48   98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 07:18:57  48.0
+49   1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 07:18:19  95.0
+50   39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 07:17:50  24.0
+51   3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 07:16:43  62.0
+52   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 07:16:12  56.0
+53   4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 07:15:55  68.0
+54   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 07:15:25  64.0
+55   fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 07:14:46  34.0
+56   5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 07:14:04  69.0
+57   98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 07:13:58  48.0
+58   1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 07:13:19  95.0
+59   39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 07:12:50  24.0
+60   3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 07:11:43  55.0
+61   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 07:11:11  56.0
+62   4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 07:10:55  69.0
+63   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 07:10:26  64.0
+64   fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 07:09:45  35.0
+65   5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 07:09:04  69.0
+66   98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 07:08:58  48.0
+67   1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 07:08:19  95.0
+68   39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 07:07:50  25.0
+69   3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 07:06:43  48.0
+70   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 07:06:11  56.0
+71   4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 07:05:54  69.0
+72   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 07:05:26  64.0
+73   fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 07:04:45  35.0
+74   5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 07:04:04  69.0
+75   98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 07:03:58  48.0
+76   1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 07:03:19  95.0
+77   39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 07:02:51  25.0
+78   ec631b640b7f771485f28a42aa14a9142ceb6a93 2026-05-01 07:02:35  39.0
+79   3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 07:01:43  41.0
+80   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 07:01:11  56.0
+81   4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 07:00:54  69.0
+82   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 07:00:26  64.0
+83   fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 06:59:46  35.0
+84   5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 06:59:05  69.0
+85   98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 06:58:57  48.0
+86   1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 06:58:19  95.0
+87   39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 06:57:51  25.0
+88   3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 06:56:43  33.0
+89   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 06:56:12  56.0
+90   4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 06:55:55  69.0
+91   0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 06:55:26  64.0
+92   fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 06:54:45  35.0
+93   5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 06:54:04  69.0
+94   98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 06:53:58  48.0
+95   1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 06:53:19  95.0
+96   39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 06:52:51  25.0
+97   3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 06:51:43  26.0
+98   5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 06:51:11  56.0
+99   4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 06:50:55  69.0
+100  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 06:50:25  65.0
+101  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 06:49:45  35.0
+102  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 06:49:04  69.0
+103  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 06:48:57  48.0
+104  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 06:48:19  95.0
+105  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 06:47:50  25.0
+106  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 06:46:43  19.0
+107  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 06:46:11  56.0
+108  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 06:45:55  69.0
+109  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 06:45:25  65.0
+110  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 06:44:45  35.0
+111  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 06:44:04  69.0
+112  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 06:43:57  49.0
+113  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 06:43:19  95.0
+114  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 06:42:50  25.0
+115  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 06:41:43  11.0
+116  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 06:41:12  56.0
+117  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 06:40:54  70.0
+118  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 06:40:26  65.0
+119  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 06:39:45  35.0
+120  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 06:39:05  69.0
+121  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 06:38:58  49.0
+122  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 06:38:20  95.0
+123  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 06:37:50  26.0
+124  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 06:36:44   4.0
+125  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 06:36:11  56.0
+126  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 06:35:54  70.0
+127  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 06:35:25  65.0
+128  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 06:34:45  35.0
+129  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 06:34:04  70.0
+130  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 06:33:57  49.0
+131  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 06:33:19  95.0
+132  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 06:32:50  26.0
+133  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 06:31:43   4.0
+134  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 06:31:11  56.0
+135  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 06:30:54  70.0
+136  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 06:30:25  65.0
+137  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 06:29:45  35.0
+138  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 06:29:04  70.0
+139  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 06:28:58  49.0
+140  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 06:28:19  95.0
+141  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 06:27:51  26.0
+142  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 06:26:43   4.0
+143  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 06:26:12  56.0
+144  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 06:25:54  70.0
+145  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 06:25:25  65.0
+146  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 06:24:45  35.0
+147  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 06:24:04  70.0
+148  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 06:23:58  49.0
+149  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 06:23:19  95.0
+150  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 06:22:51  26.0
+151  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 06:21:42   4.0
+152  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 06:21:11  56.0
+153  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 06:20:55  70.0
+154  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 06:20:26  66.0
+155  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 06:19:45  35.0
+156  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 06:19:04  70.0
+157  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 06:18:57  49.0
+158  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 06:18:20  96.0
+159  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 06:17:50  26.0
+160  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 06:16:42   4.0
+161  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 06:16:12  56.0
+162  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 06:15:54  70.0
+163  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 06:15:26  66.0
+164  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 06:14:45  35.0
+165  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 06:14:04  70.0
+166  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 06:13:58  49.0
+167  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 06:13:19  96.0
+168  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 06:12:50  26.0
+169  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 06:11:42   4.0
+170  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 06:11:11  56.0
+171  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 06:10:54  71.0
+172  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 06:10:25  66.0
+173  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 06:09:45  35.0
+174  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 06:09:05  70.0
+175  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 06:08:57  49.0
+176  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 06:08:20  96.0
+177  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 06:07:51  27.0
+178  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 06:06:43   4.0
+179  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 06:06:12  56.0
+180  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 06:05:54  71.0
+181  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 06:05:25  66.0
+182  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 06:04:45  35.0
+183  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 06:04:05  70.0
+184  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 06:03:57  49.0
+185  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 06:03:19  96.0
+186  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 06:02:50  27.0
+187  ec631b640b7f771485f28a42aa14a9142ceb6a93 2026-05-01 06:02:35  41.0
+188  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 06:01:43   4.0
+189  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 06:01:11  56.0
+190  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 06:00:54  71.0
+191  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 06:00:26  66.0
+192  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 05:59:45  35.0
+193  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 05:59:04  70.0
+194  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 05:58:57  49.0
+195  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 05:58:20  96.0
+196  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 05:57:50  27.0
+197  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 05:56:43   4.0
+198  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 05:56:11  56.0
+199  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 05:55:54  72.0
+200  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 05:55:26  66.0
+201  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 05:54:45  35.0
+202  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 05:54:04  70.0
+203  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 05:53:57  50.0
+204  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 05:53:20  96.0
+205  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 05:52:50  27.0
+206  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 05:51:43   4.0
+207  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 05:51:12  56.0
+208  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 05:50:54  72.0
+209  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 05:50:25  66.0
+210  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 05:49:45  35.0
+211  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 05:49:04  70.0
+212  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 05:48:57  50.0
+213  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 05:48:20  96.0
+214  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 05:47:50  28.0
+215  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 05:46:42   4.0
+216  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 05:46:11  56.0
+217  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 05:45:54  72.0
+218  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 05:45:25  67.0
+219  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 05:44:44  35.0
+220  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 05:44:04  70.0
+221  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 05:43:57  50.0
+222  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 05:43:19  96.0
+223  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 05:42:51  28.0
+224  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 05:41:42   4.0
+225  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 05:41:11  56.0
+226  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 05:40:54  72.0
+227  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 05:40:25  67.0
+228  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 05:39:44  35.0
+229  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 05:39:05  70.0
+230  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 05:38:58  50.0
+231  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 05:38:19  96.0
+232  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 05:37:51  28.0
+233  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 05:36:42   4.0
+234  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 05:36:11  56.0
+235  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 05:35:54  72.0
+236  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 05:35:25  67.0
+237  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 05:34:44  35.0
+238  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 05:34:04  70.0
+239  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 05:33:57  50.0
+240  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 05:33:19  96.0
+241  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 05:32:51  28.0
+242  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 05:31:42   5.0
+243  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 05:31:11  56.0
+244  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 05:30:54  72.0
+245  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 05:30:25  67.0
+246  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 05:29:44  36.0
+247  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 05:29:05  70.0
+248  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 05:28:57  50.0
+249  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 05:28:19  96.0
+250  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 05:27:50  28.0
+251  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 05:26:43   5.0
+252  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 05:26:11  56.0
+253  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 05:25:54  72.0
+254  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 05:25:25  67.0
+255  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 05:24:44  36.0
+256  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 05:24:05  71.0
+257  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 05:23:58  50.0
+258  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 05:23:20  96.0
+259  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 05:22:50  28.0
+260  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 05:21:43   5.0
+261  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 05:21:11  56.0
+262  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 05:20:54  72.0
+263  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 05:20:25  67.0
+264  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 05:19:45  36.0
+265  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 05:19:04  71.0
+266  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 05:18:57  50.0
+267  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 05:18:19  96.0
+268  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 05:17:50  28.0
+269  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 05:16:42   5.0
+270  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 05:16:11  56.0
+271  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 05:15:54  72.0
+272  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 05:15:26  67.0
+273  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 05:14:45  36.0
+274  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 05:14:05  71.0
+275  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 05:13:57  50.0
+276  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 05:13:19  96.0
+277  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 05:12:51  29.0
+278  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 05:11:42   5.0
+279  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 05:11:11  56.0
+280  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 05:10:54  73.0
+281  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 05:10:26  67.0
+282  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 05:09:45  36.0
+283  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 05:09:04  71.0
+284  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 05:08:57  50.0
+285  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 05:08:19  96.0
+286  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 05:07:51  29.0
+287  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 05:06:41   5.0
+288  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 05:06:11  56.0
+289  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 05:05:55  73.0
+290  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 05:05:26  67.0
+291  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 05:04:45  36.0
+292  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 05:04:05  71.0
+293  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 05:03:58  50.0
+294  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 05:03:19  96.0
+295  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 05:02:50  29.0
+296  ec631b640b7f771485f28a42aa14a9142ceb6a93 2026-05-01 05:02:36  44.0
+297  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 05:01:42   5.0
+298  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 05:01:11  56.0
+299  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 05:00:55  74.0
+300  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 05:00:25  68.0
+301  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 04:59:44  36.0
+302  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 04:59:05  71.0
+303  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 04:58:57  51.0
+304  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 04:58:19  96.0
+305  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 04:57:49  29.0
+306  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 04:56:41   5.0
+307  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 04:56:11  56.0
+308  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 04:55:54  75.0
+309  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 04:55:25  68.0
+310  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 04:54:44  36.0
+311  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 04:54:04  71.0
+312  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 04:53:57  51.0
+313  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 04:53:19  96.0
+314  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 04:52:49  29.0
+315  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 04:51:42   5.0
+316  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 04:51:11  56.0
+317  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 04:50:54  75.0
+318  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 04:50:25  68.0
+319  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 04:49:44  36.0
+320  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 04:49:04  71.0
+321  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 04:48:58  51.0
+322  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 04:48:18  96.0
+323  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 04:47:49  30.0
+324  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 04:46:41   5.0
+325  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 04:46:11  56.0
+326  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 04:45:54  75.0
+327  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 04:45:25  68.0
+328  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 04:44:44  36.0
+329  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 04:44:04  71.0
+330  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 04:43:57  51.0
+331  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 04:43:19  96.0
+332  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 04:42:50  30.0
+333  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 04:41:42   5.0
+334  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 04:41:10  56.0
+335  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 04:40:54  76.0
+336  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 04:40:25  68.0
+337  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 04:39:44  36.0
+338  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 04:39:04  71.0
+339  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 04:38:57  51.0
+340  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 04:38:19  96.0
+341  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 04:37:50  30.0
+342  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 04:36:41   6.0
+343  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 04:36:10  56.0
+344  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 04:35:54  76.0
+345  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 04:35:25  68.0
+346  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 04:34:44  36.0
+347  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 04:34:04  72.0
+348  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 04:33:58  51.0
+349  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 04:33:18  96.0
+350  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 04:32:49  30.0
+351  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 04:31:41   6.0
+352  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 04:31:10  56.0
+353  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 04:30:54  76.0
+354  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 04:30:26  68.0
+355  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 04:29:44  36.0
+356  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 04:29:04  72.0
+357  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 04:28:57  51.0
+358  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 04:28:18  96.0
+359  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 04:27:49  30.0
+360  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 04:26:40   6.0
+361  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 04:26:10  56.0
+362  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 04:25:53  77.0
+363  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 04:25:25  68.0
+364  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 04:24:44  36.0
+365  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 04:24:04  72.0
+366  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 04:23:57  51.0
+367  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 04:23:18  96.0
+368  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 04:22:49  31.0
+369  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 04:21:40   6.0
+370  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 04:21:10  56.0
+371  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 04:20:53  77.0
+372  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 04:20:25  69.0
+373  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 04:19:44  36.0
+374  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 04:19:04  72.0
+375  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 04:18:57  51.0
+376  1b3353f8e64ab02eb1177208446f6c863854a320 2026-05-01 04:18:19  97.0
+377  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 04:17:49  31.0
+378  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 04:16:40   6.0
+379  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 04:16:10  56.0
+380  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 04:15:53  77.0
+381  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 04:15:25  69.0
+382  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 04:14:44  36.0
+383  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 04:14:05  72.0
+384  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 04:13:58  52.0
+385  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 04:12:49  31.0
+386  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 04:11:41   6.0
+387  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 04:11:10  56.0
+388  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 04:10:54  77.0
+389  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 04:10:25  69.0
+390  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 04:09:44  36.0
+391  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 04:09:04  72.0
+392  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 04:08:57  52.0
+393  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 04:07:50  31.0
+394  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 04:06:41   6.0
+395  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 04:06:11  57.0
+396  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 04:05:53  77.0
+397  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 04:05:25  69.0
+398  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 04:04:43  36.0
+399  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 04:04:03  72.0
+400  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 04:03:57  52.0
+401  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 04:03:37  77.0
+402  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 04:02:49  31.0
+403  ec631b640b7f771485f28a42aa14a9142ceb6a93 2026-05-01 04:02:35  46.0
+404  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 04:01:41   6.0
+405  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 04:01:10  57.0
+406  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 04:00:52  77.0
+407  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 04:00:25  69.0
+408  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 03:59:44  36.0
+409  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 03:59:03  72.0
+410  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 03:58:58  52.0
+411  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 03:58:38  77.0
+412  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 03:57:49  31.0
+413  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 03:56:40   6.0
+414  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 03:56:11  57.0
+415  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 03:55:52  79.0
+416  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 03:55:25  69.0
+417  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 03:54:44  36.0
+418  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 03:54:03  72.0
+419  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 03:53:57  52.0
+420  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 03:53:37  77.0
+421  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 03:52:49  31.0
+422  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 03:51:40   6.0
+423  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 03:51:10  57.0
+424  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 03:50:52  79.0
+425  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 03:50:25  69.0
+426  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 03:49:44  36.0
+427  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 03:49:03  72.0
+428  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 03:48:57  52.0
+429  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 03:48:38  77.0
+430  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 03:47:50  32.0
+431  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 03:46:40   7.0
+432  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 03:46:10  57.0
+433  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 03:45:52  79.0
+434  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 03:45:25  69.0
+435  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 03:44:44  36.0
+436  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 03:44:04  72.0
+437  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 03:43:57  52.0
+438  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 03:43:37  77.0
+439  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 03:42:50  32.0
+440  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 03:41:40   7.0
+441  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 03:41:10  57.0
+442  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 03:40:53  79.0
+443  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 03:40:25  69.0
+444  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 03:39:44  36.0
+445  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 03:39:03  72.0
+446  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 03:38:58  52.0
+447  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 03:38:38  77.0
+448  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 03:37:49  32.0
+449  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 03:36:41   7.0
+450  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 03:36:10  57.0
+451  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 03:35:53  79.0
+452  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 03:35:25  70.0
+453  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 03:34:43  36.0
+454  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 03:34:03  73.0
+455  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 03:33:57  52.0
+456  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 03:33:37  77.0
+457  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 03:32:48  32.0
+458  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 03:31:41   7.0
+459  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 03:31:11  57.0
+460  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 03:30:53  79.0
+461  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 03:30:25  70.0
+462  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 03:29:43  36.0
+463  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 03:29:04  73.0
+464  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 03:28:58  52.0
+465  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 03:28:38  77.0
+466  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 03:27:48  32.0
+467  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 03:26:41   7.0
+468  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 03:26:10  57.0
+469  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 03:25:52  80.0
+470  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 03:25:25  70.0
+471  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 03:24:43  36.0
+472  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 03:24:04  73.0
+473  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 03:23:57  52.0
+474  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 03:23:38  77.0
+475  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 03:22:48  32.0
+476  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 03:21:41   7.0
+477  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 03:21:10  57.0
+478  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 03:20:53  80.0
+479  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 03:20:26  70.0
+480  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 03:19:43  36.0
+481  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 03:19:03  73.0
+482  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 03:18:57  53.0
+483  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 03:18:38  77.0
+484  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 03:17:48  33.0
+485  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 03:16:40   7.0
+486  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 03:16:11  57.0
+487  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 03:15:53  80.0
+488  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 03:15:26  70.0
+489  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 03:14:44  36.0
+490  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 03:14:03  73.0
+491  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 03:13:57  53.0
+492  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 03:13:38  77.0
+493  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 03:12:48  33.0
+494  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 03:11:40   7.0
+495  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 03:11:10  57.0
+496  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 03:10:52  80.0
+497  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 03:10:26  70.0
+498  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 03:09:44  36.0
+499  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 03:09:04  73.0
+500  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 03:08:58  53.0
+501  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 03:08:38  77.0
+502  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 03:07:49  33.0
+503  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 03:06:39   7.0
+504  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 03:06:10  57.0
+505  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 03:05:52  80.0
+506  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 03:05:26  70.0
+507  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 03:04:44  36.0
+508  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 03:04:03  73.0
+509  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 03:03:57  53.0
+510  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 03:03:38  77.0
+511  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 03:02:49  33.0
+512  ec631b640b7f771485f28a42aa14a9142ceb6a93 2026-05-01 03:02:36  48.0
+513  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 03:01:39   7.0
+514  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 03:01:11  57.0
+515  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 03:00:52  80.0
+516  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 03:00:26  70.0
+517  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 02:59:44  36.0
+518  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 02:59:03  73.0
+519  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 02:58:57  53.0
+520  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 02:58:38  77.0
+521  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 02:57:48  33.0
+522  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 02:56:39   8.0
+523  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 02:56:10  57.0
+524  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 02:55:52  80.0
+525  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 02:55:25  70.0
+526  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 02:54:44  36.0
+527  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 02:54:04  73.0
+528  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 02:53:58  53.0
+529  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 02:53:38  77.0
+530  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 02:52:48  33.0
+531  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 02:51:39   8.0
+532  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 02:51:10  57.0
+533  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 02:50:52  80.0
+534  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 02:50:26  70.0
+535  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 02:49:43  36.0
+536  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 02:49:03  73.0
+537  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 02:48:57  53.0
+538  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 02:48:38  77.0
+539  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 02:47:48  34.0
+540  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 02:46:40   8.0
+541  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 02:46:10  57.0
+542  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 02:45:52  80.0
+543  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 02:45:25  70.0
+544  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 02:44:43  36.0
+545  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 02:44:04  73.0
+546  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 02:43:57  53.0
+547  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 02:43:38  77.0
+548  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 02:42:48  34.0
+549  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 02:41:39   8.0
+550  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 02:41:10  57.0
+551  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 02:40:52  80.0
+552  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 02:40:25  70.0
+553  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 02:39:44  36.0
+554  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 02:39:03  74.0
+555  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 02:38:57  53.0
+556  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 02:38:38  77.0
+557  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 02:37:49  34.0
+558  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 02:36:40   8.0
+559  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 02:36:10  57.0
+560  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 02:35:52  80.0
+561  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 02:35:25  70.0
+562  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 02:34:44  36.0
+563  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 02:34:03  74.0
+564  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 02:33:58  54.0
+565  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 02:33:38  77.0
+566  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 02:32:48  34.0
+567  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 02:31:39   8.0
+568  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 02:31:11  57.0
+569  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 02:30:51  80.0
+570  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 02:30:25  70.0
+571  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 02:29:44  36.0
+572  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 02:29:03  74.0
+573  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 02:28:57  54.0
+574  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 02:28:37  77.0
+575  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 02:27:48  34.0
+576  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 02:26:40   8.0
+577  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 02:26:11  57.0
+578  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 02:25:52  80.0
+579  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 02:25:25  70.0
+580  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 02:24:43  37.0
+581  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 02:24:03  74.0
+582  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 02:23:57  54.0
+583  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 02:23:38  77.0
+584  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 02:22:49  34.0
+585  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 02:21:39   8.0
+586  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 02:21:10  57.0
+587  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 02:20:52  80.0
+588  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 02:20:26  70.0
+589  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 02:19:43  37.0
+590  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 02:19:04  74.0
+591  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 02:18:58  54.0
+592  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 02:18:37  78.0
+593  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 02:17:49  35.0
+594  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 02:16:39   8.0
+595  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 02:16:10  57.0
+596  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 02:15:51  80.0
+597  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 02:15:26  70.0
+598  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 02:14:43  37.0
+599  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 02:14:04  74.0
+600  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 02:13:57  54.0
+601  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 02:13:38  78.0
+602  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 02:12:49  35.0
+603  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 02:11:40   9.0
+604  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 02:11:11  57.0
+605  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 02:10:51  81.0
+606  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 02:10:25  71.0
+607  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 02:09:43  37.0
+608  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 02:09:03  74.0
+609  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 02:08:57  54.0
+610  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 02:08:37  78.0
+611  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 02:07:48  35.0
+612  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 02:06:40   9.0
+613  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 02:06:10  57.0
+614  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 02:05:51  81.0
+615  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 02:05:25  71.0
+616  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 02:04:43  37.0
+617  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 02:04:03  74.0
+618  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 02:03:58  54.0
+619  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 02:03:38  78.0
+620  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 02:02:48  36.0
+621  ec631b640b7f771485f28a42aa14a9142ceb6a93 2026-05-01 02:02:36  51.0
+622  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 02:01:40   9.0
+623  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 02:01:10  57.0
+624  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 02:00:51  81.0
+625  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 02:00:26  71.0
+626  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 01:59:43  37.0
+627  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 01:59:03  74.0
+628  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 01:58:57  54.0
+629  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 01:58:37  78.0
+630  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 01:57:48  36.0
+631  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 01:56:40   9.0
+632  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 01:56:10  57.0
+633  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 01:55:50  81.0
+634  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 01:55:26  71.0
+635  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 01:54:43  37.0
+636  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 01:54:03  74.0
+637  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 01:53:57  54.0
+638  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 01:53:38  78.0
+639  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 01:52:48  36.0
+640  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 01:51:40   9.0
+641  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 01:51:10  57.0
+642  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 01:50:50  81.0
+643  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 01:50:25  71.0
+644  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 01:49:43  37.0
+645  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 01:49:04  74.0
+646  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 01:48:58  54.0
+647  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 01:48:37  78.0
+648  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 01:47:49  36.0
+649  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 01:46:40   9.0
+650  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 01:46:11  57.0
+651  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 01:45:51  82.0
+652  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 01:45:25  71.0
+653  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 01:44:42  37.0
+654  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 01:44:04  74.0
+655  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 01:43:57  55.0
+656  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 01:43:38  78.0
+657  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 01:42:48  37.0
+658  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 01:41:40   9.0
+659  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 01:41:10  57.0
+660  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 01:40:50  82.0
+661  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 01:40:25  71.0
+662  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 01:39:42  37.0
+663  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 01:39:03  74.0
+664  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 01:38:57  55.0
+665  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 01:38:37  78.0
+666  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 01:37:48  37.0
+667  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 01:36:40   9.0
+668  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 01:36:10  57.0
+669  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 01:35:51  82.0
+670  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 01:35:26  71.0
+671  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 01:34:43  37.0
+672  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 01:34:03  74.0
+673  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 01:33:57  55.0
+674  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 01:33:38  78.0
+675  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 01:32:49  37.0
+676  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 01:31:39   9.0
+677  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 01:31:10  57.0
+678  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 01:30:51  82.0
+679  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 01:30:26  71.0
+680  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 01:29:43  37.0
+681  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 01:29:03  75.0
+682  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 01:28:58  55.0
+683  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 01:28:37  78.0
+684  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 01:27:48  37.0
+685  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 01:26:39   9.0
+686  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 01:26:11  57.0
+687  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 01:25:50  82.0
+688  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 01:25:25  71.0
+689  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 01:24:43  37.0
+690  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 01:24:03  75.0
+691  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 01:23:57  55.0
+692  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 01:23:37  78.0
+693  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 01:22:48  37.0
+694  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 01:21:40   9.0
+695  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 01:21:10  57.0
+696  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 01:20:50  82.0
+697  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 01:20:25  71.0
+698  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 01:19:43  37.0
+699  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 01:19:03  75.0
+700  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 01:18:57  55.0
+701  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 01:18:37  78.0
+702  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 01:17:48  38.0
+703  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 01:16:39  10.0
+704  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 01:16:10  57.0
+705  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 01:15:50  82.0
+706  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 01:15:25  71.0
+707  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 01:14:42  37.0
+708  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 01:14:03  75.0
+709  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 01:13:58  55.0
+710  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 01:13:37  78.0
+711  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 01:12:48  38.0
+712  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 01:11:39  10.0
+713  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 01:11:10  57.0
+714  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 01:10:50  82.0
+715  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 01:10:25  71.0
+716  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 01:09:42  37.0
+717  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 01:09:04  75.0
+718  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 01:08:58  55.0
+719  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 01:08:38  78.0
+720  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 01:07:48  38.0
+721  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 01:06:39  10.0
+722  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 01:06:11  57.0
+723  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 01:05:50  82.0
+724  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 01:05:25  71.0
+725  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 01:04:43  37.0
+726  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 01:04:03  75.0
+727  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 01:03:58  55.0
+728  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 01:03:37  78.0
+729  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 01:02:48  38.0
+730  ec631b640b7f771485f28a42aa14a9142ceb6a93 2026-05-01 01:02:35  53.0
+731  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 01:01:39  10.0
+732  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 01:01:11  57.0
+733  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 01:00:50  82.0
+734  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 01:00:25  71.0
+735  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 00:59:42  37.0
+736  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 00:59:03  75.0
+737  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 00:58:57  56.0
+738  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 00:58:38  78.0
+739  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 00:57:48  38.0
+740  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 00:56:39  10.0
+741  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 00:56:10  57.0
+742  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 00:55:50  83.0
+743  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 00:55:26  71.0
+744  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 00:54:42  37.0
+745  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 00:54:03  75.0
+746  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 00:53:57  56.0
+747  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 00:53:37  78.0
+748  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 00:52:48  38.0
+749  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 00:51:39  10.0
+750  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 00:51:10  57.0
+751  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 00:50:50  83.0
+752  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 00:50:25  71.0
+753  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 00:49:43  37.0
+754  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 00:49:03  75.0
+755  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 00:48:57  56.0
+756  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 00:48:38  78.0
+757  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 00:47:48  38.0
+758  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 00:46:39  10.0
+759  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 00:46:10  57.0
+760  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 00:45:50  83.0
+761  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 00:45:25  71.0
+762  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 00:44:43  37.0
+763  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 00:44:03  75.0
+764  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 00:43:57  56.0
+765  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 00:43:37  78.0
+766  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 00:42:48  39.0
+767  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 00:41:39  10.0
+768  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 00:41:10  57.0
+769  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 00:40:50  84.0
+770  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 00:40:25  71.0
+771  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 00:39:42  37.0
+772  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 00:39:03  75.0
+773  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 00:38:57  56.0
+774  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 00:38:38  78.0
+775  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 00:37:48  39.0
+776  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 00:36:39  11.0
+777  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 00:36:11  57.0
+778  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 00:35:50  84.0
+779  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 00:35:25  71.0
+780  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 00:34:42  37.0
+781  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 00:34:03  76.0
+782  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 00:33:57  56.0
+783  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 00:33:38  78.0
+784  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 00:32:48  39.0
+785  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 00:31:39  11.0
+786  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 00:31:10  57.0
+787  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 00:30:49  84.0
+788  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 00:30:26  71.0
+789  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 00:29:43  37.0
+790  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 00:29:03  76.0
+791  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 00:28:57  56.0
+792  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 00:28:37  78.0
+793  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 00:27:48  39.0
+794  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 00:26:39  11.0
+795  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 00:26:10  57.0
+796  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 00:25:49  85.0
+797  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 00:25:25  71.0
+798  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 00:24:43  37.0
+799  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 00:24:03  76.0
+800  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 00:23:57  57.0
+801  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 00:23:37  78.0
+802  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 00:22:48  39.0
+803  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 00:21:39  11.0
+804  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 00:21:10  57.0
+805  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 00:20:49  85.0
+806  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 00:20:25  72.0
+807  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 00:19:42  37.0
+808  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 00:19:03  76.0
+809  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 00:18:57  57.0
+810  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 00:18:38  78.0
+811  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 00:17:48  39.0
+812  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 00:16:39  11.0
+813  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 00:16:11  58.0
+814  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 00:15:48  85.0
+815  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 00:15:25  72.0
+816  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 00:14:43  37.0
+817  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 00:14:03  76.0
+818  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 00:13:57  57.0
+819  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 00:13:38  78.0
+820  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 00:12:48  39.0
+821  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 00:11:40  11.0
+822  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 00:11:11  58.0
+823  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 00:10:48  85.0
+824  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 00:10:25  72.0
+825  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 00:09:43  37.0
+826  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 00:09:04  76.0
+827  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 00:08:57  57.0
+828  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 00:08:38  78.0
+829  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 00:07:48  40.0
+830  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 00:06:40  11.0
+831  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 00:06:10  58.0
+832  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 00:05:48  85.0
+833  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 00:05:26  72.0
+834  fb947d3c61491c139176d0cc2ea98cee6d214393 2026-05-01 00:04:42  37.0
+835  5169e8019ef11ac0316f6bddf0afc5370977ced4 2026-05-01 00:04:03  76.0
+836  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-05-01 00:03:57  57.0
+837  e3b9d5c770b359892b7911839eb8e870b22fe559 2026-05-01 00:03:38  78.0
+838  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-05-01 00:02:48  40.0
+839  ec631b640b7f771485f28a42aa14a9142ceb6a93 2026-05-01 00:02:35  55.0
+840  3f727e94476661dac969cbb771b1a119eaab225b 2026-05-01 00:01:40  12.0
+841  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482 2026-05-01 00:01:10  58.0
+842  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-05-01 00:00:48  85.0
+843  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-05-01 00:00:26  72.0
+
+================================================================================
+  SECTION 4: BATTERY PERCENTAGE
+================================================================================
+
+------------------------------------------------------------
+  4a — CSV: battery_percentage distribution
+------------------------------------------------------------
+  min=0.00%  p5=3.00%  p25=18.00%  med=51.00%  p75=84.00%  p95=100.00%  max=100.00%  mean=50.99%  std=33.53%
+  Nulls: 0  (0.0%)
+  At 0%: 7  |  At 100%: 32
+  Impossible values (<0 or >100): 0
+
+------------------------------------------------------------
+  4b — CSV: per-participant battery stats
+------------------------------------------------------------
+  code                        min    mean   max     n
+  ------------------------- ----- ------- ----- -----
+  clever-gecko-71               0    50.0   100     2
+  cool-seal-27                  3    42.4    65    12
+  fierce-newt-7                 0    50.6   100   125
+  fierce-owl-1                  2    35.6   100    21
+  gentle-owl-208                0    47.8   100    40
+  gentle-owl-33                 9    32.5    91    11
+  jolly-seal-25                50    50.0    50     1
+  keen-hawk-4                   0    57.8   100    25
+  merry-moose-23               10    49.8    99     4
+  merry-panda-18                3    62.5   100    38
+  noble-numbat-5               36    71.4   100     5
+  plucky-bison-10             100   100.0   100     1
+  quick-otter-3                 2    54.8   100    52
+  snappy-seal-7                40    40.0    40     1
+  trusty-koala-846            100   100.0   100     1
+  warm-fox-8                   17    19.5    22     2
+  wise-fox-66                   5    11.3    21     3
+
+------------------------------------------------------------
+  4c — API: bat distribution
+------------------------------------------------------------
+  min=0.00%  p5=8.00%  p25=37.00%  med=59.00%  p75=82.00%  p95=99.00%  max=100.00%  mean=57.73%  std=27.97%
+  Nulls: 0
+  At 0%: 36  |  At 100%: 3060
+  Impossible values: 0
+
+------------------------------------------------------------
+  4d — API: charging=1 vs charging=0 breakdown
+------------------------------------------------------------
+  charging=1 (on charge):   3156  (4.7%)
+  charging=0 (off charge): 63977  (95.3%)
+
+  bat when charging=1: min=0.00%  p5=46.00%  p25=100.00%  med=100.00%  p75=100.00%  p95=100.00%  max=100.00%  mean=93.97%  std=18.35%
+  bat when charging=0: min=0.00%  p5=8.00%  p25=36.00%  med=57.00%  p75=80.00%  p95=95.00%  max=100.00%  mean=55.94%  std=27.13%
+
+------------------------------------------------------------
+  4e — API: per-device battery stats
+------------------------------------------------------------
+  device/participant               min    mean   max      n
+  ------------------------------ ----- ------- ----- ------
+  04376431f8…                        4    60.2   100   4425
+  0457c34ac3…                        0    62.3   100   6134
+  0497c237ac…                       73    73.0    73      1
+  quick-otter-3                      0    49.2   100   5931
+  1b3353f8e6…                       16    58.6   100   1611
+  1b43be7a41…                       59    59.0    59      1
+  39492696ca…                        0    59.5   100   5768
+  merry-panda-18                     4    72.2   100   4452
+  4013ffdec8…                        0    46.7   100   3296
+  4caf030f50…                       25    26.3    27      3
+  fierce-owl-1                       2    50.8   100   5087
+  504ee0cf39…                       13    58.7   100    488
+  5169e8019e…                       68    76.6    86    196
+  5be3da43dd…                       30    65.5    96   5678
+  652ec02bd2…                       71    76.9    83    261
+  727287ece9…                        2    44.3   100   4825
+  fierce-newt-7                      2    51.2   100   3722
+  956fb3a352…                       98    98.8    99     11
+  98a5acccfb…                        0    54.6   100    583
+  cool-seal-27                      86    89.0    93    114
+  b45b270371…                       50    99.2   100     60
+  b63b6eb396…                        0    52.7    97   1793
+  d82839a836…                       77    77.0    77      2
+  keen-hawk-4                       26    74.7   100   5515
+  ec631b640b…                       18    37.8   100   1542
+  f0ad6bcc8c…                       85    85.7    86      3
+  fb947d3c61…                        4    54.8   100   5630
+  unknown…                          85    85.0    85      1
+
+------------------------------------------------------------
+  4f — API: bat=0 and charging=0 (dead watch still logging)
+------------------------------------------------------------
+  Count: 34
+                                      device_id           timestamp  bat  charging
+10786  182fe10af4611e572f80124619c02bde653c1b64 2026-04-26 17:17:28  0.0         0
+10794  182fe10af4611e572f80124619c02bde653c1b64 2026-04-26 17:12:27  0.0         0
+10802  182fe10af4611e572f80124619c02bde653c1b64 2026-04-26 17:07:28  0.0         0
+10811  182fe10af4611e572f80124619c02bde653c1b64 2026-04-26 17:02:27  0.0         0
+13954  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-25 11:23:58  0.0         0
+13963  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-25 11:18:59  0.0         0
+13972  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-25 11:13:58  0.0         0
+19778  182fe10af4611e572f80124619c02bde653c1b64 2026-04-23 07:09:39  0.0         0
+19788  182fe10af4611e572f80124619c02bde653c1b64 2026-04-23 07:04:38  0.0         0
+23191  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-22 05:39:23  0.0         0
+23202  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-22 05:34:24  0.0         0
+23212  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-22 05:29:23  0.0         0
+23222  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-22 05:24:23  0.0         0
+23232  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-22 05:19:23  0.0         0
+23242  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-22 05:14:23  0.0         0
+23252  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-22 05:09:24  0.0         0
+23262  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-22 05:04:23  0.0         0
+23272  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-22 04:59:23  0.0         0
+23497  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-22 03:08:03  0.0         0
+25960  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-21 05:27:14  0.0         0
+28261  b63b6eb396d0801216f2f9de1c114675ee84592b 2026-04-20 09:21:51  0.0         0
+32765  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-18 15:10:49  0.0         0
+32772  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-18 15:05:50  0.0         0
+33803  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-18 04:14:14  0.0         0
+35042  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-04-17 16:23:45  0.0         0
+37019  182fe10af4611e572f80124619c02bde653c1b64 2026-04-17 00:28:45  0.0         0
+37030  182fe10af4611e572f80124619c02bde653c1b64 2026-04-17 00:23:45  0.0         0
+37041  182fe10af4611e572f80124619c02bde653c1b64 2026-04-17 00:18:46  0.0         0
+50421  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-12 08:10:45  0.0         0
+51413  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-11 21:52:00  0.0         0
+51421  4013ffdec83138e6888a0828450df3308d9fb485 2026-04-11 21:47:01  0.0         0
+63255  182fe10af4611e572f80124619c02bde653c1b64 2026-04-04 05:33:00  0.0         0
+63262  182fe10af4611e572f80124619c02bde653c1b64 2026-04-04 05:27:59  0.0         0
+63269  182fe10af4611e572f80124619c02bde653c1b64 2026-04-04 05:22:59  0.0         0
+
+------------------------------------------------------------
+  4g — API: bat=100 and charging=0 (implausible full battery without charge)
+------------------------------------------------------------
+  Count: 371
+                                     device_id           timestamp    bat  charging
+1502  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-30 18:25:44  100.0         0
+1512  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-30 18:20:44  100.0         0
+1658  1b3353f8e64ab02eb1177208446f6c863854a320 2026-04-30 17:01:02  100.0         0
+1667  1b3353f8e64ab02eb1177208446f6c863854a320 2026-04-30 16:56:02  100.0         0
+1676  1b3353f8e64ab02eb1177208446f6c863854a320 2026-04-30 16:51:02  100.0         0
+1685  1b3353f8e64ab02eb1177208446f6c863854a320 2026-04-30 16:46:02  100.0         0
+1694  1b3353f8e64ab02eb1177208446f6c863854a320 2026-04-30 16:41:01  100.0         0
+3582  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-29 11:57:34  100.0         0
+3592  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-29 11:52:34  100.0         0
+3603  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-29 11:47:33  100.0         0
+3613  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-29 11:42:33  100.0         0
+3623  39492696cac7db14c5dd1102ebb468c79304c3fb 2026-04-29 11:37:34  100.0         0
+4132  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-29 07:26:11  100.0         0
+4134  4d4c82eaef432d2ddbc7448a662134e285b70b85 2026-04-29 07:25:59  100.0         0
+4142  3f727e94476661dac969cbb771b1a119eaab225b 2026-04-29 07:21:11  100.0         0
+5978  98a5acccfb6f99af1b98ab4459b6fce647598e51 2026-04-28 14:51:48  100.0         0
+6410  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-28 11:28:10  100.0         0
+6421  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-28 11:23:10  100.0         0
+6432  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-28 11:18:11  100.0         0
+6443  0457c34ac33a3bc3ee0196003561d39b6b9a4080 2026-04-28 11:13:11  100.0         0
+
+------------------------------------------------------------
+  4h — API: battery increases while not charging (per device)
+------------------------------------------------------------
+  device/participant               ↑>1%   ↑>5%   ↑>10%
+  ------------------------------ ------ ------ -------
+  04376431f8…                         4      4       4
+  0457c34ac3…                        10      8       8
+  quick-otter-3                      10      9       9
+  1b3353f8e6…                         3      3       3
+  39492696ca…                         8      8       8
+  merry-panda-18                      6      6       6
+  4013ffdec8…                         8      7       7
+  4caf030f50…                         0      0       0
+  fierce-owl-1                       15     14      14
+  504ee0cf39…                         1      1       1
+  5169e8019e…                         0      0       0
+  5be3da43dd…                         4      4       4
+  652ec02bd2…                         0      0       0
+  727287ece9…                         5      5       5
+  fierce-newt-7                       4      3       3
+  956fb3a352…                         0      0       0
+  98a5acccfb…                         9      8       7
+  cool-seal-27                        0      0       0
+  b45b270371…                         1      1       1
+  b63b6eb396…                         2      2       1
+  d82839a836…                         0      0       0
+  keen-hawk-4                         8      8       8
+  ec631b640b…                         1      1       1
+  f0ad6bcc8c…                         0      0       0
+  fb947d3c61…                         3      3       3
+
+------------------------------------------------------------
+  4i — API: battery % when charging starts (last reading before charging=1 begins)
+------------------------------------------------------------
+  n=67 charge-start events
+  min=0.00%  p5=0.00%  p25=2.00%  med=10.00%  p75=40.50%  p95=73.10%  max=100.00%  mean=22.94%  std=26.66%
+
+------------------------------------------------------------
+  4j — API: battery % when charging stops (first reading after charging=1 → 0)
+------------------------------------------------------------
+  n=74 charge-end events
+  min=13.00%  p5=31.65%  p25=81.00%  med=99.50%  p75=100.00%  p95=100.00%  max=100.00%  mean=85.04%  std=23.70%
+
+================================================================================
+  SECTION 5: DISCHARGE EPISODE ANALYSIS  (API only)
+================================================================================
+
+------------------------------------------------------------
+  5a — Episode count summary
+------------------------------------------------------------
+  Total episodes:   91
+  Clean:            46  (50.5%)
+  Flagged:          45  (49.5%)
+
+  Flag breakdown:
+    gap>2h                    35
+    bat↑x1                    16
+    short(<1h)                6
+    bat↑x2                    5
+    few_readings              5
+    bat↑x3                    3
+    bat↑x4                    1
+
+------------------------------------------------------------
+  5b — Episode duration distribution
+------------------------------------------------------------
+  All:   min=0.08h  p5=0.52h  p25=24.20h  med=64.45h  p75=94.28h  p95=192.50h  max=8536.59h  mean=164.66h  std=889.67h
+  Clean: min=1.17h  p5=4.79h  p25=16.06h  med=51.55h  p75=71.96h  p95=116.39h  max=137.94h  mean=50.63h  std=35.43h
+
+------------------------------------------------------------
+  5c — Drain rate distribution (clean episodes with computable rate)
+------------------------------------------------------------
+  n=45 clean episodes with drain rate
+  min=6.96%/day  p5=10.79%/day  p25=18.51%/day  med=27.43%/day  p75=34.50%/day  p95=45.72%/day  max=70.85%/day  mean=27.40%/day  std=12.33%/day
+
+------------------------------------------------------------
+  5d — Episodes per device
+------------------------------------------------------------
+  device/participant              total  clean  flagged  longest_clean(h)
+  ------------------------------ ------ ------ -------- -----------------
+  04376431f8…                         3      2        1              79.3
+  0457c34ac3…                         9      3        6              69.3
+  1b3353f8e6…                         4      1        3               4.4
+  39492696ca…                         8      5        3              72.2
+  4013ffdec8…                         5      3        2              75.7
+  4caf030f50…                         1      0        1               0.0
+  504ee0cf39…                         1      0        1               0.0
+  5169e8019e…                         1      1        0              16.3
+  5be3da43dd…                         5      3        2             120.1
+  652ec02bd2…                         1      1        0              21.5
+  727287ece9…                         3      1        2              60.5
+  956fb3a352…                         1      0        1               0.0
+  98a5acccfb…                         9      7        2              68.0
+  b45b270371…                         1      0        1               0.0
+  b63b6eb396…                         2      0        2               0.0
+  cool-seal-27                        1      1        0               9.3
+  d82839a836…                         1      0        1               0.0
+  ec631b640b…                         2      2        0             117.2
+  f0ad6bcc8c…                         1      0        1               0.0
+  fb947d3c61…                         3      2        1             137.9
+  fierce-newt-7                       5      3        2              71.3
+  fierce-owl-1                        6      1        5              25.4
+  keen-hawk-4                         8      7        1              84.9
+  merry-panda-18                      5      2        3              46.1
+  quick-otter-3                       5      1        4              77.5
+
+------------------------------------------------------------
+  5e — Episodes per device per config era
+------------------------------------------------------------
+era             Post SDK All Off #2  Post SDK All On #2  Post SDK All On #3  Post ↓ Logging  Pre SpO2
+label                                                                                                
+04376431f8…                       0                   3                   0               0         0
+0457c34ac3…                       0                   4                   5               0         0
+1b3353f8e6…                       0                   0                   4               0         0
+39492696ca…                       0                   3                   5               0         0
+4013ffdec8…                       0                   2                   3               0         0
+4caf030f50…                       0                   1                   0               0         0
+504ee0cf39…                       0                   1                   0               0         0
+5169e8019e…                       0                   0                   1               0         0
+5be3da43dd…                       0                   2                   3               0         0
+652ec02bd2…                       0                   0                   1               0         0
+727287ece9…                       0                   2                   1               0         0
+956fb3a352…                       0                   0                   1               0         0
+98a5acccfb…                       0                   0                   9               0         0
+b45b270371…                       0                   1                   0               0         0
+b63b6eb396…                       0                   0                   1               0         1
+cool-seal-27                      0                   1                   0               0         0
+d82839a836…                       0                   1                   0               0         0
+ec631b640b…                       0                   0                   2               0         0
+f0ad6bcc8c…                       0                   1                   0               0         0
+fb947d3c61…                       0                   2                   1               0         0
+fierce-newt-7                     0                   4                   0               1         0
+fierce-owl-1                      1                   2                   3               0         0
+keen-hawk-4                       1                   3                   4               0         0
+merry-panda-18                    0                   1                   4               0         0
+quick-otter-3                     0                   1                   4               0         0
+
+------------------------------------------------------------
+  5f — All episodes detail (truncated to first 60 for readability)
+------------------------------------------------------------
+         label         start_ts  duration_h  start_bat  end_bat  drop_pct  n_readings  drain_rate                    flags
+   04376431f8… 2026-04-02 13:31        78.4       98.0      4.0      94.0         950        28.8                         
+   04376431f8… 2026-04-06 12:41        79.3      100.0      8.0      92.0         954        27.8                         
+   04376431f8… 2026-04-10 13:17       204.5      100.0     33.0      67.0        2322         NaN           gap>2h, bat↑x2
+   0457c34ac3… 2026-04-02 08:32        13.0       93.0     87.0       6.0         158        11.1                         
+   0457c34ac3… 2026-04-03 14:35        69.3       88.0     42.0      46.0         856        15.9                         
+   0457c34ac3… 2026-04-06 11:57        57.6       44.0     74.0     -30.0         540         NaN           gap>2h, bat↑x1
+   0457c34ac3… 2026-04-09 06:46       171.6      100.0      3.0      97.0        1976         NaN                   gap>2h
+   0457c34ac3… 2026-04-16 11:49        90.9       99.0      3.0      96.0         496         NaN                   gap>2h
+   0457c34ac3… 2026-04-20 07:21        46.3       56.0      0.0      56.0         193         NaN                   gap>2h
+   0457c34ac3… 2026-04-22 12:45        70.6       96.0      0.0      96.0         791         NaN                   gap>2h
+   0457c34ac3… 2026-04-27 13:42        80.6       94.0     19.0      75.0         859         NaN           gap>2h, bat↑x2
+   0457c34ac3… 2026-04-30 22:55         8.8       73.0     63.0      10.0         106        27.4                         
+ quick-otter-3 2026-04-02 10:37       349.8       53.0      0.0      53.0        3260         NaN           gap>2h, bat↑x3
+ quick-otter-3 2026-04-17 08:03         0.2       19.0     20.0      -1.0           4         NaN short(<1h), few_readings
+ quick-otter-3 2026-04-17 08:28       142.7       33.0      0.0      33.0        1036         NaN           gap>2h, bat↑x1
+ quick-otter-3 2026-04-23 11:47        77.5      100.0      0.0     100.0         940        31.0                         
+ quick-otter-3 2026-04-27 09:58        60.0       31.0     31.0       0.0         686         NaN           gap>2h, bat↑x1
+   1b3353f8e6… 2026-04-24 08:48        70.8       91.0     18.0      73.0         805         NaN                   gap>2h
+   1b3353f8e6… 2026-04-27 08:04         4.4       36.0     36.0       0.0          54         NaN                         
+   1b3353f8e6… 2026-04-27 13:09        73.8       76.0     16.0      60.0         620         NaN                   gap>2h
+   1b3353f8e6… 2026-04-30 16:41        15.0      100.0     94.0       6.0         115         NaN                   gap>2h
+   39492696ca… 2026-04-02 14:09        42.0      100.0     46.0      54.0         505        30.9                         
+   39492696ca… 2026-04-09 11:35        68.6      100.0      0.0     100.0         299         NaN                   gap>2h
+   39492696ca… 2026-04-13 14:10       121.0      100.0      0.0     100.0        1435        19.8                   bat↑x1
+   39492696ca… 2026-04-18 18:13        72.2      100.0      6.0      94.0         867        31.3                         
+   39492696ca… 2026-04-21 20:13        57.5      100.0      5.0      95.0         691        39.6                         
+   39492696ca… 2026-04-24 08:19        60.8      100.0     10.0      90.0         731        35.5                         
+   39492696ca… 2026-04-26 22:22        58.3       95.0      4.0      91.0         698        37.5                         
+   39492696ca… 2026-04-29 11:37        44.1      100.0     23.0      77.0         403         NaN                   gap>2h
+merry-panda-18 2026-04-02 11:36       157.8      100.0      9.0      91.0        1084         NaN           gap>2h, bat↑x1
+merry-panda-18 2026-04-23 10:14        46.1      100.0     10.0      90.0         554        46.9                         
+merry-panda-18 2026-04-25 09:54        45.3      100.0      4.0      96.0         550        50.9                         
+merry-panda-18 2026-04-28 06:21        72.2      100.0      4.0      96.0         657         NaN           gap>2h, bat↑x1
+merry-panda-18 2026-05-01 07:31         0.2       80.0     79.0       1.0           3         NaN short(<1h), few_readings
+   4013ffdec8… 2026-04-11 07:16        14.6       25.0      0.0      25.0         176        41.1                         
+   4013ffdec8… 2026-04-12 09:36        75.7      100.0      1.0      99.0         912        31.4                         
+   4013ffdec8… 2026-04-15 14:03        62.2       59.0      0.0      59.0         739        22.8                   bat↑x1
+   4013ffdec8… 2026-04-18 06:46        70.7       91.0      0.0      91.0         850        30.9                         
+   4013ffdec8… 2026-04-21 09:59       171.2       25.0     35.0     -10.0         611         NaN           gap>2h, bat↑x3
+   4caf030f50… 2026-04-07 14:58         0.2       27.0     25.0       2.0           3         NaN short(<1h), few_readings
+  fierce-owl-1 2026-04-07 13:29        25.4       85.0     10.0      75.0         306        70.9                         
+  fierce-owl-1 2026-04-08 17:08       134.8      100.0      2.0      98.0        1035         NaN           gap>2h, bat↑x1
+  fierce-owl-1 2026-04-14 15:20        89.3      100.0      2.0      98.0         916         NaN           gap>2h, bat↑x1
+  fierce-owl-1 2026-04-19 11:54       116.1      100.0      2.0      98.0        1010         NaN           gap>2h, bat↑x3
+  fierce-owl-1 2026-04-24 14:44        44.2      100.0     45.0      55.0         516        29.9                   bat↑x1
+  fierce-owl-1 2026-04-26 12:07       115.6      100.0     66.0      34.0        1192         NaN           gap>2h, bat↑x4
+   504ee0cf39… 2026-04-02 11:16        44.2       51.0     83.0     -32.0         487         NaN           gap>2h, bat↑x1
+   5169e8019e… 2026-04-30 15:29        16.3       86.0     68.0      18.0         196        26.6                         
+   5be3da43dd… 2026-04-09 17:27        95.4       85.0     39.0      46.0        1147        11.6                         
+   5be3da43dd… 2026-04-13 17:36        94.6       92.0     36.0      56.0         692         NaN                   gap>2h
+   5be3da43dd… 2026-04-17 16:39        94.0       72.0     30.0      42.0        1130        10.7                         
+   5be3da43dd… 2026-04-21 15:45       120.1       96.0     54.0      42.0        1445         8.4                         
+   5be3da43dd… 2026-04-26 16:30       111.2       94.0     56.0      38.0        1232         NaN                   gap>2h
+   652ec02bd2… 2026-04-20 02:57        21.5       83.0     71.0      12.0         261        13.4                         
+   727287ece9… 2026-04-09 08:44        60.5       66.0      2.0      64.0         730        25.4                         
+   727287ece9… 2026-04-11 22:01       242.0       32.0      7.0      25.0        2331         NaN           gap>2h, bat↑x2
+   727287ece9… 2026-04-22 07:52       180.5      100.0      7.0      93.0        1756         NaN           gap>2h, bat↑x1
+ fierce-newt-7 2026-04-01 15:07        30.5      100.0     71.0      29.0         373        22.8                         
+ fierce-newt-7 2026-04-03 14:48        44.3       55.0     16.0      39.0         582        21.1                         
+ fierce-newt-7 2026-04-06 11:19        55.3       13.0      2.0      11.0         661         4.8                   bat↑x2
+  … and 31 more episodes (not shown)
+
+================================================================================
+  SECTION 6: SENSOR / CONFIGURATION FLAGS  (CSV only)
+================================================================================
+
+------------------------------------------------------------
+  6a — Boolean sensor columns: True / False / null counts
+------------------------------------------------------------
+  column                           True  False   null
+  ------------------------------ ------ ------ ------
+  heart_rate                        344      0      0
+  respiration_rate                  344      0      0
+  stress                            344      0      0
+  steps                             344      0      0
+  bbi                               344      0      0
+  enhanced_bbi                      344      0      0
+  gyroscope                         344      0      0
+  skin_temperature                  129    215      0
+  wrist_status                      344      0      0
+  accelerometer                     344      0      0
+  zero_crossing                     344      0      0
+  actigraphy_1                      344      0      0
+  actigraphy_2                      344      0      0
+  actigraphy_3                      344      0      0
+  always_on_display                   0    344      0
+
+------------------------------------------------------------
+  6b — Per config_name consistency of each boolean sensor
+------------------------------------------------------------
+  Flags: MIXED = same sensor has both True and False values for some participant in this era
+
+  ✓  SDK All On: all sensors consistent within each participant
+  ✓  SDK All Off: all sensors consistent within each participant
+  ✓  SpO2 All Day: all sensors consistent within each participant
+  ✓  Initial: all sensors consistent within each participant
+
+------------------------------------------------------------
+  6c — spo2 value counts
+------------------------------------------------------------
+  All day              243
+  On Demand            90
+  Sleep Only           11
+
+  spo2 mode per config_name:
+spo2          All day  On Demand  Sleep Only
+config_name                                 
+Initial            12         81           8
+SDK All Off        19          1           0
+SDK All On        161          2           3
+SpO2 All Day       51          6           0
+
+------------------------------------------------------------
+  6d — always_on_display value counts
+------------------------------------------------------------
+  False      344
+
+  always_on_display per config_name:
+always_on_display  False
+config_name             
+Initial              101
+SDK All Off           20
+SDK All On           166
+SpO2 All Day          57
+
+------------------------------------------------------------
+  6e — Configuration fingerprints (unique sensor flag combinations)
+------------------------------------------------------------
+  Unique fingerprints: 5
+   count  fingerprint
+     159  heart_rate=True  respiration_rate=True  stress=True  steps=True  bbi=True  enhanced_bbi=True  gyroscope=True  skin_temperature=False  wrist_status=True  accelerometer=True  zero_crossing=True  actigraphy_1=True  actigraphy_2=True  actigraphy_3=True  always_on_display=False  spo2=All day  always_on_display=False
+      84  heart_rate=True  respiration_rate=True  stress=True  steps=True  bbi=True  enhanced_bbi=True  gyroscope=True  skin_temperature=True  wrist_status=True  accelerometer=True  zero_crossing=True  actigraphy_1=True  actigraphy_2=True  actigraphy_3=True  always_on_display=False  spo2=All day  always_on_display=False
+      56  heart_rate=True  respiration_rate=True  stress=True  steps=True  bbi=True  enhanced_bbi=True  gyroscope=True  skin_temperature=False  wrist_status=True  accelerometer=True  zero_crossing=True  actigraphy_1=True  actigraphy_2=True  actigraphy_3=True  always_on_display=False  spo2=On Demand  always_on_display=False
+      34  heart_rate=True  respiration_rate=True  stress=True  steps=True  bbi=True  enhanced_bbi=True  gyroscope=True  skin_temperature=True  wrist_status=True  accelerometer=True  zero_crossing=True  actigraphy_1=True  actigraphy_2=True  actigraphy_3=True  always_on_display=False  spo2=On Demand  always_on_display=False
+      11  heart_rate=True  respiration_rate=True  stress=True  steps=True  bbi=True  enhanced_bbi=True  gyroscope=True  skin_temperature=True  wrist_status=True  accelerometer=True  zero_crossing=True  actigraphy_1=True  actigraphy_2=True  actigraphy_3=True  always_on_display=False  spo2=Sleep Only  always_on_display=False
+
+================================================================================
+  SECTION 7: LINKAGE QUALITY
+================================================================================
+
+------------------------------------------------------------
+  7a — Summary
+------------------------------------------------------------
+  participant_codes in CSV:          17
+  device_ids in API:                 28
+  Matched (code + device_id both):   6
+  CSV-only (no API device_id):       11
+  API-only (no CSV match):           22
+
+------------------------------------------------------------
+  7b — Matched participants: timestamp overlap
+------------------------------------------------------------
+  code                      csv_start          csv_end            api_start          api_end            overlap?
+  ------------------------- ------------------ ------------------ ------------------ ------------------ --------
+  cool-seal-27              2026-03-11 14:04   2026-03-24 18:14   2026-04-02 13:58   2026-04-02 23:23   ⚠ NO
+  fierce-newt-7             2026-03-10 16:36   2026-04-02 15:41   2026-04-01 14:57   2026-04-16 11:17   ✓
+  fierce-owl-1              2026-03-09 16:16   2026-03-30 16:42   2026-04-07 13:24   2026-05-01 07:45   ⚠ NO
+  keen-hawk-4               2026-03-13 18:31   2026-04-11 07:12   2026-04-08 13:33   2026-05-01 04:03   ✓
+  merry-panda-18            2026-03-11 11:54   2026-04-02 09:05   2026-04-02 11:31   2026-05-01 07:41   ⚠ NO
+  quick-otter-3             2026-03-11 11:54   2026-04-02 10:12   2026-04-02 10:32   2026-04-29 21:59   ⚠ NO
+
+------------------------------------------------------------
+  7c — CSV-only participant codes (no device_id in API)
+------------------------------------------------------------
+  clever-gecko-71               readings=2  mapped_device_id=(not in metadata)
+  gentle-owl-208                readings=40  mapped_device_id=(not in metadata)
+  gentle-owl-33                 readings=11  mapped_device_id=(not in metadata)
+  jolly-seal-25                 readings=1  mapped_device_id=(not in metadata)
+  merry-moose-23                readings=4  mapped_device_id=(not in metadata)
+  noble-numbat-5                readings=5  mapped_device_id=(not in metadata)
+  plucky-bison-10               readings=1  mapped_device_id=(not in metadata)
+  snappy-seal-7                 readings=1  mapped_device_id=(not in metadata)
+  trusty-koala-846              readings=1  mapped_device_id=(not in metadata)
+  warm-fox-8                    readings=2  mapped_device_id=(not in metadata)
+  wise-fox-66                   readings=3  mapped_device_id=(not in metadata)
+
+------------------------------------------------------------
+  7d — API-only device_ids (no CSV participant_code match)
+------------------------------------------------------------
+  04376431f8bce5d2a81e8b2bd5953ae0e0aa43a4  readings=4425  model=Vivoactive 6  name=Yiwei Ji
+  0457c34ac33a3bc3ee0196003561d39b6b9a4080  readings=6134  model=Vivoactive 6  name=Rohan Barrowcliff
+  0497c237acc4fb92938318ca840b54906dbec8e0  readings=1  model=—  name=—
+  1b3353f8e64ab02eb1177208446f6c863854a320  readings=1611  model=—  name=—
+  1b43be7a4124ef9599325ec25bd0a7d92e012384  readings=1  model=—  name=—
+  39492696cac7db14c5dd1102ebb468c79304c3fb  readings=5768  model=Venu 3S  name=John Daniels
+  4013ffdec83138e6888a0828450df3308d9fb485  readings=3296  model=—  name=—
+  4caf030f5082edf015bca6b23df68756437d94a4  readings=3  model=—  name=—
+  504ee0cf39ff7ffc6a6302463ad7a4fbd5c639af  readings=488  model=Vivoactive 5  name=Runcong Zhao
+  5169e8019ef11ac0316f6bddf0afc5370977ced4  readings=196  model=—  name=—
+  5be3da43dd1704a3bffd3caf9eb5dc8b2c814482  readings=5678  model=—  name=—
+  652ec02bd230849ee9aaf282b192c3dfc6a9565f  readings=261  model=—  name=—
+  727287ece99f866e56f84b53c3887b040aee29f3  readings=4825  model=Vivoactive 5  name=Liza Pekosak
+  956fb3a352f00dbdcd2a5858e6c010082df2be3a  readings=11  model=—  name=—
+  98a5acccfb6f99af1b98ab4459b6fce647598e51  readings=583  model=Venu 3S  name=Xinyu Wang
+  b45b27037186c0874c1f26a0ff05a15445888b5b  readings=60  model=—  name=—
+  b63b6eb396d0801216f2f9de1c114675ee84592b  readings=1793  model=Venu 4 41mm  name=Mary Abichi
+  d82839a836da26f49888a74a66c40a8e040edc44  readings=2  model=—  name=—
+  ec631b640b7f771485f28a42aa14a9142ceb6a93  readings=1542  model=—  name=—
+  f0ad6bcc8c3e5e3d9ab052769e825c9b31a89103  readings=3  model=—  name=—
+  fb947d3c61491c139176d0cc2ea98cee6d214393  readings=5630  model=Venu 4 45mm  name=Xiaoyu Zheng
+  unknown  readings=1  model=—  name=—
+
+------------------------------------------------------------
+  7e — Device model consistency: CSV vs API part_number
+------------------------------------------------------------
+  code                      csv_model            api_part_number        api_model            match?
+  ------------------------- -------------------- ---------------------- -------------------- ------
+  cool-seal-27              Venu 4               unknown                (unknown)            ⚠
+  fierce-newt-7             Vivoactive 5         006-B4426-00           Vivoactive 5         ✓
+  fierce-newt-7             Vivoactive 5         unknown                (unknown)            ⚠
+  fierce-owl-1              Vivoactive 5         006-B4426-00           Vivoactive 5         ✓
+  keen-hawk-4               Venu 3S              006-B4261-00           Venu 3S              ✓
+  merry-panda-18            Venu 3S              006-B4261-00           Venu 3S              ✓
+  merry-panda-18            Venu 3S              unknown                (unknown)            ⚠
+  quick-otter-3             Vivoactive 6         006-B4625-00           Vivoactive 6         ✓
+  quick-otter-3             Vivoactive 6         unknown                (unknown)            ⚠
+
+------------------------------------------------------------
+  7f — Participant codes linked to multiple device_ids (device swap candidates)
+------------------------------------------------------------
+  ✓  No participant_code maps to multiple device_ids in metadata.
+
+------------------------------------------------------------
+  7g — Device IDs linked to multiple participant codes (reassignment candidates)
+------------------------------------------------------------
+  ✓  No device_id maps to multiple participant_codes in metadata.
+
+================================================================================
+  SECTION 8: ANOMALIES AND DATA QUALITY FLAGS
+================================================================================
+
+------------------------------------------------------------
+  8a — CSV rows with any null values
+------------------------------------------------------------
+  Rows with ≥1 null: 0  (0.0%)
+
+------------------------------------------------------------
+  8b — API: readings with null bat or ts
+------------------------------------------------------------
+  null bat: 0  |  null ts: 0
+
+------------------------------------------------------------
+  8c — API: devices with very long mid-study gaps (>48h)
+------------------------------------------------------------
+  ⚠  0457c34ac3…               50h gap:  2026-04-17 14:31 → 2026-04-19 16:36
+  ⚠  0457c34ac3…               49h gap:  2026-04-25 11:23 → 2026-04-27 12:35
+  ⚠  quick-otter-3             76h gap:  2026-04-04 06:41 → 2026-04-07 10:49
+  ⚠  quick-otter-3             57h gap:  2026-04-17 11:18 → 2026-04-19 20:09
+  ⚠  39492696ca…               122h gap:  2026-04-04 08:09 → 2026-04-09 09:51
+  ⚠  merry-panda-18            68h gap:  2026-04-04 10:41 → 2026-04-07 06:25
+  ⚠  merry-panda-18            145h gap:  2026-04-09 01:22 → 2026-04-15 02:17
+  ⚠  4013ffdec8…               61h gap:  2026-04-24 13:08 → 2026-04-27 02:14
+  ⚠  b63b6eb396…               8356h gap:  2025-05-01 08:41 → 2026-04-14 12:15
+  ⚠  b63b6eb396…               84h gap:  2026-04-16 05:30 → 2026-04-19 17:21
+  ⚠  keen-hawk-4               56h gap:  2026-04-23 08:41 → 2026-04-25 17:06
+
+------------------------------------------------------------
+  8d — CSV: implausible battery jumps between consecutive readings (>50% change)
+------------------------------------------------------------
+  ⚠  clever-gecko-71            Δ100%  at 2026-03-17 22:24  (0% → 100%)
+  ⚠  fierce-newt-7              Δ52%  at 2026-03-11 10:20  (97% → 45%)
+  ⚠  fierce-newt-7              Δ89%  at 2026-03-11 17:17  (7% → 96%)
+  ⚠  fierce-newt-7              Δ98%  at 2026-03-13 00:16  (0% → 98%)
+  ⚠  fierce-newt-7              Δ92%  at 2026-03-20 12:34  (0% → 92%)
+  ⚠  fierce-newt-7              Δ98%  at 2026-03-23 07:35  (2% → 100%)
+  ⚠  fierce-newt-7              Δ59%  at 2026-03-25 11:18  (6% → 65%)
+  ⚠  fierce-newt-7              Δ87%  at 2026-03-26 13:21  (5% → 92%)
+  ⚠  fierce-newt-7              Δ85%  at 2026-03-28 13:05  (7% → 92%)
+  ⚠  fierce-newt-7              Δ82%  at 2026-03-30 12:02  (18% → 100%)
+  ⚠  fierce-owl-1               Δ59%  at 2026-03-10 15:52  (100% → 41%)
+  ⚠  fierce-owl-1               Δ98%  at 2026-03-17 17:34  (2% → 100%)
+  ⚠  fierce-owl-1               Δ98%  at 2026-03-25 07:14  (2% → 100%)
+  ⚠  gentle-owl-208             Δ97%  at 2026-03-14 12:12  (3% → 100%)
+  ⚠  gentle-owl-208             Δ100%  at 2026-03-17 10:57  (0% → 100%)
+  ⚠  gentle-owl-208             Δ90%  at 2026-03-22 09:59  (8% → 98%)
+  ⚠  gentle-owl-208             Δ94%  at 2026-03-27 13:35  (6% → 100%)
+  ⚠  gentle-owl-208             Δ100%  at 2026-04-02 10:14  (0% → 100%)
+  ⚠  gentle-owl-33              Δ79%  at 2026-03-18 16:53  (12% → 91%)
+  ⚠  keen-hawk-4                Δ59%  at 2026-03-15 07:10  (84% → 25%)
+  ⚠  keen-hawk-4                Δ96%  at 2026-03-15 18:09  (4% → 100%)
+  ⚠  keen-hawk-4                Δ87%  at 2026-03-16 09:08  (100% → 13%)
+  ⚠  keen-hawk-4                Δ77%  at 2026-03-16 15:27  (13% → 90%)
+  ⚠  keen-hawk-4                Δ58%  at 2026-03-17 06:21  (58% → 0%)
+  ⚠  keen-hawk-4                Δ100%  at 2026-03-17 09:46  (0% → 100%)
+  ⚠  keen-hawk-4                Δ58%  at 2026-03-18 07:46  (66% → 8%)
+  ⚠  keen-hawk-4                Δ100%  at 2026-03-23 14:34  (0% → 100%)
+  ⚠  keen-hawk-4                Δ66%  at 2026-04-08 15:37  (34% → 100%)
+  ⚠  merry-moose-23             Δ89%  at 2026-03-17 11:30  (99% → 10%)
+  ⚠  merry-moose-23             Δ56%  at 2026-03-18 09:34  (10% → 66%)
+  ⚠  merry-panda-18             Δ69%  at 2026-03-12 12:00  (31% → 100%)
+  ⚠  merry-panda-18             Δ76%  at 2026-03-16 13:34  (24% → 100%)
+  ⚠  merry-panda-18             Δ93%  at 2026-03-18 09:29  (7% → 100%)
+  ⚠  merry-panda-18             Δ66%  at 2026-03-19 08:22  (34% → 100%)
+  ⚠  merry-panda-18             Δ80%  at 2026-03-23 08:07  (16% → 96%)
+  ⚠  merry-panda-18             Δ72%  at 2026-03-27 07:58  (28% → 100%)
+  ⚠  merry-panda-18             Δ87%  at 2026-03-29 08:46  (10% → 97%)
+  ⚠  merry-panda-18             Δ59%  at 2026-03-31 05:42  (41% → 100%)
+  ⚠  quick-otter-3              Δ96%  at 2026-03-16 11:41  (4% → 100%)
+  ⚠  quick-otter-3              Δ92%  at 2026-03-18 09:45  (8% → 100%)
+  ⚠  quick-otter-3              Δ62%  at 2026-03-23 08:54  (36% → 98%)
+  ⚠  quick-otter-3              Δ52%  at 2026-03-25 09:10  (83% → 31%)
+  ⚠  quick-otter-3              Δ88%  at 2026-03-26 15:36  (12% → 100%)
+  ⚠  quick-otter-3              Δ63%  at 2026-03-30 11:25  (86% → 23%)
+  ⚠  quick-otter-3              Δ72%  at 2026-04-01 08:13  (2% → 74%)
+
+------------------------------------------------------------
+  8e — CSV: config era transitions per participant
+------------------------------------------------------------
+  (shows exact timestamp when config_name changed per participant)
+  clever-gecko-71                 (single era throughout: SpO2 All Day)
+
+  cool-seal-27:
+    Initial → SpO2 All Day  at 2026-03-17 14:33
+    SpO2 All Day → SDK All Off  at 2026-03-18 17:56
+    SDK All Off → SDK All On  at 2026-03-24 16:53
+
+  fierce-newt-7:
+    Initial → SpO2 All Day  at 2026-03-17 14:27
+    SpO2 All Day → SDK All Off  at 2026-03-18 18:06
+    SDK All Off → SDK All On  at 2026-03-19 12:19
+
+  fierce-owl-1:
+    Initial → SpO2 All Day  at 2026-03-17 17:34
+    SpO2 All Day → SDK All Off  at 2026-03-19 09:26
+    SDK All Off → SDK All On  at 2026-03-19 15:59
+
+  gentle-owl-208:
+    Initial → SpO2 All Day  at 2026-03-18 09:39
+    SpO2 All Day → SDK All Off  at 2026-03-19 00:17
+    SDK All Off → SDK All On  at 2026-03-20 09:20
+
+  gentle-owl-33:
+    Initial → SpO2 All Day  at 2026-03-17 15:50
+    SpO2 All Day → SDK All On  at 2026-03-30 12:54
+  jolly-seal-25                   (single era throughout: Initial)
+
+  keen-hawk-4:
+    Initial → SpO2 All Day  at 2026-03-17 12:20
+    SpO2 All Day → SDK All On  at 2026-03-23 14:34
+
+  merry-moose-23:
+    Initial → SpO2 All Day  at 2026-03-18 09:34
+    SpO2 All Day → SDK All On  at 2026-03-20 08:53
+
+  merry-panda-18:
+    Initial → SpO2 All Day  at 2026-03-17 14:55
+    SpO2 All Day → SDK All Off  at 2026-03-19 07:02
+    SDK All Off → SDK All On  at 2026-03-20 07:35
+
+  noble-numbat-5:
+    Initial → SpO2 All Day  at 2026-03-17 14:30
+  plucky-bison-10                 (single era throughout: Initial)
+
+  quick-otter-3:
+    Initial → SpO2 All Day  at 2026-03-17 14:24
+    SpO2 All Day → SDK All Off  at 2026-03-18 22:47
+    SDK All Off → SDK All On  at 2026-03-19 14:04
+  snappy-seal-7                   (single era throughout: Initial)
+  trusty-koala-846                (single era throughout: SpO2 All Day)
+  warm-fox-8                      (single era throughout: Initial)
+
+  wise-fox-66:
+    Initial → SDK All On  at 2026-03-19 23:26
+
+------------------------------------------------------------
+  8f — Devices with very few total readings (<10)
+------------------------------------------------------------
+  ⚠  f0ad6bcc8c…                     3 readings
+  ⚠  4caf030f50…                     3 readings
+  ⚠  d82839a836…                     2 readings
+  ⚠  0497c237ac…                     1 readings
+  ⚠  1b43be7a41…                     1 readings
+  ⚠  unknown…                        1 readings
+
+------------------------------------------------------------
+  8g — API: devices with implausibly long continuous charging (>6h)
+------------------------------------------------------------
+  ⚠  04376431f8…                16.7h charging  2026-04-05 20:02 → 2026-04-06 12:41
+  ⚠  04376431f8…                17.2h charging  2026-04-09 20:04 → 2026-04-10 13:17
+  ⚠  0457c34ac3…                9.2h charging  2026-04-08 21:36 → 2026-04-09 06:46
+  ⚠  merry-panda-18             199.9h charging  2026-04-15 02:17 → 2026-04-23 10:14
+  ⚠  merry-panda-18             23.1h charging  2026-04-27 07:14 → 2026-04-28 06:21
+  ⚠  4013ffdec8…                11.6h charging  2026-04-11 21:59 → 2026-04-12 09:36
+  ⚠  fierce-owl-1               7.1h charging  2026-04-14 08:14 → 2026-04-14 15:20
+  ⚠  fierce-owl-1               16.2h charging  2026-04-18 19:44 → 2026-04-19 11:54
+  ⚠  fierce-owl-1               6.7h charging  2026-04-24 08:04 → 2026-04-24 14:44
+  ⚠  727287ece9…                7.8h charging  2026-04-22 00:06 → 2026-04-22 07:52
+  ⚠  98a5acccfb…                7.0h charging  2026-04-19 16:39 → 2026-04-19 23:39
+  ⚠  98a5acccfb…                6.0h charging  2026-04-25 18:01 → 2026-04-26 00:01
+  ⚠  keen-hawk-4                11.3h charging  2026-04-08 14:48 → 2026-04-09 02:03
+  ⚠  keen-hawk-4                11.7h charging  2026-04-11 18:35 → 2026-04-12 06:16
+  ⚠  keen-hawk-4                8.3h charging  2026-04-16 05:11 → 2026-04-16 13:32
+  ⚠  keen-hawk-4                73.6h charging  2026-04-22 15:31 → 2026-04-25 17:06
+  ⚠  keen-hawk-4                31.0h charging  2026-04-29 06:07 → 2026-04-30 13:08
+
+================================================================================
+  FINAL SUMMARY TABLE
+================================================================================
+  Building per-participant/device rollup …
+
+     Participant  CSV_n  API_n API_complete  Episodes Mean_%/day  Flagged_ep
+     04376431f8…      0      0            —         0          —           0
+     0457c34ac3…      0      0            —         0          —           0
+     0497c237ac…      0      0            —         0          —           0
+     1b3353f8e6…      0      0            —         0          —           0
+     1b43be7a41…      0      0            —         0          —           0
+     39492696ca…      0      0            —         0          —           0
+     4013ffdec8…      0      0            —         0          —           0
+     4caf030f50…      0      0            —         0          —           0
+     504ee0cf39…      0      0            —         0          —           0
+     5169e8019e…      0      0            —         0          —           0
+     5be3da43dd…      0      0            —         0          —           0
+     652ec02bd2…      0      0            —         0          —           0
+     727287ece9…      0      0            —         0          —           0
+     956fb3a352…      0      0            —         0          —           0
+     98a5acccfb…      0      0            —         0          —           0
+     b45b270371…      0      0            —         0          —           0
+     b63b6eb396…      0      0            —         0          —           0
+ clever-gecko-71      2      0            —         0          —           0
+    cool-seal-27     12    114       100.0%         1       18.0           0
+     d82839a836…      0      0            —         0          —           0
+     ec631b640b…      0      0            —         0          —           0
+     f0ad6bcc8c…      0      0            —         0          —           0
+     fb947d3c61…      0      0            —         0          —           0
+   fierce-newt-7    125   3722        87.0%         5       20.8           2
+    fierce-owl-1     21   5087        74.3%         6       70.9           5
+  gentle-owl-208     40      0            —         0          —           0
+   gentle-owl-33     11      0            —         0          —           0
+   jolly-seal-25      1      0            —         0          —           0
+     keen-hawk-4     25   5515        84.7%         8       24.8           1
+  merry-moose-23      4      0            —         0          —           0
+  merry-panda-18     38   4452        53.6%         5       48.9           3
+  noble-numbat-5      5      0            —         0          —           0
+ plucky-bison-10      1      0            —         0          —           0
+   quick-otter-3     52   5931        74.9%         5       31.0           4
+   snappy-seal-7      1      0            —         0          —           0
+trusty-koala-846      1      0            —         0          —           0
+        unknown…      0      0            —         0          —           0
+      warm-fox-8      2      0            —         0          —           0
+     wise-fox-66      3      0            —         0          —           0
+
+================================================================================
+  AUDIT COMPLETE
+================================================================================
+  Generated: 2026-05-01 08:45:13
+  CSV rows: 344  |  API rows: 67133
+================================================================================

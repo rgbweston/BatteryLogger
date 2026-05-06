@@ -209,17 +209,7 @@ PARTICIPANTS = [
     }
 ]
 
-# ── Part number → model name ──────────────────────────────────────────────────
-# Extracted from SDK compiler.json files. Regional variants (APAC etc.) may have
-# different last two digits — unrecognised values fall back to the raw part number.
-
-PART_NUMBER_MODELS = {
-    '006-B4426-00': 'Vivoactive 5',
-    '006-B4625-00': 'Vivoactive 6',
-    '006-B4261-00': 'Venu 3S',
-    '006-B4644-00': 'Venu 4 41mm',
-    '006-B4643-00': 'Venu 4 45mm',
-}
+from device_models import PART_NUMBER_MODELS  # noqa: F401  (re-exported for callers)
 
 # ── Lookup helpers ────────────────────────────────────────────────────────────
 
